@@ -88,7 +88,7 @@ class SSHSession {
     if (pixelHeight < 0) {
       throw ArgumentError.value(pixelHeight, 'pixelHeight', 'must be positive');
     }
-    _channel.sendTerminalLibraryFlutterWindowChange(
+    _channel.sendTerminalWindowChange(
       width: width,
       height: height,
       pixelWidth: pixelWidth,

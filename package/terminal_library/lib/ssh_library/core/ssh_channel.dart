@@ -151,7 +151,7 @@ class SSHChannelController {
     );
   }
 
-  void sendTerminalLibraryFlutterWindowChange({
+  void sendTerminalWindowChange({
     required int width,
     required int height,
     required int pixelWidth,
@@ -410,13 +410,13 @@ class SSHChannel {
     return await _controller.sendShell();
   }
 
-  void sendTerminalLibraryFlutterWindowChange({
+  void sendTerminalWindowChange({
     required int width,
     required int height,
     int pixelWidth = 0,
     int pixelHeight = 0,
   }) {
-    _controller.sendTerminalLibraryFlutterWindowChange(
+    _controller.sendTerminalWindowChange(
       width: width,
       height: height,
       pixelWidth: pixelWidth,
