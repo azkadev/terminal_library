@@ -5,7 +5,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'src/flutter_pty_bindings_generated.dart';
+import 'src/pty_library_bindings_generated.dart';
 
 const _libName = 'flutter_pty';
 
@@ -22,7 +22,7 @@ final DynamicLibrary _dylib = () {
   throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');
 }();
 
-final _bindings = FlutterPtyBindings(_dylib);
+final _bindings = FlutterPtyLibraryBindings(_dylib);
 
 final _init = () {
   return _bindings.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
@@ -34,18 +34,18 @@ void _ensureInitialized() {
   }
 }
 
-/// Pty represents a process running in a pseudo-terminal.
+/// PtyLibrary represents a process running in a pseudo-terminal.
 ///
-/// To create a Pty, use [Pty.start].
-class Pty {
+/// To create a PtyLibrary, use [PtyLibrary.start].
+class PtyLibrary {
   final String executable;
 
   final List<String> arguments;
 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
-  /// [ackRead] indicates if the pty should wait for a call to [Pty.ackRead] before sending the next data.
-  Pty.start(
+  /// [ackRead] indicates if the pty should wait for a call to [PtyLibrary.ackRead] before sending the next data.
+  PtyLibrary.start(
     this.executable, {
     this.arguments = const [],
     String? workingDirectory,
@@ -99,7 +99,7 @@ class Pty {
     }
     envp.elementAt(effectiveEnv.length).value = nullptr;
 
-    final options = calloc<PtyOptions>();
+    final options = calloc<PtyLibraryOptions>();
     options.ref.rows = rows;
     options.ref.cols = columns;
     options.ref.executable = executable.toNativeUtf8().cast();
@@ -120,7 +120,7 @@ class Pty {
     calloc.free(options);
 
     if (_handle == nullptr) {
-      throw StateError('Failed to create PTY: ${_getPtyError()}');
+      throw StateError('Failed to create PTY: ${_getPtyLibraryError()}');
     }
 
     _exitPort.first.then(_onExitCode);
@@ -132,7 +132,7 @@ class Pty {
 
   final _exitCodeCompleter = Completer<int>();
 
-  late final Pointer<PtyHandle> _handle;
+  late final Pointer<PtyLibraryHandle> _handle;
 
   /// The output stream from the pseudo-terminal. Note that pseudo-terminals
   /// do not distinguish between stdout and stderr.
@@ -205,7 +205,7 @@ class Pty {
   }
 }
 
-String? _getPtyError() {
+String? _getPtyLibraryError() {
   final error = _bindings.pty_error();
 
   if (error == nullptr) {
