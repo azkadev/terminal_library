@@ -3,9 +3,16 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  gamepads_linux
+  media_kit_video
+  screen_retriever
+  sim_card_info
+  url_launcher_linux
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  flutter_pty
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)
