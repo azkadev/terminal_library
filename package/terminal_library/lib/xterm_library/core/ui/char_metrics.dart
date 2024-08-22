@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:terminal_library/xterm_library/core/ui/terminal_text_style.dart';
 
-Size calcCharSize(TerminalStyle style, TextScaler textScaler) {
+Size calcCharSize(TerminalLibraryFlutterStyle style, TextScaler textScaler) {
   const test = 'mmmmmmmmmm';
 
   final textStyle = style.toTextStyle();

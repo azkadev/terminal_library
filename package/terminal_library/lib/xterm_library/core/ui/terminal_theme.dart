@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class TerminalTheme {
-  const TerminalTheme({
+class TerminalLibraryFlutterTheme {
+  const TerminalLibraryFlutterTheme({
     required this.cursor,
     required this.selection,
     required this.foreground,

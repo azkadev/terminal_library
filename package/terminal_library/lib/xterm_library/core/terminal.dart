@@ -20,12 +20,12 @@ import 'package:terminal_library/xterm_library/core/core/tabs.dart';
 import 'package:terminal_library/xterm_library/core/utils/ascii.dart';
 import 'package:terminal_library/xterm_library/core/utils/circular_buffer.dart';
 
-/// [Terminal] is an interface to interact with command line applications. It
+/// [TerminalLibraryFlutter] is an interface to interact with command line applications. It
 /// translates escape sequences from the application into updates to the
 /// [buffer] and events such as [onTitleChange] or [onBell], as well as
 /// translating user input into escape sequences that the application can
 /// understand.
-class Terminal with Observable implements TerminalState, EscapeHandler {
+class TerminalLibraryFlutter with Observable implements TerminalLibraryFlutterState, EscapeHandler {
   /// The number of lines that the scrollback buffer can hold. If the buffer
   /// exceeds this size, the lines at the top of the buffer will be removed.
   final int maxLines;
@@ -50,33 +50,33 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
   /// Function that is called when the dimensions of the terminal change.
   void Function(int width, int height, int pixelWidth, int pixelHeight)? onResize;
 
-  /// The [TerminalInputHandler] used by this terminal. [defaultInputHandler] is
+  /// The [TerminalLibraryFlutterInputHandler] used by this terminal. [defaultInputHandler] is
   /// used when not specified. User of this class can provide their own
-  /// implementation of [TerminalInputHandler] or extend [defaultInputHandler]
+  /// implementation of [TerminalLibraryFlutterInputHandler] or extend [defaultInputHandler]
   /// with [CascadeInputHandler].
-  TerminalInputHandler? inputHandler;
+  TerminalLibraryFlutterInputHandler? inputHandler;
 
-  TerminalMouseHandler? mouseHandler;
+  TerminalLibraryFlutterMouseHandler? mouseHandler;
 
   /// The callback that is called when the terminal receives a unrecognized
   /// escape sequence.
   void Function(String code, List<String> args)? onPrivateOSC;
 
   /// Flag to toggle os specific behaviors.
-  final TerminalTargetPlatform platform;
+  final TerminalLibraryFlutterTargetPlatform platform;
 
   /// Characters that break selection when double clicking. If not set, the
   /// [Buffer.defaultWordSeparators] will be used.
   final Set<int>? wordSeparators;
 
-  Terminal({
+  TerminalLibraryFlutter({
     this.maxLines = 1000,
     this.onBell,
     this.onTitleChange,
     this.onIconChange,
     this.onOutput,
     this.onResize,
-    this.platform = TerminalTargetPlatform.unknown,
+    this.platform = TerminalLibraryFlutterTargetPlatform.unknown,
     this.inputHandler = defaultInputHandler,
     this.mouseHandler = defaultMouseHandler,
     this.onPrivateOSC,
@@ -110,7 +110,7 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
   /// sequences that repeat the last character.
   var _precedingCodepoint = 0;
 
-  /* TerminalState */
+  /* TerminalLibraryFlutterState */
 
   int _viewWidth = 80;
 
@@ -235,13 +235,13 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
   /// - [textInput]
   /// - [paste]
   bool keyInput(
-    TerminalKey key, {
+    TerminalLibraryFlutterKey key, {
     bool shift = false,
     bool alt = false,
     bool ctrl = false,
   }) {
     final output = inputHandler?.call(
-      TerminalKeyboardEvent(
+      TerminalLibraryFlutterKeyboardEvent(
         key: key,
         shift: shift,
         alt: alt,
@@ -261,7 +261,7 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
   }
 
   /// Similary to [keyInput], but takes a character as input instead of a
-  /// [TerminalKey].
+  /// [TerminalLibraryFlutterKey].
   ///
   /// See also:
   /// - [keyInput]
@@ -288,7 +288,7 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
       }
     }
 
-    if (alt && platform != TerminalTargetPlatform.macos) {
+    if (alt && platform != TerminalLibraryFlutterTargetPlatform.macos) {
       if (charCode >= Ascii.a && charCode <= Ascii.z) {
         final code = charCode - Ascii.a + 65;
         final input = [0x1b, code];
@@ -327,11 +327,11 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
 
   // Handle a mouse event and return true if it was handled.
   bool mouseInput(
-    TerminalMouseButton button,
-    TerminalMouseButtonState buttonState,
+    TerminalLibraryFlutterMouseButton button,
+    TerminalLibraryFlutterMouseButtonState buttonState,
     CellOffset position,
   ) {
-    final output = mouseHandler?.call(TerminalMouseEvent(
+    final output = mouseHandler?.call(TerminalLibraryFlutterMouseEvent(
       button: button,
       buttonState: buttonState,
       position: position,
@@ -377,7 +377,7 @@ class Terminal with Observable implements TerminalState, EscapeHandler {
 
   @override
   String toString() {
-    return 'Terminal(#$hashCode, $_viewWidth x $_viewHeight, ${_buffer.height} lines)';
+    return 'TerminalLibraryFlutter(#$hashCode, $_viewWidth x $_viewHeight, ${_buffer.height} lines)';
   }
 
   /* Handlers */

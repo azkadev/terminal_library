@@ -9,8 +9,8 @@ import 'package:terminal_library/xterm_library/core/core/buffer/range_line.dart'
 import 'package:terminal_library/xterm_library/core/ui/pointer_input.dart';
 import 'package:terminal_library/xterm_library/core/ui/selection_mode.dart';
 
-class TerminalController with ChangeNotifier {
-  TerminalController({
+class TerminalLibraryFlutterController with ChangeNotifier {
+  TerminalLibraryFlutterController({
     SelectionMode selectionMode = SelectionMode.line,
     PointerInputs pointerInputs = const PointerInputs({PointerInput.tap}),
     bool suspendPointerInput = false,
@@ -32,8 +32,8 @@ class TerminalController with ChangeNotifier {
   bool get suspendedPointerInputs => _suspendPointerInputs;
   bool _suspendPointerInputs;
 
-  List<TerminalHighlight> get highlights => _highlights;
-  final _highlights = <TerminalHighlight>[];
+  List<TerminalLibraryFlutterHighlight> get highlights => _highlights;
+  final _highlights = <TerminalLibraryFlutterHighlight>[];
 
   BufferRange? get selection {
     final base = _selectionBase;
@@ -111,7 +111,7 @@ class TerminalController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Returns true if this type of PointerInput should be send to the Terminal.
+  // Returns true if this type of PointerInput should be send to the TerminalLibraryFlutter.
   // @internal
   bool shouldSendPointerInput(PointerInput pointerInput) {
     // Always return false if pointer input is suspended.
@@ -121,12 +121,12 @@ class TerminalController with ChangeNotifier {
   /// Creates a new highlight on the terminal from [p1] to [p2] with the given
   /// [color]. The highlight will be removed when the returned object is
   /// disposed.
-  TerminalHighlight highlight({
+  TerminalLibraryFlutterHighlight highlight({
     required CellAnchor p1,
     required CellAnchor p2,
     required Color color,
   }) {
-    final highlight = TerminalHighlight(
+    final highlight = TerminalLibraryFlutterHighlight(
       this,
       p1: p1,
       p2: p2,
@@ -145,8 +145,8 @@ class TerminalController with ChangeNotifier {
   }
 }
 
-class TerminalHighlight with Disposable {
-  final TerminalController owner;
+class TerminalLibraryFlutterHighlight with Disposable {
+  final TerminalLibraryFlutterController owner;
 
   final CellAnchor p1;
 
@@ -154,7 +154,7 @@ class TerminalHighlight with Disposable {
 
   final Color color;
 
-  TerminalHighlight(
+  TerminalLibraryFlutterHighlight(
     this.owner, {
     required this.p1,
     required this.p2,

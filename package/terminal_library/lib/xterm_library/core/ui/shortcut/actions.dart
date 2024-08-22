@@ -4,17 +4,17 @@ import 'package:terminal_library/xterm_library/core/terminal.dart';
 import 'package:terminal_library/xterm_library/core/ui/controller.dart';
 import 'package:terminal_library/xterm_library/core/ui/selection_mode.dart';
 
-class TerminalActions extends StatelessWidget {
-  const TerminalActions({
+class TerminalLibraryFlutterActions extends StatelessWidget {
+  const TerminalLibraryFlutterActions({
     super.key,
     required this.terminal,
     required this.controller,
     required this.child,
   });
 
-  final Terminal terminal;
+  final TerminalLibraryFlutter terminal;
 
-  final TerminalController controller;
+  final TerminalLibraryFlutterController controller;
 
   final Widget child;
 

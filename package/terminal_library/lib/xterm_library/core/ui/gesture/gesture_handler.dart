@@ -8,8 +8,8 @@ import 'package:terminal_library/xterm_library/core/ui/gesture/gesture_detector.
 import 'package:terminal_library/xterm_library/core/ui/pointer_input.dart';
 import 'package:terminal_library/xterm_library/core/ui/render.dart';
 
-class TerminalGestureHandler extends StatefulWidget {
-  const TerminalGestureHandler({
+class TerminalLibraryFlutterGestureHandler extends StatefulWidget {
+  const TerminalLibraryFlutterGestureHandler({
     super.key,
     required this.terminalView,
     required this.terminalController,
@@ -24,9 +24,9 @@ class TerminalGestureHandler extends StatefulWidget {
     this.readOnly = false,
   });
 
-  final TerminalViewState terminalView;
+  final TerminalLibraryFlutterViewWidgetState terminalView;
 
-  final TerminalController terminalController;
+  final TerminalLibraryFlutterController terminalController;
 
   final Widget? child;
 
@@ -47,13 +47,13 @@ class TerminalGestureHandler extends StatefulWidget {
   final bool readOnly;
 
   @override
-  State<TerminalGestureHandler> createState() => _TerminalGestureHandlerState();
+  State<TerminalLibraryFlutterGestureHandler> createState() => _TerminalLibraryFlutterGestureHandlerState();
 }
 
-class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
-  TerminalViewState get terminalView => widget.terminalView;
+class _TerminalLibraryFlutterGestureHandlerState extends State<TerminalLibraryFlutterGestureHandler> {
+  TerminalLibraryFlutterViewWidgetState get terminalView => widget.terminalView;
 
-  RenderTerminal get renderTerminal => terminalView.renderTerminal;
+  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter => terminalView.renderTerminalLibraryFlutter;
 
   DragStartDetails? _lastDragStartDetails;
 
@@ -61,7 +61,7 @@ class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
 
   @override
   Widget build(BuildContext context) {
-    return TerminalGestureDetector(
+    return TerminalLibraryFlutterGestureDetector(
       child: widget.child,
       onTapUp: widget.onTapUp,
       onSingleTapUp: onSingleTapUp,
@@ -84,15 +84,15 @@ class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
   void _tapDown(
     GestureTapDownCallback? callback,
     TapDownDetails details,
-    TerminalMouseButton button, {
+    TerminalLibraryFlutterMouseButton button, {
     bool forceCallback = false,
   }) {
     // Check if the terminal should and can handle the tap down event.
     var handled = false;
     if (_shouldSendTapEvent) {
-      handled = renderTerminal.mouseEvent(
+      handled = renderTerminalLibraryFlutter.mouseEvent(
         button,
-        TerminalMouseButtonState.down,
+        TerminalLibraryFlutterMouseButtonState.down,
         details.localPosition,
       );
     }
@@ -105,15 +105,15 @@ class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
   void _tapUp(
     GestureTapUpCallback? callback,
     TapUpDetails details,
-    TerminalMouseButton button, {
+    TerminalLibraryFlutterMouseButton button, {
     bool forceCallback = false,
   }) {
     // Check if the terminal should and can handle the tap up event.
     var handled = false;
     if (_shouldSendTapEvent) {
-      handled = renderTerminal.mouseEvent(
+      handled = renderTerminalLibraryFlutter.mouseEvent(
         button,
-        TerminalMouseButtonState.up,
+        TerminalLibraryFlutterMouseButtonState.up,
         details.localPosition,
       );
     }
@@ -125,46 +125,46 @@ class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
 
   void onTapDown(TapDownDetails details) {
     // onTapDown is special, as it will always call the supplied callback.
-    // The TerminalView depends on it to bring the terminal into focus.
+    // The TerminalLibraryFlutterViewWidget depends on it to bring the terminal into focus.
     _tapDown(
       widget.onTapDown,
       details,
-      TerminalMouseButton.left,
+      TerminalLibraryFlutterMouseButton.left,
       forceCallback: true,
     );
   }
 
   void onSingleTapUp(TapUpDetails details) {
-    _tapUp(widget.onSingleTapUp, details, TerminalMouseButton.left);
+    _tapUp(widget.onSingleTapUp, details, TerminalLibraryFlutterMouseButton.left);
   }
 
   void onSecondaryTapDown(TapDownDetails details) {
-    _tapDown(widget.onSecondaryTapDown, details, TerminalMouseButton.right);
+    _tapDown(widget.onSecondaryTapDown, details, TerminalLibraryFlutterMouseButton.right);
   }
 
   void onSecondaryTapUp(TapUpDetails details) {
-    _tapUp(widget.onSecondaryTapUp, details, TerminalMouseButton.right);
+    _tapUp(widget.onSecondaryTapUp, details, TerminalLibraryFlutterMouseButton.right);
   }
 
   void onTertiaryTapDown(TapDownDetails details) {
-    _tapDown(widget.onTertiaryTapDown, details, TerminalMouseButton.middle);
+    _tapDown(widget.onTertiaryTapDown, details, TerminalLibraryFlutterMouseButton.middle);
   }
 
   void onTertiaryTapUp(TapUpDetails details) {
-    _tapUp(widget.onTertiaryTapUp, details, TerminalMouseButton.right);
+    _tapUp(widget.onTertiaryTapUp, details, TerminalLibraryFlutterMouseButton.right);
   }
 
   void onDoubleTapDown(TapDownDetails details) {
-    renderTerminal.selectWord(details.localPosition);
+    renderTerminalLibraryFlutter.selectWord(details.localPosition);
   }
 
   void onLongPressStart(LongPressStartDetails details) {
     _lastLongPressStartDetails = details;
-    renderTerminal.selectWord(details.localPosition);
+    renderTerminalLibraryFlutter.selectWord(details.localPosition);
   }
 
   void onLongPressMoveUpdate(LongPressMoveUpdateDetails details) {
-    renderTerminal.selectWord(
+    renderTerminalLibraryFlutter.selectWord(
       _lastLongPressStartDetails!.localPosition,
       details.localPosition,
     );
@@ -175,11 +175,11 @@ class _TerminalGestureHandlerState extends State<TerminalGestureHandler> {
   void onDragStart(DragStartDetails details) {
     _lastDragStartDetails = details;
 
-    details.kind == PointerDeviceKind.mouse ? renderTerminal.selectCharacters(details.localPosition) : renderTerminal.selectWord(details.localPosition);
+    details.kind == PointerDeviceKind.mouse ? renderTerminalLibraryFlutter.selectCharacters(details.localPosition) : renderTerminalLibraryFlutter.selectWord(details.localPosition);
   }
 
   void onDragUpdate(DragUpdateDetails details) {
-    renderTerminal.selectCharacters(
+    renderTerminalLibraryFlutter.selectCharacters(
       _lastDragStartDetails!.localPosition,
       details.localPosition,
     );

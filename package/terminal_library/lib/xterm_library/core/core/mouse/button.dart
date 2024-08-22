@@ -1,4 +1,4 @@
-enum TerminalMouseButton {
+enum TerminalLibraryFlutterMouseButton {
   left(id: 0),
 
   middle(id: 1),
@@ -25,5 +25,5 @@ enum TerminalMouseButton {
   /// Whether this button is a mouse wheel button.
   final bool isWheel;
 
-  const TerminalMouseButton({required this.id, this.isWheel = false});
+  const TerminalLibraryFlutterMouseButton({required this.id, this.isWheel = false});
 }

@@ -1,4 +1,4 @@
-enum TerminalTargetPlatform {
+enum TerminalLibraryFlutterTargetPlatform {
   unknown,
 
   android,

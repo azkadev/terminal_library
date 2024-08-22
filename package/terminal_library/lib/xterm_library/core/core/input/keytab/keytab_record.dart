@@ -51,7 +51,7 @@ class KeytabRecord {
   });
 
   String qtKeyName;
-  TerminalKey key;
+  TerminalLibraryFlutterKey key;
   KeytabAction action;
 
   bool? alt;

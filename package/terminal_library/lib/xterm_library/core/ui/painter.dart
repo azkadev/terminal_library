@@ -6,10 +6,10 @@ import 'package:terminal_library/xterm_library/core/ui/paragraph_cache.dart';
 import 'package:terminal_library/xterm_library/xterm.dart';
 
 /// Encapsulates the logic for painting various terminal elements.
-class TerminalPainter {
-  TerminalPainter({
-    required TerminalTheme theme,
-    required TerminalStyle textStyle,
+class TerminalLibraryFlutterPainter {
+  TerminalLibraryFlutterPainter({
+    required TerminalLibraryFlutterTheme theme,
+    required TerminalLibraryFlutterStyle textStyle,
     required TextScaler textScaler,
   })  : _textStyle = textStyle,
         _theme = theme,
@@ -26,9 +26,9 @@ class TerminalPainter {
   /// [_textStyle] is changed, or when the system font changes.
   final _paragraphCache = ParagraphCache(10240);
 
-  TerminalStyle get textStyle => _textStyle;
-  TerminalStyle _textStyle;
-  set textStyle(TerminalStyle value) {
+  TerminalLibraryFlutterStyle get textStyle => _textStyle;
+  TerminalLibraryFlutterStyle _textStyle;
+  set textStyle(TerminalLibraryFlutterStyle value) {
     if (value == _textStyle) return;
     _textStyle = value;
     _cellSize = _measureCharSize();
@@ -44,9 +44,9 @@ class TerminalPainter {
     _paragraphCache.clear();
   }
 
-  TerminalTheme get theme => _theme;
-  TerminalTheme _theme;
-  set theme(TerminalTheme value) {
+  TerminalLibraryFlutterTheme get theme => _theme;
+  TerminalLibraryFlutterTheme _theme;
+  set theme(TerminalLibraryFlutterTheme value) {
     if (value == _theme) return;
     _theme = value;
     _colorPalette = PaletteBuilder(value).build();
@@ -89,7 +89,7 @@ class TerminalPainter {
   void paintCursor(
     Canvas canvas,
     Offset offset, {
-    required TerminalCursorType cursorType,
+    required TerminalLibraryFlutterCursorType cursorType,
     bool hasFocus = true,
   }) {
     final paint = Paint()
@@ -103,17 +103,17 @@ class TerminalPainter {
     }
 
     switch (cursorType) {
-      case TerminalCursorType.block:
+      case TerminalLibraryFlutterCursorType.block:
         paint.style = PaintingStyle.fill;
         canvas.drawRect(offset & _cellSize, paint);
         return;
-      case TerminalCursorType.underline:
+      case TerminalLibraryFlutterCursorType.underline:
         return canvas.drawLine(
           Offset(offset.dx, _cellSize.height - 1),
           Offset(offset.dx + _cellSize.width, _cellSize.height - 1),
           paint,
         );
-      case TerminalCursorType.verticalBar:
+      case TerminalLibraryFlutterCursorType.verticalBar:
         return canvas.drawLine(
           Offset(offset.dx, 0),
           Offset(offset.dx, _cellSize.height),

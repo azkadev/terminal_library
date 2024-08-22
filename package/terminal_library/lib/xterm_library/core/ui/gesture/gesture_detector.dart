@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-class TerminalGestureDetector extends StatefulWidget {
-  const TerminalGestureDetector({
+class TerminalLibraryFlutterGestureDetector extends StatefulWidget {
+  const TerminalLibraryFlutterGestureDetector({
     super.key,
     this.child,
     this.onSingleTapUp,
@@ -51,11 +51,10 @@ class TerminalGestureDetector extends StatefulWidget {
   final GestureDragUpdateCallback? onDragUpdate;
 
   @override
-  State<TerminalGestureDetector> createState() =>
-      _TerminalGestureDetectorState();
+  State<TerminalLibraryFlutterGestureDetector> createState() => _TerminalLibraryFlutterGestureDetectorState();
 }
 
-class _TerminalGestureDetectorState extends State<TerminalGestureDetector> {
+class _TerminalLibraryFlutterGestureDetectorState extends State<TerminalLibraryFlutterGestureDetector> {
   Timer? _doubleTapTimer;
 
   Offset? _lastTapOffset;
@@ -69,8 +68,7 @@ class _TerminalGestureDetectorState extends State<TerminalGestureDetector> {
   void _handleTapDown(TapDownDetails details) {
     widget.onTapDown?.call(details);
 
-    if (_doubleTapTimer != null &&
-        _isWithinDoubleTapTolerance(details.globalPosition)) {
+    if (_doubleTapTimer != null && _isWithinDoubleTapTolerance(details.globalPosition)) {
       // If there was already a previous tap, the second down hold/tap is a
       // double tap down.
       widget.onDoubleTapDown?.call(details);
@@ -108,8 +106,7 @@ class _TerminalGestureDetectorState extends State<TerminalGestureDetector> {
   Widget build(BuildContext context) {
     final gestures = <Type, GestureRecognizerFactory>{};
 
-    gestures[TapGestureRecognizer] =
-        GestureRecognizerFactoryWithHandlers<TapGestureRecognizer>(
+    gestures[TapGestureRecognizer] = GestureRecognizerFactoryWithHandlers<TapGestureRecognizer>(
       () => TapGestureRecognizer(debugOwner: this),
       (TapGestureRecognizer instance) {
         instance
@@ -122,8 +119,7 @@ class _TerminalGestureDetectorState extends State<TerminalGestureDetector> {
       },
     );
 
-    gestures[LongPressGestureRecognizer] =
-        GestureRecognizerFactoryWithHandlers<LongPressGestureRecognizer>(
+    gestures[LongPressGestureRecognizer] = GestureRecognizerFactoryWithHandlers<LongPressGestureRecognizer>(
       () => LongPressGestureRecognizer(
         debugOwner: this,
         supportedDevices: {
@@ -139,8 +135,7 @@ class _TerminalGestureDetectorState extends State<TerminalGestureDetector> {
       },
     );
 
-    gestures[PanGestureRecognizer] =
-        GestureRecognizerFactoryWithHandlers<PanGestureRecognizer>(
+    gestures[PanGestureRecognizer] = GestureRecognizerFactoryWithHandlers<PanGestureRecognizer>(
       () => PanGestureRecognizer(
         debugOwner: this,
         supportedDevices: <PointerDeviceKind>{PointerDeviceKind.mouse},

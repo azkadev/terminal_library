@@ -6,8 +6,8 @@ import 'package:terminal_library/xterm_library/core/ui/infinite_scroll_view.dart
 /// screen buffer, the terminal don't have a scrollback buffer, instead, the
 /// scroll gestures are converted to escape sequences based on the current
 /// report mode declared by the application.
-class TerminalScrollGestureHandler extends StatefulWidget {
-  const TerminalScrollGestureHandler({
+class TerminalLibraryFlutterScrollGestureHandler extends StatefulWidget {
+  const TerminalLibraryFlutterScrollGestureHandler({
     super.key,
     required this.terminal,
     required this.getCellOffset,
@@ -16,7 +16,7 @@ class TerminalScrollGestureHandler extends StatefulWidget {
     required this.child,
   });
 
-  final Terminal terminal;
+  final TerminalLibraryFlutter terminal;
 
   /// Returns the cell offset for the pixel offset.
   final CellOffset Function(Offset) getCellOffset;
@@ -32,10 +32,10 @@ class TerminalScrollGestureHandler extends StatefulWidget {
   final Widget child;
 
   @override
-  State<TerminalScrollGestureHandler> createState() => _TerminalScrollGestureHandlerState();
+  State<TerminalLibraryFlutterScrollGestureHandler> createState() => _TerminalLibraryFlutterScrollGestureHandlerState();
 }
 
-class _TerminalScrollGestureHandlerState extends State<TerminalScrollGestureHandler> {
+class _TerminalLibraryFlutterScrollGestureHandlerState extends State<TerminalLibraryFlutterScrollGestureHandler> {
   /// Whether the application is in alternate screen buffer. If false, then this
   /// widget does nothing.
   var isAltBuffer = false;
@@ -50,28 +50,28 @@ class _TerminalScrollGestureHandlerState extends State<TerminalScrollGestureHand
 
   @override
   void initState() {
-    widget.terminal.addListener(_onTerminalUpdated);
+    widget.terminal.addListener(_onTerminalLibraryFlutterUpdated);
     isAltBuffer = widget.terminal.isUsingAltBuffer;
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.terminal.removeListener(_onTerminalUpdated);
+    widget.terminal.removeListener(_onTerminalLibraryFlutterUpdated);
     super.dispose();
   }
 
   @override
-  void didUpdateWidget(covariant TerminalScrollGestureHandler oldWidget) {
+  void didUpdateWidget(covariant TerminalLibraryFlutterScrollGestureHandler oldWidget) {
     if (oldWidget.terminal != widget.terminal) {
-      oldWidget.terminal.removeListener(_onTerminalUpdated);
-      widget.terminal.addListener(_onTerminalUpdated);
+      oldWidget.terminal.removeListener(_onTerminalLibraryFlutterUpdated);
+      widget.terminal.addListener(_onTerminalLibraryFlutterUpdated);
       isAltBuffer = widget.terminal.isUsingAltBuffer;
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  void _onTerminalUpdated() {
+  void _onTerminalLibraryFlutterUpdated() {
     if (isAltBuffer != widget.terminal.isUsingAltBuffer) {
       isAltBuffer = widget.terminal.isUsingAltBuffer;
       setState(() {});
@@ -85,14 +85,14 @@ class _TerminalScrollGestureHandlerState extends State<TerminalScrollGestureHand
     final position = widget.getCellOffset(lastPointerPosition);
 
     final handled = widget.terminal.mouseInput(
-      up ? TerminalMouseButton.wheelUp : TerminalMouseButton.wheelDown,
-      TerminalMouseButtonState.down,
+      up ? TerminalLibraryFlutterMouseButton.wheelUp : TerminalLibraryFlutterMouseButton.wheelDown,
+      TerminalLibraryFlutterMouseButtonState.down,
       position,
     );
 
     if (!handled && widget.simulateScroll) {
       widget.terminal.keyInput(
-        up ? TerminalKey.arrowUp : TerminalKey.arrowDown,
+        up ? TerminalLibraryFlutterKey.arrowUp : TerminalLibraryFlutterKey.arrowDown,
       );
     }
   }

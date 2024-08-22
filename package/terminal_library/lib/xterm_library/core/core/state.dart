@@ -1,7 +1,7 @@
 import 'package:terminal_library/xterm_library/core/core/cursor.dart';
 import 'package:terminal_library/xterm_library/core/core/mouse/mode.dart';
 
-abstract class TerminalState {
+abstract class TerminalLibraryFlutterState {
   int get viewWidth;
 
   int get viewHeight;

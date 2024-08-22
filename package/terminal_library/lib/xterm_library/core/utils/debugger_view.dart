@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_library/xterm_library/core/utils/debugger.dart';
 
-class TerminalDebuggerView extends StatefulWidget {
-  const TerminalDebuggerView(
+class TerminalLibraryFlutterDebuggerView extends StatefulWidget {
+  const TerminalLibraryFlutterDebuggerView(
     this.debugger, {
     super.key,
     this.scrollController,
     this.onSeek,
   });
 
-  final TerminalDebugger debugger;
+  final TerminalLibraryFlutterDebugger debugger;
 
   final ScrollController? scrollController;
 
   final void Function(int?)? onSeek;
 
   @override
-  State<TerminalDebuggerView> createState() => _TerminalDebuggerViewState();
+  State<TerminalLibraryFlutterDebuggerView> createState() => _TerminalLibraryFlutterDebuggerViewState();
 }
 
-class _TerminalDebuggerViewState extends State<TerminalDebuggerView> {
+class _TerminalLibraryFlutterDebuggerViewState extends State<TerminalLibraryFlutterDebuggerView> {
   int? selectedCommand;
 
   @override
@@ -29,7 +29,7 @@ class _TerminalDebuggerViewState extends State<TerminalDebuggerView> {
   }
 
   @override
-  void didUpdateWidget(covariant TerminalDebuggerView oldWidget) {
+  void didUpdateWidget(covariant TerminalLibraryFlutterDebuggerView oldWidget) {
     if (oldWidget.debugger != widget.debugger) {
       oldWidget.debugger.removeListener(_onDebuggerChanged);
       widget.debugger.addListener(_onDebuggerChanged);
@@ -84,7 +84,7 @@ class _CommandItem extends StatelessWidget {
 
   final int index;
 
-  final TerminalCommand command;
+  final TerminalLibraryFlutterCommand command;
 
   final bool selected;
 

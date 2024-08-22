@@ -1,4 +1,4 @@
-enum TerminalMouseButtonState {
+enum TerminalLibraryFlutterMouseButtonState {
   up,
 
   down,

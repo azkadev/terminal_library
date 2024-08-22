@@ -3,7 +3,7 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 import 'package:terminal_library/xterm_library/core/utils/lookup_table.dart';
 
 class PaletteBuilder {
-  final TerminalTheme theme;
+  final TerminalLibraryFlutterTheme theme;
 
   PaletteBuilder(this.theme);
 

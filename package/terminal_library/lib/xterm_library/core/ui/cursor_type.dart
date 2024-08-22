@@ -1,4 +1,4 @@
-enum TerminalCursorType {
+enum TerminalLibraryFlutterCursorType {
   block,
 
   underline,

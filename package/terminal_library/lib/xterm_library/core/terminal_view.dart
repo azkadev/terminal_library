@@ -21,13 +21,13 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_text_style.dart'
 import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 import 'package:terminal_library/xterm_library/core/ui/themes.dart';
 
-class TerminalView extends StatefulWidget {
-  const TerminalView(
+class TerminalLibraryFlutterViewWidget extends StatefulWidget {
+  const TerminalLibraryFlutterViewWidget(
     this.terminal, {
     super.key,
     this.controller,
-    this.theme = TerminalThemes.defaultTheme,
-    this.textStyle = const TerminalStyle(),
+    this.theme = TerminalLibraryFlutterThemes.defaultTheme,
+    this.textStyle = const TerminalLibraryFlutterStyle(),
     this.textScaler,
     this.padding,
     this.scrollController,
@@ -41,7 +41,7 @@ class TerminalView extends StatefulWidget {
     this.mouseCursor = SystemMouseCursors.text,
     this.keyboardType = TextInputType.emailAddress,
     this.keyboardAppearance = Brightness.dark,
-    this.cursorType = TerminalCursorType.block,
+    this.cursorType = TerminalLibraryFlutterCursorType.block,
     this.alwaysShowCursor = false,
     this.deleteDetection = false,
     this.shortcuts,
@@ -52,15 +52,15 @@ class TerminalView extends StatefulWidget {
   });
 
   /// The underlying terminal that this widget renders.
-  final Terminal terminal;
+  final TerminalLibraryFlutter terminal;
 
-  final TerminalController? controller;
+  final TerminalLibraryFlutterController? controller;
 
   /// The theme to use for this terminal.
-  final TerminalTheme theme;
+  final TerminalLibraryFlutterTheme theme;
 
   /// The style to use for painting characters.
-  final TerminalStyle textStyle;
+  final TerminalLibraryFlutterStyle textStyle;
 
   final TextScaler? textScaler;
 
@@ -108,8 +108,8 @@ class TerminalView extends StatefulWidget {
   /// This setting is only honored on iOS devices.
   final Brightness keyboardAppearance;
 
-  /// The type of cursor to use. [TerminalCursorType.block] by default.
-  final TerminalCursorType cursorType;
+  /// The type of cursor to use. [TerminalLibraryFlutterCursorType.block] by default.
+  final TerminalLibraryFlutterCursorType cursorType;
 
   /// Whether to always show the cursor. This is useful for debugging.
   /// [false] by default.
@@ -121,7 +121,7 @@ class TerminalView extends StatefulWidget {
   final bool deleteDetection;
 
   /// Shortcuts for this terminal. This has higher priority than input handler
-  /// of the terminal If not provided, [defaultTerminalShortcuts] will be used.
+  /// of the terminal If not provided, [defaultTerminalLibraryFlutterShortcuts] will be used.
   final Map<ShortcutActivator, Intent>? shortcuts;
 
   /// Keyboard event handler of the terminal. This has higher priority than
@@ -143,10 +143,10 @@ class TerminalView extends StatefulWidget {
   final bool simulateScroll;
 
   @override
-  State<TerminalView> createState() => TerminalViewState();
+  State<TerminalLibraryFlutterViewWidget> createState() => TerminalLibraryFlutterViewWidgetState();
 }
 
-class TerminalViewState extends State<TerminalView> {
+class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutterViewWidget> {
   late FocusNode _focusNode;
 
   late final ShortcutManager _shortcutManager;
@@ -159,25 +159,25 @@ class TerminalViewState extends State<TerminalView> {
 
   String? _composingText;
 
-  late TerminalController _controller;
+  late TerminalLibraryFlutterController _controller;
 
   late ScrollController _scrollController;
 
-  RenderTerminal get renderTerminal => _viewportKey.currentContext!.findRenderObject() as RenderTerminal;
+  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter => _viewportKey.currentContext!.findRenderObject() as RenderTerminalLibraryFlutter;
 
   @override
   void initState() {
     _focusNode = widget.focusNode ?? FocusNode();
-    _controller = widget.controller ?? TerminalController();
+    _controller = widget.controller ?? TerminalLibraryFlutterController();
     _scrollController = widget.scrollController ?? ScrollController();
     _shortcutManager = ShortcutManager(
-      shortcuts: widget.shortcuts ?? defaultTerminalShortcuts,
+      shortcuts: widget.shortcuts ?? defaultTerminalLibraryFlutterShortcuts,
     );
     super.initState();
   }
 
   @override
-  void didUpdateWidget(TerminalView oldWidget) {
+  void didUpdateWidget(TerminalLibraryFlutterViewWidget oldWidget) {
     if (oldWidget.focusNode != widget.focusNode) {
       if (oldWidget.focusNode == null) {
         _focusNode.dispose();
@@ -188,7 +188,7 @@ class TerminalViewState extends State<TerminalView> {
       if (oldWidget.controller == null) {
         _controller.dispose();
       }
-      _controller = widget.controller ?? TerminalController();
+      _controller = widget.controller ?? TerminalLibraryFlutterController();
     }
     if (oldWidget.scrollController != widget.scrollController) {
       if (oldWidget.scrollController == null) {
@@ -196,7 +196,7 @@ class TerminalViewState extends State<TerminalView> {
       }
       _scrollController = widget.scrollController ?? ScrollController();
     }
-    _shortcutManager.shortcuts = widget.shortcuts ?? defaultTerminalShortcuts;
+    _shortcutManager.shortcuts = widget.shortcuts ?? defaultTerminalLibraryFlutterShortcuts;
     super.didUpdateWidget(oldWidget);
   }
 
@@ -221,7 +221,7 @@ class TerminalViewState extends State<TerminalView> {
       key: _scrollableKey,
       controller: _scrollController,
       viewportBuilder: (context, offset) {
-        return _TerminalView(
+        return _TerminalLibraryFlutterViewWidget(
           key: _viewportKey,
           terminal: widget.terminal,
           controller: _controller,
@@ -240,11 +240,11 @@ class TerminalViewState extends State<TerminalView> {
       },
     );
 
-    child = TerminalScrollGestureHandler(
+    child = TerminalLibraryFlutterScrollGestureHandler(
       terminal: widget.terminal,
       simulateScroll: widget.simulateScroll,
-      getCellOffset: (offset) => renderTerminal.getCellOffset(offset),
-      getLineHeight: () => renderTerminal.lineHeight,
+      getCellOffset: (offset) => renderTerminalLibraryFlutter.getCellOffset(offset),
+      getLineHeight: () => renderTerminalLibraryFlutter.lineHeight,
       child: child,
     );
 
@@ -259,13 +259,13 @@ class TerminalViewState extends State<TerminalView> {
         onInsert: _onInsert,
         onDelete: () {
           _scrollToBottom();
-          widget.terminal.keyInput(TerminalKey.backspace);
+          widget.terminal.keyInput(TerminalLibraryFlutterKey.backspace);
         },
         onComposing: _onComposing,
         onAction: (action) {
           _scrollToBottom();
           if (action == TextInputAction.done) {
-            widget.terminal.keyInput(TerminalKey.enter);
+            widget.terminal.keyInput(TerminalLibraryFlutterKey.enter);
           }
         },
         onKeyEvent: _handleKeyEvent,
@@ -284,7 +284,7 @@ class TerminalViewState extends State<TerminalView> {
       );
     }
 
-    child = TerminalActions(
+    child = TerminalLibraryFlutterActions(
       terminal: widget.terminal,
       controller: _controller,
       child: child,
@@ -295,7 +295,7 @@ class TerminalViewState extends State<TerminalView> {
       child: child,
     );
 
-    child = TerminalGestureHandler(
+    child = TerminalLibraryFlutterGestureHandler(
       terminalView: this,
       terminalController: _controller,
       onTapUp: _onTapUp,
@@ -329,15 +329,15 @@ class TerminalViewState extends State<TerminalView> {
   }
 
   Rect get cursorRect {
-    return renderTerminal.cursorOffset & renderTerminal.cellSize;
+    return renderTerminalLibraryFlutter.cursorOffset & renderTerminalLibraryFlutter.cellSize;
   }
 
   Rect get globalCursorRect {
-    return renderTerminal.localToGlobal(renderTerminal.cursorOffset) & renderTerminal.cellSize;
+    return renderTerminalLibraryFlutter.localToGlobal(renderTerminalLibraryFlutter.cursorOffset) & renderTerminalLibraryFlutter.cellSize;
   }
 
   void _onTapUp(TapUpDetails details) {
-    final offset = renderTerminal.getCellOffset(details.localPosition);
+    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onTapUp?.call(details, offset);
   }
 
@@ -354,12 +354,12 @@ class TerminalViewState extends State<TerminalView> {
   }
 
   void _onSecondaryTapDown(TapDownDetails details) {
-    final offset = renderTerminal.getCellOffset(details.localPosition);
+    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onSecondaryTapDown?.call(details, offset);
   }
 
   void _onSecondaryTapUp(TapUpDetails details) {
-    final offset = renderTerminal.getCellOffset(details.localPosition);
+    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onSecondaryTapUp?.call(details, offset);
   }
 
@@ -368,7 +368,7 @@ class TerminalViewState extends State<TerminalView> {
   }
 
   void _onInsert(String text) {
-    final key = charToTerminalKey(text.trim());
+    final key = charToTerminalLibraryFlutterKey(text.trim());
 
     // On mobile platforms there is no guarantee that virtual keyboard will
     // generate hardware key events. So we need first try to send the key
@@ -406,7 +406,7 @@ class TerminalViewState extends State<TerminalView> {
       return KeyEventResult.ignored;
     }
 
-    final key = keyToTerminalKey(event.logicalKey);
+    final key = keyToTerminalLibraryFlutterKey(event.logicalKey);
 
     if (key == null) {
       return KeyEventResult.ignored;
@@ -446,8 +446,8 @@ class TerminalViewState extends State<TerminalView> {
   }
 }
 
-class _TerminalView extends LeafRenderObjectWidget {
-  const _TerminalView({
+class _TerminalLibraryFlutterViewWidget extends LeafRenderObjectWidget {
+  const _TerminalLibraryFlutterViewWidget({
     super.key,
     required this.terminal,
     required this.controller,
@@ -464,9 +464,9 @@ class _TerminalView extends LeafRenderObjectWidget {
     this.composingText,
   });
 
-  final Terminal terminal;
+  final TerminalLibraryFlutter terminal;
 
-  final TerminalController controller;
+  final TerminalLibraryFlutterController controller;
 
   final ViewportOffset offset;
 
@@ -474,15 +474,15 @@ class _TerminalView extends LeafRenderObjectWidget {
 
   final bool autoResize;
 
-  final TerminalStyle textStyle;
+  final TerminalLibraryFlutterStyle textStyle;
 
   final TextScaler textScaler;
 
-  final TerminalTheme theme;
+  final TerminalLibraryFlutterTheme theme;
 
   final FocusNode focusNode;
 
-  final TerminalCursorType cursorType;
+  final TerminalLibraryFlutterCursorType cursorType;
 
   final bool alwaysShowCursor;
 
@@ -491,8 +491,8 @@ class _TerminalView extends LeafRenderObjectWidget {
   final String? composingText;
 
   @override
-  RenderTerminal createRenderObject(BuildContext context) {
-    return RenderTerminal(
+  RenderTerminalLibraryFlutter createRenderObject(BuildContext context) {
+    return RenderTerminalLibraryFlutter(
       terminal: terminal,
       controller: controller,
       offset: offset,
@@ -510,7 +510,7 @@ class _TerminalView extends LeafRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderTerminal renderObject) {
+  void updateRenderObject(BuildContext context, RenderTerminalLibraryFlutter renderObject) {
     renderObject
       ..terminal = terminal
       ..controller = controller

@@ -1,4 +1,4 @@
-enum TerminalKey {
+enum TerminalLibraryFlutterKey {
   /// Represents the logical "None" key on the keyboard.
   none,
 

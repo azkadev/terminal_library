@@ -23,23 +23,20 @@ const _kDefaultFontFamilyFallback = [
   'sans-serif',
 ];
 
-class TerminalStyle {
-  const TerminalStyle({
+class TerminalLibraryFlutterStyle {
+  const TerminalLibraryFlutterStyle({
     this.fontSize = _kDefaultFontSize,
     this.height = _kDefaultHeight,
     this.fontFamily = _kDefaultFontFamily,
     this.fontFamilyFallback = _kDefaultFontFamilyFallback,
   });
 
-  factory TerminalStyle.fromTextStyle(TextStyle textStyle) {
-    return TerminalStyle(
+  factory TerminalLibraryFlutterStyle.fromTextStyle(TextStyle textStyle) {
+    return TerminalLibraryFlutterStyle(
       fontSize: textStyle.fontSize ?? _kDefaultFontSize,
       height: textStyle.height ?? _kDefaultHeight,
-      fontFamily: textStyle.fontFamily ??
-          textStyle.fontFamilyFallback?.first ??
-          _kDefaultFontFamily,
-      fontFamilyFallback:
-          textStyle.fontFamilyFallback ?? _kDefaultFontFamilyFallback,
+      fontFamily: textStyle.fontFamily ?? textStyle.fontFamilyFallback?.first ?? _kDefaultFontFamily,
+      fontFamilyFallback: textStyle.fontFamilyFallback ?? _kDefaultFontFamilyFallback,
     );
   }
 
@@ -71,13 +68,13 @@ class TerminalStyle {
     );
   }
 
-  TerminalStyle copyWith({
+  TerminalLibraryFlutterStyle copyWith({
     double? fontSize,
     double? height,
     String? fontFamily,
     List<String>? fontFamilyFallback,
   }) {
-    return TerminalStyle(
+    return TerminalLibraryFlutterStyle(
       fontSize: fontSize ?? this.fontSize,
       height: height ?? this.height,
       fontFamily: fontFamily ?? this.fontFamily,

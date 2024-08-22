@@ -23,7 +23,7 @@ class Keytab {
   final List<KeytabRecord> records;
 
   KeytabRecord? find(
-    TerminalKey key, {
+    TerminalLibraryFlutterKey key, {
     bool ctrl = false,
     bool alt = false,
     bool shift = false,

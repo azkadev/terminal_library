@@ -1,3 +1,3 @@
-abstract class TerminalSnapshot {
+abstract class TerminalLibraryFlutterSnapshot {
   void trimScrollback();
 }

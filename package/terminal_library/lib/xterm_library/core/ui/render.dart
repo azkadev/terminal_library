@@ -19,18 +19,18 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 
 typedef EditableRectCallback = void Function(Rect rect, Rect caretRect);
 
-class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
-  RenderTerminal({
-    required Terminal terminal,
-    required TerminalController controller,
+class RenderTerminalLibraryFlutter extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
+  RenderTerminalLibraryFlutter({
+    required TerminalLibraryFlutter terminal,
+    required TerminalLibraryFlutterController controller,
     required ViewportOffset offset,
     required EdgeInsets padding,
     required bool autoResize,
-    required TerminalStyle textStyle,
+    required TerminalLibraryFlutterStyle textStyle,
     required TextScaler textScaler,
-    required TerminalTheme theme,
+    required TerminalLibraryFlutterTheme theme,
     required FocusNode focusNode,
-    required TerminalCursorType cursorType,
+    required TerminalLibraryFlutterCursorType cursorType,
     required bool alwaysShowCursor,
     EditableRectCallback? onEditableRect,
     String? composingText,
@@ -44,24 +44,24 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
         _alwaysShowCursor = alwaysShowCursor,
         _onEditableRect = onEditableRect,
         _composingText = composingText,
-        _painter = TerminalPainter(
+        _painter = TerminalLibraryFlutterPainter(
           theme: theme,
           textStyle: textStyle,
           textScaler: textScaler,
         );
 
-  Terminal _terminal;
-  set terminal(Terminal terminal) {
+  TerminalLibraryFlutter _terminal;
+  set terminal(TerminalLibraryFlutter terminal) {
     if (_terminal == terminal) return;
-    if (attached) _terminal.removeListener(_onTerminalChange);
+    if (attached) _terminal.removeListener(_onTerminalLibraryFlutterChange);
     _terminal = terminal;
-    if (attached) _terminal.addListener(_onTerminalChange);
-    _resizeTerminalIfNeeded();
+    if (attached) _terminal.addListener(_onTerminalLibraryFlutterChange);
+    _resizeTerminalLibraryFlutterIfNeeded();
     markNeedsLayout();
   }
 
-  TerminalController _controller;
-  set controller(TerminalController controller) {
+  TerminalLibraryFlutterController _controller;
+  set controller(TerminalLibraryFlutterController controller) {
     if (_controller == controller) return;
     if (attached) _controller.removeListener(_onControllerUpdate);
     _controller = controller;
@@ -92,7 +92,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     markNeedsLayout();
   }
 
-  set textStyle(TerminalStyle value) {
+  set textStyle(TerminalLibraryFlutterStyle value) {
     if (value == _painter.textStyle) return;
     _painter.textStyle = value;
     markNeedsLayout();
@@ -104,7 +104,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     markNeedsLayout();
   }
 
-  set theme(TerminalTheme value) {
+  set theme(TerminalLibraryFlutterTheme value) {
     if (value == _painter.theme) return;
     _painter.theme = value;
     markNeedsPaint();
@@ -119,8 +119,8 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     markNeedsPaint();
   }
 
-  TerminalCursorType _cursorType;
-  set cursorType(TerminalCursorType value) {
+  TerminalLibraryFlutterCursorType _cursorType;
+  set cursorType(TerminalLibraryFlutterCursorType value) {
     if (value == _cursorType) return;
     _cursorType = value;
     markNeedsPaint();
@@ -147,9 +147,9 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     markNeedsPaint();
   }
 
-  TerminalSize? _viewportSize;
+  TerminalLibraryFlutterSize? _viewportSize;
 
-  final TerminalPainter _painter;
+  final TerminalLibraryFlutterPainter _painter;
 
   var _stickToBottom = true;
 
@@ -163,7 +163,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     markNeedsPaint();
   }
 
-  void _onTerminalChange() {
+  void _onTerminalLibraryFlutterChange() {
     markNeedsLayout();
     _notifyEditableRect();
   }
@@ -179,7 +179,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
   void attach(PipelineOwner owner) {
     super.attach(owner);
     _offset.addListener(_onScroll);
-    _terminal.addListener(_onTerminalChange);
+    _terminal.addListener(_onTerminalLibraryFlutterChange);
     _controller.addListener(_onControllerUpdate);
     _focusNode.addListener(_onFocusChange);
   }
@@ -188,7 +188,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
   void detach() {
     super.detach();
     _offset.removeListener(_onScroll);
-    _terminal.removeListener(_onTerminalChange);
+    _terminal.removeListener(_onTerminalLibraryFlutterChange);
     _controller.removeListener(_onControllerUpdate);
     _focusNode.removeListener(_onFocusChange);
   }
@@ -299,8 +299,8 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
 
   /// Send a mouse event at [offset] with [button] being currently in [buttonState].
   bool mouseEvent(
-    TerminalMouseButton button,
-    TerminalMouseButtonState buttonState,
+    TerminalLibraryFlutterMouseButton button,
+    TerminalLibraryFlutterMouseButtonState buttonState,
     Offset offset,
   ) {
     final position = getCellOffset(offset);
@@ -329,19 +329,19 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
       return;
     }
 
-    final viewportSize = TerminalSize(
+    final viewportSize = TerminalLibraryFlutterSize(
       size.width ~/ _painter.cellSize.width,
       _viewportHeight ~/ _painter.cellSize.height,
     );
 
     if (_viewportSize != viewportSize) {
       _viewportSize = viewportSize;
-      _resizeTerminalIfNeeded();
+      _resizeTerminalLibraryFlutterIfNeeded();
     }
   }
 
   /// Notify the underlying terminal that the viewport size has changed.
-  void _resizeTerminalIfNeeded() {
+  void _resizeTerminalLibraryFlutterIfNeeded() {
     if (_autoResize && _viewportSize != null) {
       _terminal.resize(
         _viewportSize!.width,
@@ -508,7 +508,7 @@ class RenderTerminal extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
 
   void _paintHighlights(
     Canvas canvas,
-    List<TerminalHighlight> highlights,
+    List<TerminalLibraryFlutterHighlight> highlights,
     int firstLine,
     int lastLine,
   ) {

@@ -12,7 +12,7 @@ import 'package:terminal_library/xterm_library/core/utils/circular_buffer.dart';
 import 'package:terminal_library/xterm_library/core/utils/unicode_v11.dart';
 
 class Buffer {
-  final TerminalState terminal;
+  final TerminalLibraryFlutterState terminal;
 
   final int maxLines;
 
@@ -92,10 +92,10 @@ class Buffer {
   /// Absolute index of the last line in the scroll region.
   int get absoluteMarginBottom => _marginBottom + scrollBack;
 
-  /// Writes data to the _terminal. Terminal sequences or special characters are
+  /// Writes data to the _terminal. TerminalLibraryFlutter sequences or special characters are
   /// not interpreted and directly added to the buffer.
   ///
-  /// See also: [Terminal.write]
+  /// See also: [TerminalLibraryFlutter.write]
   void write(String text) {
     for (var char in text.runes) {
       writeChar(char);
@@ -105,7 +105,7 @@ class Buffer {
   /// Writes a single character to the _terminal. Escape sequences or special
   /// characters are not interpreted and directly added to the buffer.
   ///
-  /// See also: [Terminal.writeChar]
+  /// See also: [TerminalLibraryFlutter.writeChar]
   void writeChar(int codePoint) {
     codePoint = charset.translate(codePoint);
 

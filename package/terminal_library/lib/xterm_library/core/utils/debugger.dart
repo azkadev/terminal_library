@@ -3,8 +3,8 @@ import 'package:terminal_library/xterm_library/core/core/escape/parser.dart';
 import 'package:terminal_library/xterm_library/core/core/mouse/mode.dart';
 import 'package:terminal_library/xterm_library/core/base/observable.dart';
 
-class TerminalCommand {
-  TerminalCommand(
+class TerminalLibraryFlutterCommand {
+  TerminalLibraryFlutterCommand(
     this.start,
     this.end,
     this.chars,
@@ -26,14 +26,14 @@ class TerminalCommand {
   final bool error;
 }
 
-class TerminalDebugger with Observable {
+class TerminalLibraryFlutterDebugger with Observable {
   late final _parser = EscapeParser(_handler);
 
-  late final _handler = _TerminalDebuggerHandler(recordCommand);
+  late final _handler = _TerminalLibraryFlutterDebuggerHandler(recordCommand);
 
   final recorded = <int>[];
 
-  final commands = <TerminalCommand>[];
+  final commands = <TerminalLibraryFlutterCommand>[];
 
   void write(String chunk) {
     recorded.addAll(chunk.runes);
@@ -52,12 +52,12 @@ class TerminalDebugger with Observable {
       final chars = String.fromCharCodes(charCodes);
       final escapedChars = _escape(chars);
       commands.add(
-        TerminalCommand(start, end, chars, escapedChars, [explanation], error),
+        TerminalLibraryFlutterCommand(start, end, chars, escapedChars, [explanation], error),
       );
     }
   }
 
-  String getRecord(TerminalCommand command) {
+  String getRecord(TerminalLibraryFlutterCommand command) {
     final charCodes = recorded.sublist(0, command.end);
     return String.fromCharCodes(charCodes);
   }
@@ -79,8 +79,8 @@ class TerminalDebugger with Observable {
   }
 }
 
-class _TerminalDebuggerHandler implements EscapeHandler {
-  _TerminalDebuggerHandler(this.onCommand);
+class _TerminalLibraryFlutterDebuggerHandler implements EscapeHandler {
+  _TerminalLibraryFlutterDebuggerHandler(this.onCommand);
 
   final void Function(String explanation, {bool error}) onCommand;
 
