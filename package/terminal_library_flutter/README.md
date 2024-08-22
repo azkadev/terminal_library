@@ -8,7 +8,7 @@
 ## 📚️ Docs
 
 1. [Documentation]({url_documentation})
-2. [Youtube](https://youtube.com/{main_youtube_username_owner})
+2. [Youtube](https://youtube.com/azkadev)
 3. [Telegram Support Group](https://t.me/{telegram_support_username})
 4. [Contact Developer](https://github.com/azkadev) (check social media or readme profile github)
 

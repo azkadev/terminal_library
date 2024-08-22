@@ -19,8 +19,6 @@ environment:
 dependencies: 
   path: '^1.9.0'
   universal_io: '^2.2.2'
-  # terminal_library: '^0.0.0'
-  # terminal_library_scheme: '^0.0.0'
   mason_logger: '^0.2.5'
   collection: '^1.18.0'
   yaml: '^3.1.2'

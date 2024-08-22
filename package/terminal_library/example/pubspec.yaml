@@ -12,12 +12,11 @@ dependencies:
   general_lib_flutter: '^0.0.25'
   simulate: '^0.0.40'
   path: '^1.9.0'
-  general: '^0.0.26'
+  general: '^0.0.29'
   terminal_library: 
     path: '../'
-
   flutter_pty: 
-    path: ../../../../general_studio_developer_project/package/flutter_pty
+    path: '../../../../general_studio_developer_project/package/flutter_pty'
 dev_dependencies: 
   flutter_test: 
     sdk: 'flutter'

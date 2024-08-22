@@ -1,8 +1,6 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
-
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:general_lib/general_lib.dart';
 import 'package:general_lib_flutter/extension/build_context.dart';
@@ -18,7 +16,6 @@ void main(List<String> args) {
 class App extends StatelessWidget {
   static GeneralLibFlutterApp generalLibFlutterApp = GeneralLibFlutterApp();
   const App({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GeneralLibFlutterAppMain(
@@ -39,7 +36,6 @@ class App extends StatelessWidget {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -77,7 +73,6 @@ class _MyAppState extends State<MyApp> {
     });
     await Future(() async {
       await Future.delayed(Durations.short1);
-
       ptyLibrary = PtyLibrary.start(
         shell,
         columns: terminalLibraryFlutter.viewWidth,
@@ -97,7 +92,6 @@ class _MyAppState extends State<MyApp> {
           } catch (e) {}
         }
       };
-
       terminalLibraryFlutter.onResize = (w, h, pw, ph) {
         ptyLibrary.resize(h, w);
       };
@@ -107,7 +101,6 @@ class _MyAppState extends State<MyApp> {
       terminalLibraryFlutter.keyInput(TerminalLibraryFlutterKey.enter);
       setState(() {});
     });
-
     setState(() {
       is_loading = false;
     });
@@ -145,11 +138,9 @@ class _MyAppState extends State<MyApp> {
     if (Platform.isMacOS || Platform.isLinux) {
       return Platform.environment['SHELL'] ?? 'bash';
     }
-
     if (Platform.isWindows) {
       return 'cmd.exe';
     }
-
     return 'sh';
   }
 }
