@@ -52,14 +52,14 @@ Future<void> pubspecUpdate({
     Map yaml_code_clone = yaml_code.clone();
 
     yaml_code_clone.addAll({
-      "description": "A sample command-line application.",
+      "description": "A Cross Platform Terminal Library Easy Maintaned And Support On Everywhere Platform",
       "version": version_package,
-      "repository": "https://github.com/{main_username_owner}/terminal_library",
-      "homepage": "https://github.com/{main_username_owner}/terminal_library",
-      "issue_tracker": "https://github.com/{main_username_owner}/terminal_library/issues",
-      "documentation": "https://github.com/{main_username_owner}/terminal_library/tree/main/docs",
+      "repository": "https://github.com/azkadev/terminal_library",
+      "homepage": "https://github.com/azkadev/terminal_library",
+      "issue_tracker": "https://github.com/azkadev/terminal_library/issues",
+      "documentation": "https://github.com/azkadev/terminal_library/tree/main/docs",
       "funding": [
-        "https://github.com/sponsors/{main_username_owner}",
+        "https://github.com/sponsors/azkadev",
       ],
       "platforms": {
         "android": null,
@@ -75,19 +75,19 @@ Future<void> pubspecUpdate({
       "publish_to",
     ]);
     if (yaml_code_clone["dependencies"] is Map) {
-      (yaml_code_clone["dependencies"] as Map).forEach((key, value) { 
+      (yaml_code_clone["dependencies"] as Map).forEach((key, value) {
         if (librarys.contains(key)) {
           yaml_code_clone["dependencies"][key] = "^${version_package}";
         }
       });
-      (yaml_code_clone["dependencies"] as Map).forEach((key, value) { 
-        if (key == "general_lib") {
-          yaml_code_clone["dependencies"][key] = "^0.0.36";
-        }
-        if (key == "general_lib_flutter") {
-          yaml_code_clone["dependencies"][key] = "^0.0.19";
-        }
-      });
+      // (yaml_code_clone["dependencies"] as Map).forEach((key, value) {
+      //   if (key == "general_lib") {
+      //     yaml_code_clone["dependencies"][key] = "^0.0.36";
+      //   }
+      //   if (key == "general_lib_flutter") {
+      //     yaml_code_clone["dependencies"][key] = "^0.0.19";
+      //   }
+      // });
     }
     var yamlDoc = YamlWriter().write(yaml_code_clone);
 

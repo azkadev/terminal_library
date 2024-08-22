@@ -1,6 +1,6 @@
 # melos_managed_dependency_overrides: edge_dart_runtime
-dependency_overrides:
-  terminal_library:
-    path: ../terminal_library
-  terminal_library_scheme:
-    path: ../terminal_library_scheme
+# dependency_overrides:
+#   terminal_library:
+#     path: ../terminal_library
+#   terminal_library_scheme:
+#     path: ../terminal_library_scheme

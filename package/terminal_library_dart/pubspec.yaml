@@ -1,13 +1,11 @@
-name: 'terminal_library'
-description: 'A sample command-line application.'
+name: 'terminal_library_dart'
+description: 'A Cross Platform Terminal Library Easy Maintaned And Support On Everywhere Platform'
 version: '0.0.0'
-homepage: 'https://github.com/{main_username_owner}/terminal_library'
-repository: 'https://github.com/{main_username_owner}/terminal_library'
-issue_tracker: 'https://github.com/{main_username_owner}/terminal_library/issues'
-documentation: 'https://github.com/{main_username_owner}/terminal_library/tree/main/docs'
+homepage: 'https://github.com/azkadev/terminal_library'
+repository: 'https://github.com/azkadev/terminal_library'
+issue_tracker: 'https://github.com/azkadev/terminal_library/issues'
+documentation: 'https://github.com/azkadev/terminal_library/tree/main/docs'
 funding: 
-  - 'https://github.com/sponsors/{main_username_owner}'
-  - 'https://github.com/sponsors/{main_username_owner}'
   - 'https://github.com/sponsors/azkadev'
 platforms: 
   android: null
@@ -21,8 +19,8 @@ environment:
 dependencies: 
   path: '^1.9.0'
   universal_io: '^2.2.2'
-  terminal_library: '^0.0.0'
-  terminal_library_scheme: '^0.0.0'
+  # terminal_library: '^0.0.0'
+  # terminal_library_scheme: '^0.0.0'
   mason_logger: '^0.2.5'
   collection: '^1.18.0'
   yaml: '^3.1.2'
@@ -33,6 +31,5 @@ dev_dependencies:
   test: '^1.24.0'
 executables: 
   terminal_library: 'terminal_library'
-publish_to: 'none'
 dependency_overrides: 
   pointycastle: '3.8.0'

@@ -35,15 +35,15 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'dart:async';
 
 import 'package:general_lib/general_lib.dart';
-import 'package:terminal_library/api/extensions.dart';
-import 'package:terminal_library/scheme/scheme/terminal_library_pubspec_config.dart';
-import 'package:terminal_library/scheme/scheme/pubspec_terminal_library.dart';
-import 'package:terminal_library/scheme/scheme/pubspec_terminal_library_dependencies.dart';
+// import 'package:terminal_library/api/extensions.dart';
+// import 'package:terminal_library/scheme/scheme/terminal_library_pubspec_config.dart';
+// import 'package:terminal_library/scheme/scheme/pubspec_terminal_library.dart';
+// import 'package:terminal_library/scheme/scheme/pubspec_terminal_library_dependencies.dart';
 import "package:path/path.dart" as path;
 import 'package:universal_io/io.dart';
 
 import "package:yaml/yaml.dart" as yaml;
-import 'package:yaml_writer/yaml_writer.dart';
+// import 'package:yaml_writer/yaml_writer.dart';
 
 enum TerminalLibraryDartBuildType {
   debug,
@@ -83,7 +83,7 @@ class TerminalLibraryDartApi {
       int exit_code = await (process.exitCode);
     }
     Map yaml_code = (yaml.loadYaml(file_pubspec.readAsStringSync(), recover: true) as Map);
-    PubspecTerminalLibrary pubspecTerminalLibrary = PubspecTerminalLibrary(yaml_code.clone());
+    // PubspecTerminalLibrary pubspecTerminalLibrary = PubspecTerminalLibrary(yaml_code.clone());
 
     File file_guide = File(path.join(directory_project.path, "guide-terminal_library.md"));
 
@@ -98,32 +98,32 @@ class TerminalLibraryDartApi {
     // supabase directory deploy
     Directory directory_script_supabase = Directory(path.join(directory_project.path, "supabase", "functions", project_name));
 
-    // default configuration pubspec
-    PubspecTerminalLibrary pubspecTerminalLibrary_default = PubspecTerminalLibrary.create(
-      repository: "https://github.com/{main_username_owner}/terminal_library",
-      homepage: "https://github.com/{main_username_owner}/terminal_library",
-      issue_tracker: "https://github.com/{main_username_owner}/terminal_library/issues",
-      documentation: "https://github.com/{main_username_owner}/terminal_library/tree/main/docs",
-      funding: [
-        "https://github.com/sponsors/{main_username_owner}",
-      ],
-      dependencies: PubspecTerminalLibraryDependencies({
-        "terminal_library": "any",
-        "terminal_library_http_client": "any",
-        "general_lib": "^0.0.34",
-      }),
-      terminal_library: TerminalLibraryPubspecConfig.create(),
-    );
+    // // default configuration pubspec
+    // PubspecTerminalLibrary pubspecTerminalLibrary_default = PubspecTerminalLibrary.create(
+    //   repository: "https://github.com/azkadev/terminal_library",
+    //   homepage: "https://github.com/azkadev/terminal_library",
+    //   issue_tracker: "https://github.com/azkadev/terminal_library/issues",
+    //   documentation: "https://github.com/azkadev/terminal_library/tree/main/docs",
+    //   funding: [
+    //     "https://github.com/sponsors/azkadev",
+    //   ],
+    //   dependencies: PubspecTerminalLibraryDependencies({
+    //     "terminal_library": "any",
+    //     "terminal_library_http_client": "any",
+    //     "general_lib": "^0.0.34",
+    //   }),
+    //   terminal_library: TerminalLibraryPubspecConfig.create(),
+    // );
 
-    // update pubspec default
-    pubspecTerminalLibrary.rawData.terminal_library_updateMapIfNotSameOrEmptyOrNull(
-      data: pubspecTerminalLibrary_default.toJson(),
-      ignoreKeys: [
-        "@type",
-      ],
-    );
-    String yaml_documents_new = YamlWriter().write(pubspecTerminalLibrary.toJson());
-    await file_pubspec.writeAsString(yaml_documents_new);
+    // // update pubspec default
+    // pubspecTerminalLibrary.rawData.terminal_library_updateMapIfNotSameOrEmptyOrNull(
+    //   data: pubspecTerminalLibrary_default.toJson(),
+    //   ignoreKeys: [
+    //     "@type",
+    //   ],
+    // );
+    // String yaml_documents_new = YamlWriter().write(pubspecTerminalLibrary.toJson());
+    // await file_pubspec.writeAsString(yaml_documents_new);
     // finished update pubspec
   }
 
@@ -157,7 +157,7 @@ class TerminalLibraryDartApi {
       return;
     }
     Map yaml_code = (yaml.loadYaml(file_pubspec.readAsStringSync(), recover: true) as Map);
-    PubspecTerminalLibrary pubspec_server_universe = PubspecTerminalLibrary(yaml_code.clone());
+    // PubspecTerminalLibrary pubspec_server_universe = PubspecTerminalLibrary(yaml_code.clone());
     Directory directory_script = Directory(path.join(directoryBase.path, "bin"));
     Directory directory_build = Directory(path.join(directoryBase.path, "build"));
     if (directory_build.existsSync() == false) {
