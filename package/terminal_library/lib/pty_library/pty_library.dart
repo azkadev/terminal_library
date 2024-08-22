@@ -7,37 +7,37 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'src/pty_library_bindings_generated.dart';
 
-const _libName = 'flutter_pty';
-
-final DynamicLibrary _dylib = () {
-  if (Platform.isMacOS || Platform.isIOS) {
-    return DynamicLibrary.open('$_libName.framework/$_libName');
-  }
-  if (Platform.isAndroid || Platform.isLinux) {
-    return DynamicLibrary.open('lib$_libName.so');
-  }
-  if (Platform.isWindows) {
-    return DynamicLibrary.open('$_libName.dll');
-  }
-  throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');
-}();
-
-final _bindings = FlutterPtyLibraryBindings(_dylib);
-
-final _init = () {
-  return _bindings.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
-}();
-
-void _ensureInitialized() {
-  if (_init != 0) {
-    throw StateError('Failed to initialize native bindings');
-  }
-}
-
 /// PtyLibrary represents a process running in a pseudo-terminal.
 ///
 /// To create a PtyLibrary, use [PtyLibrary.start].
 class PtyLibrary {
+  static const _libName = 'flutter_pty';
+
+  static final DynamicLibrary _dylib = () {
+    if (Platform.isMacOS || Platform.isIOS) {
+      return DynamicLibrary.open('$_libName.framework/$_libName');
+    }
+    if (Platform.isAndroid || Platform.isLinux) {
+      return DynamicLibrary.open('lib$_libName.so');
+    }
+    if (Platform.isWindows) {
+      return DynamicLibrary.open('$_libName.dll');
+    }
+    throw UnsupportedError('Unknown platform: ${Platform.operatingSystem}');
+  }();
+
+  static final _bindings = FlutterPtyLibraryBindings(_dylib);
+
+  static final _init = () {
+    return _bindings.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
+  }();
+
+  static void _ensureInitialized() {
+    if (_init != 0) {
+      throw StateError('Failed to initialize native bindings');
+    }
+  }
+
   final String executable;
 
   final List<String> arguments;
@@ -62,14 +62,7 @@ class PtyLibrary {
     // Without this, tools like "vi" produce sequences that are not UTF-8 friendly
     effectiveEnv['LANG'] = 'en_US.UTF-8';
 
-    const envValuesToCopy = {
-      'LOGNAME',
-      'USER',
-      'DISPLAY',
-      'LC_TYPE',
-      'HOME',
-      'PATH'
-    };
+    const envValuesToCopy = {'LOGNAME', 'USER', 'DISPLAY', 'LC_TYPE', 'HOME', 'PATH'};
 
     for (var entry in Platform.environment.entries) {
       if (envValuesToCopy.contains(entry.key)) {
@@ -203,14 +196,14 @@ class PtyLibrary {
     _exitPort.close();
     _exitCodeCompleter.complete(exitCode);
   }
-}
 
-String? _getPtyLibraryError() {
-  final error = _bindings.pty_error();
+  static String? _getPtyLibraryError() {
+    final error = _bindings.pty_error();
 
-  if (error == nullptr) {
-    return null;
+    if (error == nullptr) {
+      return null;
+    }
+
+    return error.cast<Utf8>().toDartString();
   }
-
-  return error.cast<Utf8>().toDartString();
 }
