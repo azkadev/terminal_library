@@ -53,6 +53,11 @@ flutter pub add terminal_library
 
 1. General Studio Developer App
 
+![](assets/general_studio_developer_development.png)
+
+| --                                                       | -- |
+|----------------------------------------------------------|----|
+| ![](assets/general_studio_developer_mobile_terminal.png) | -- |
 
 2. General Bot App / General Automation App
 
