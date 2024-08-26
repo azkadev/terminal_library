@@ -53,16 +53,15 @@ flutter pub add terminal_library
 
 1. General Studio Developer App
 
-![](assets/general_studio_developer_development.png)
+General Studio Developer App Is Application code editor with cross platform support with extra feature native (SSH CLIENT, CHROOT LINUX, HTTP CLIENT, NETWORK PROXY) so this app is can help you to develop without use more one app so you will significant decrease ram usage
+ 
+<img src="assets/general_studio_developer_development.png" height=100% width=100%>
+<img src="assets/general_studio_developer_mobile_terminal.png" height=50% width=50%>
 
-| --                                                       | -- |
-|----------------------------------------------------------|----|
-| ![](assets/general_studio_developer_mobile_terminal.png) | -- |
+1. General Bot App / General Automation App
+   
 
-2. General Bot App / General Automation App
-
-
-3. General Application
+2. General Application
 
 
 ## 🚀️ Quick Start
