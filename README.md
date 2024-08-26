@@ -14,13 +14,14 @@
 
 ## 🔖️ Features
 
-1. [x] 📱️ **Cross Platform** support (Device, Edge Severless functions)
+1. [x] 📱️ **Cross Platform** support (Device)
 2. [x] 📜️ **Standarization** Style Code
 3. [x] ⌨️ **Cli** (Terminal for help you use this library or create project)
 4. [x] 🔥️ **Api** (If you developer bot / userbot you can use this library without interact cli just add library and use 🚀️)
-5. [ ] 🧩️ **Customizable Extension** (if you want add extension so you can more speed up on development)
-6. [ ] ✨️ **Pretty Information** (user friendly for newbie)
- 
+5. [x] 🧩️ **Customizable Extension** (if you want add extension so you can more speed up on development)
+6. [x] ✨️ **Pretty Information** (user friendly for newbie)
+7. [x] 🔥️ **Multi Function** One library with multi function (INCLUDE SSH CLIENT) so you can connect ssh terminal or acces file using SFTP without any hastle
+
 ## ❔️ Fun Fact
 
 This library work on everywhere platform (cli, server, web, gui) ignore flutter flag only pub.dev
