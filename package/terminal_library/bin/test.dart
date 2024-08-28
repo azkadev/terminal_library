@@ -6,17 +6,15 @@ import 'package:terminal_library/pty_library/pty_library.dart';
 
 void main(List<String> args) {
   print("start");
-  PtyLibrary.ensureInitialized(
-    libraryPty: "/home/galaxeus/Documents/galaxeus/app/terminal_library/package/terminal_library/bin/libterminal_library_flutter_pty.so",
+  PtyLibrary ptyLibrary = PtyLibrary(
+    executable: PtyLibrary.defaultShell,
   );
-  PtyLibrary ptyLibrary = PtyLibrary.start(
-    executable: "bash",
-  );
-
-  ptyLibrary.output.listen((event) {
+  ptyLibrary.ensureInitialized();
+  ptyLibrary.stdout_receive_port.listen((event) {
     if (event.isNotEmpty) {
       try {
         stdout.add(event);
+        // stdout.add(utf8.encode("PTY: ${utf8.decode(event,allowMalformed: true)}"));
       } catch (e) {}
     }
   });

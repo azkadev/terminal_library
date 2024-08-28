@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations
 
 import 'dart:async';
 import 'dart:ffi';
@@ -9,89 +9,155 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:general_lib/dart/dart.dart';
 import 'package:general_lib/dart/executable_type/executable_type.dart';
+
 import 'src/pty_library_bindings_generated.dart';
 
 /// PtyLibrary represents a process running in a pseudo-terminal.
 ///
 /// To create a PtyLibrary, use [PtyLibrary.start].
 class PtyLibrary {
-  static String libraryName = 'terminal_library_flutter_pty';
+  final String executable;
+  final List<String> arguments;
+
+  final String? workingDirectory;
+  final Map? environment;
+  final int rows;
+  final int columns;
+  final bool isAckRead;
+
+  late String libraryPtyPath;
 
   bool isInitialized = false;
-  static final DynamicLibrary _dylib = () {
-    if (Platform.isMacOS || Platform.isIOS) {
-      return DynamicLibrary.open('${libraryName}.framework/${libraryName}');
-    }
-    if (Platform.isAndroid || Platform.isLinux) {
-      if (Dart.executable_type == ExecutableType.cli) {
-        return DynamicLibrary.open('${libraryName}.so');
-      }
-      return DynamicLibrary.open('lib${libraryName}.so');
-    }
-    if (Platform.isWindows) {
-      return DynamicLibrary.open('${libraryName}.dll');
-    }
-    return DynamicLibrary.process();
-  }();
 
-  static final _bindings = FlutterPtyLibraryBindings(_dylib);
+  static bool is_dynamic_library_pty_initialized = false;
+  static late final DynamicLibrary dynamic_library_pty;
+  static late final FlutterPtyLibraryBindings pty_library;
+  static late final int pty_library_init;
 
-  static final _init = () {
-    return _bindings.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
-  }();
+  final ReceivePort stdout_receive_port = ReceivePort();
 
-  static void ensureInitialized({
-    String? libraryPty,
-  }) {
-    if (libraryPty != null) {
-      libraryName = libraryPty;
-    }
-  }
+  final ReceivePort exit__receive_port = ReceivePort();
 
-  static void _ensureInitialized() {
-    if (_init != 0) {
-      throw StateError('Failed to initialize native bindings');
-    }
-  }
+  final Completer<int> exit_code_completer = Completer<int>();
 
-  final String executable;
-
-  final List<String> arguments;
+  late final Pointer<PtyLibraryHandle> _handle;
 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
   /// [ackRead] indicates if the pty should wait for a call to [PtyLibrary.ackRead] before sending the next data.
-  PtyLibrary.start({
-    required this.executable,
+  PtyLibrary({
+    this.executable = "sh",
+    this.workingDirectory,
+    String? libraryPtyPath,
     this.arguments = const [],
+    this.environment = const {},
+    this.rows = 25,
+    this.columns = 80,
+    this.isAckRead = false,
+  }) {
+    if (libraryPtyPath != null) {
+      this.libraryPtyPath = libraryPtyPath;
+    } else {
+      this.libraryPtyPath = PtyLibrary.defaultLibraryPtyPath;
+    }
+  }
+
+  static PtyLibrary start({
+    String? executable,
     String? workingDirectory,
-    Map<String, String>? environment,
+    String? libraryPtyPath,
+    List<String>? arguments,
+    Map? environment,
     int rows = 25,
     int columns = 80,
-    bool ackRead = false,
+    bool isAckRead = false,
   }) {
-    _ensureInitialized();
+    final PtyLibrary ptyLibrary = PtyLibrary(
+      executable: PtyLibrary.defaultShell,
+      libraryPtyPath: PtyLibrary.defaultLibraryPtyPath,
+      workingDirectory: workingDirectory,
+      environment: environment,
+      arguments: arguments ?? [],
+      rows: rows,
+      columns: columns,
+      isAckRead: isAckRead,
+    );
+    ptyLibrary.ensureInitialized();
+    return ptyLibrary;
+  }
 
-    final effectiveEnv = <String, String>{};
+  static String get defaultLibraryPtyPath {
+    if (Platform.isMacOS || Platform.isIOS) {
+      return "libterminal_library_flutter_pty.framework/libterminal_library_flutter_pty";
+    }
+    if (Platform.isAndroid || Platform.isLinux) {
+      if (Dart.executable_type == ExecutableType.cli) {
+        return 'libterminal_library_pty.so';
+      }
+      return 'libterminal_library_flutter_pty.so';
+    }
 
+    if (Platform.isWindows) {
+      return 'libterminal_library_flutter_pty.dll';
+    }
+    return "";
+  }
+
+  static String get defaultShell {
+    if (Platform.isMacOS || Platform.isLinux) {
+      return Platform.environment['SHELL'] ?? 'bash';
+    }
+    if (Platform.isWindows) {
+      return 'cmd.exe';
+    }
+    return 'sh';
+  }
+
+  void ensureInitialized() {
+    if (isInitialized) {
+      return;
+    }
+
+    if (is_dynamic_library_pty_initialized == false) {
+      dynamic_library_pty = () {
+        if (libraryPtyPath.isNotEmpty) {
+          return DynamicLibrary.open('${libraryPtyPath}');
+        }
+        return DynamicLibrary.process();
+      }();
+
+      pty_library = FlutterPtyLibraryBindings(dynamic_library_pty);
+      pty_library_init = pty_library.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
+      is_dynamic_library_pty_initialized = true;
+    }
+    if (pty_library_init != 0) {
+      throw StateError('Failed to initialize native bindings');
+    }
+
+    final Map<String, String> effectiveEnv = <String, String>{};
     effectiveEnv['TERM'] = 'xterm-256color';
     // Without this, tools like "vi" produce sequences that are not UTF-8 friendly
     effectiveEnv['LANG'] = 'en_US.UTF-8';
 
-    const envValuesToCopy = {'LOGNAME', 'USER', 'DISPLAY', 'LC_TYPE', 'HOME', 'PATH'};
+    const Set<String> envValuesToCopy = {
+      'LOGNAME',
+      'USER',
+      'DISPLAY',
+      'LC_TYPE',
+      'HOME',
+      'PATH',
+    };
 
     for (var entry in Platform.environment.entries) {
       if (envValuesToCopy.contains(entry.key)) {
         effectiveEnv[entry.key] = entry.value;
       }
     }
-
     if (environment != null) {
-      for (var entry in environment.entries) {
+      for (var entry in (environment ?? {}).entries) {
         effectiveEnv[entry.key] = entry.value;
       }
     }
-
     // build argv
     final argv = calloc<Pointer<Utf8>>(arguments.length + 2);
 
@@ -115,38 +181,31 @@ class PtyLibrary {
     options.ref.executable = executable.toNativeUtf8().cast();
     options.ref.arguments = argv.cast();
     options.ref.environment = envp.cast();
-    options.ref.stdout_port = _stdoutPort.sendPort.nativePort;
-    options.ref.exit_port = _exitPort.sendPort.nativePort;
-    options.ref.ackRead = ackRead;
+    options.ref.stdout_port = stdout_receive_port.sendPort.nativePort;
+    options.ref.exit_port = exit__receive_port.sendPort.nativePort;
+    options.ref.ackRead = isAckRead;
 
-    if (workingDirectory != null) {
-      options.ref.working_directory = workingDirectory.toNativeUtf8().cast();
+    if ((workingDirectory ?? "").isNotEmpty) {
+      options.ref.working_directory = (workingDirectory ?? "").toNativeUtf8().cast();
     } else {
       options.ref.working_directory = nullptr;
     }
 
-    _handle = _bindings.pty_create(options);
+    _handle = pty_library.pty_create(options);
 
     calloc.free(options);
 
     if (_handle == nullptr) {
       throw StateError('Failed to create PTY: ${_getPtyLibraryError()}');
     }
+    exit__receive_port.first.then(_onExitCode);
 
-    _exitPort.first.then(_onExitCode);
+    isInitialized = true;
   }
-
-  final _stdoutPort = ReceivePort();
-
-  final _exitPort = ReceivePort();
-
-  final _exitCodeCompleter = Completer<int>();
-
-  late final Pointer<PtyLibraryHandle> _handle;
 
   /// The output stream from the pseudo-terminal. Note that pseudo-terminals
   /// do not distinguish between stdout and stderr.
-  Stream<Uint8List> get output => _stdoutPort.cast();
+  Stream<Uint8List> get output => stdout_receive_port.cast();
 
   /// A `Future` which completes with the exit code of the process
   /// when the process completes.
@@ -174,22 +233,22 @@ class PtyLibrary {
   /// output of the process when the returned future completes.
   /// To be sure that all output is captured, wait for the done event on the
   /// streams.
-  Future<int> get exitCode => _exitCodeCompleter.future;
+  Future<int> get exitCode => exit_code_completer.future;
 
   /// The process id of the process running in the pseudo-terminal.
-  int get pid => _bindings.pty_getpid(_handle);
+  int get pid => pty_library.pty_getpid(_handle);
 
   /// Write data to the pseudo-terminal.
   void write(Uint8List data) {
     final buf = malloc<Int8>(data.length);
     buf.asTypedList(data.length).setAll(0, data);
-    _bindings.pty_write(_handle, buf.cast(), data.length);
+    pty_library.pty_write(_handle, buf.cast(), data.length);
     malloc.free(buf);
   }
 
   /// Resize the pseudo-terminal.
   void resize(int rows, int cols) {
-    _bindings.pty_resize(_handle, rows, cols);
+    pty_library.pty_resize(_handle, rows, cols);
   }
 
   /// Kill the process running in the pseudo-terminal.
@@ -205,17 +264,17 @@ class PtyLibrary {
   /// This is needed when ackRead is set to true as the pty will wait for this signal to happen
   /// before any additional data is sent.
   void ackRead() {
-    _bindings.pty_ack_read(_handle);
+    pty_library.pty_ack_read(_handle);
   }
 
   void _onExitCode(dynamic exitCode) {
-    _stdoutPort.close();
-    _exitPort.close();
-    _exitCodeCompleter.complete(exitCode);
+    stdout_receive_port.close();
+    exit__receive_port.close();
+    exit_code_completer.complete(exitCode);
   }
 
-  static String? _getPtyLibraryError() {
-    final error = _bindings.pty_error();
+  String? _getPtyLibraryError() {
+    final error = pty_library.pty_error();
 
     if (error == nullptr) {
       return null;
