@@ -1,0 +1,33 @@
+name: terminal_library_flutter_pty
+description: "A new Flutter FFI plugin project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+  flutter: '>=3.3.0'
+ 
+
+dependencies: 
+  flutter: 
+    sdk: 'flutter'
+  ffi: '^2.0.1'
+dev_dependencies: 
+  flutter_test: 
+    sdk: 'flutter'
+  ffigen: '^8.0.0'
+  flutter_lints: '^2.0.1'
+  
+flutter: 
+  plugin: 
+    platforms: 
+      android: 
+        ffiPlugin: true
+      ios: 
+        ffiPlugin: true
+      linux: 
+        ffiPlugin: true
+      macos: 
+        ffiPlugin: true
+      windows: 
+        ffiPlugin: true

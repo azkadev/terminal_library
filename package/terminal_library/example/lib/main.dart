@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
     await Future(() async {
       await Future.delayed(Durations.short1);
       ptyLibrary = PtyLibrary.start(
-        shell,
+        executable:shell,
         columns: terminalLibraryFlutter.viewWidth,
         rows: terminalLibraryFlutter.viewHeight,
       );
