@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
+ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:terminal_library/pty_library/pty_library.dart';
@@ -10,7 +9,8 @@ void main(List<String> args) {
     executable: PtyLibrary.defaultShell,
   );
   ptyLibrary.ensureInitialized();
-  ptyLibrary.stdout_receive_port.listen((event) {
+  
+  ptyLibrary.output.listen((event) {
     if (event.isNotEmpty) {
       try {
         stdout.add(event);

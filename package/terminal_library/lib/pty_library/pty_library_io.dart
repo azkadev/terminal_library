@@ -129,9 +129,10 @@ class PtyLibrary {
       pty_library = FlutterPtyLibraryBindings(dynamic_library_pty);
       pty_library_init = pty_library.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
       is_dynamic_library_pty_initialized = true;
-    }
-    if (pty_library_init != 0) {
-      throw StateError('Failed to initialize native bindings');
+
+      if (pty_library_init != 0) {
+        throw StateError('Failed to initialize native bindings');
+      }
     }
 
     final Map<String, String> effectiveEnv = <String, String>{};
