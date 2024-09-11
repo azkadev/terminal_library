@@ -5,7 +5,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:ffi/ffi.dart'; 
+import 'package:ffi/ffi.dart';
 import 'package:terminal_library/pty_library/src/terminal_pty_bindings_generated.dart';
 
 import 'base.dart';
@@ -21,6 +21,8 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
 
   late final Pointer<PtyHandle> _handle;
 
+  static late final String library_pty_path;
+
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
   /// [ackRead] indicates if the pty should wait for a call to [TerminalPtyLibrary.ackRead] before sending the next data.
@@ -33,7 +35,11 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     super.environment,
     super.isAckRead,
     super.rows,
-  });
+  }) {
+    library_pty_path = libraryPtyPath;
+    openLibrary();
+    ensureInitialized();
+  }
 
   static String get defaultShell {
     if (Platform.isMacOS || Platform.isLinux) {
@@ -45,16 +51,11 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     return 'sh';
   }
 
-  @override
-  void ensureInitialized() {
-    if (isInitialized) {
-      return;
-    }
-
+  static void openLibrary() {
     if (is_dynamic_library_pty_initialized == false) {
       dynamic_library_pty = () {
-        if (libraryPtyPath.isNotEmpty) {
-          return DynamicLibrary.open('${libraryPtyPath}');
+        if (library_pty_path.isNotEmpty) {
+          return DynamicLibrary.open('${library_pty_path}');
         }
         return DynamicLibrary.process();
       }();
@@ -66,6 +67,13 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
       if (pty_library_init != 0) {
         throw StateError('Failed to initialize native bindings');
       }
+    }
+  }
+
+  @override
+  void ensureInitialized() {
+    if (isInitialized) {
+      return;
     }
 
     final Map<String, String> effectiveEnv = <String, String>{};

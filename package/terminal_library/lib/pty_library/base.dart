@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations
 
-import 'dart:async'; 
+import 'dart:async';
 
 import 'dart:typed_data';
 
@@ -22,7 +22,7 @@ abstract class TerminalPtyLibraryBase {
   final int columns;
   final bool isAckRead;
 
-  late String libraryPtyPath;
+  static late final String library_pty_path;
 
   bool isInitialized = false;
 
@@ -35,6 +35,7 @@ abstract class TerminalPtyLibraryBase {
   final ReceivePort exit_receive_port = ReceivePort();
 
   final Completer<int> exit_code_completer = Completer<int>();
+  late final String libraryPtyPath;
 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
@@ -56,8 +57,10 @@ abstract class TerminalPtyLibraryBase {
     }
     if (libraryPtyPath != null) {
       this.libraryPtyPath = libraryPtyPath;
+      library_pty_path = libraryPtyPath;
     } else {
       this.libraryPtyPath = TerminalPtyLibraryBase.defaultLibraryPtyPath;
+      library_pty_path = TerminalPtyLibraryBase.defaultLibraryPtyPath;
     }
   }
 
@@ -153,4 +156,3 @@ abstract class TerminalPtyLibraryBase {
   /// before any additional data is sent.
   void ackRead() {}
 }
- 

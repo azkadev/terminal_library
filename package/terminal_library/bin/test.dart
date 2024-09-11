@@ -1,4 +1,4 @@
-import 'dart:convert'; 
+import 'dart:convert';
 
 import 'package:terminal_library/pty_library/pty_library.dart';
 
@@ -13,7 +13,7 @@ void main(List<String> args) {
   ptyLibrary.output.listen((event) {
     if (event.isNotEmpty) {
       try {
-        print(utf8.decode(event,allowMalformed: true));
+        print(utf8.decode(event, allowMalformed: true));
         // stdout.add(utf8.encode("ALO: ${utf8.decode(event, allowMalformed: true)}"));
         // stdout.add(utf8.encode("PTY: ${utf8.decode(event,allowMalformed: true)}"));
       } catch (e) {}
@@ -25,5 +25,6 @@ void main(List<String> args) {
   //   } catch (e) {}
   // });
   print("oke");
-  ptyLibrary.write(utf8.encode("echo \"ini dari ani\""));
+  ptyLibrary.write(utf8.encode("ls\n"));
+  // ptyLibrary.write(utf8.encode("echo \"ini dari ani\""));
 }
