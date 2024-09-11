@@ -1,107 +1,39 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations, deprecated_member_use
 
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:isolate';
 import 'dart:typed_data';
 
-import 'package:ffi/ffi.dart';
-import 'package:general_lib/dart/dart.dart';
-import 'package:general_lib/dart/executable_type/executable_type.dart';
+import 'package:ffi/ffi.dart'; 
+import 'package:terminal_library/pty_library/src/terminal_pty_bindings_generated.dart';
 
-import 'src/pty_library_bindings_generated.dart';
+import 'base.dart';
 
-/// PtyLibrary represents a process running in a pseudo-terminal.
+/// TerminalPtyLibrary represents a process running in a pseudo-terminal.
 ///
-/// To create a PtyLibrary, use [PtyLibrary.start].
-class PtyLibrary {
-  final String executable;
-  final List<String> arguments;
-
-  final String? workingDirectory;
-  final Map? environment;
-  final int rows;
-  final int columns;
-  final bool isAckRead;
-
-  late String libraryPtyPath;
-
-  bool isInitialized = false;
-
+/// To create a TerminalPtyLibrary, use [TerminalPtyLibrary.start].
+class TerminalPtyLibrary extends TerminalPtyLibraryBase {
   static bool is_dynamic_library_pty_initialized = false;
   static late final DynamicLibrary dynamic_library_pty;
-  static late final FlutterPtyLibraryBindings pty_library;
+  static late final TerminalPtyBindings pty_library;
   static late final int pty_library_init;
 
-  final ReceivePort stdout_receive_port = ReceivePort();
-
-  final ReceivePort exit__receive_port = ReceivePort();
-
-  final Completer<int> exit_code_completer = Completer<int>();
-
-  late final Pointer<PtyLibraryHandle> _handle;
+  late final Pointer<PtyHandle> _handle;
 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
-  /// [ackRead] indicates if the pty should wait for a call to [PtyLibrary.ackRead] before sending the next data.
-  PtyLibrary({
-    this.executable = "sh",
-    this.workingDirectory,
-    String? libraryPtyPath,
-    this.arguments = const [],
-    this.environment = const {},
-    this.rows = 25,
-    this.columns = 80,
-    this.isAckRead = false,
-  }) {
-    if (libraryPtyPath != null) {
-      this.libraryPtyPath = libraryPtyPath;
-    } else {
-      this.libraryPtyPath = PtyLibrary.defaultLibraryPtyPath;
-    }
-  }
-
-  static PtyLibrary start({
-    String? executable,
-    String? workingDirectory,
-    String? libraryPtyPath,
-    List<String>? arguments,
-    Map? environment,
-    int rows = 25,
-    int columns = 80,
-    bool isAckRead = false,
-  }) {
-    final PtyLibrary ptyLibrary = PtyLibrary(
-      executable: PtyLibrary.defaultShell,
-      libraryPtyPath: PtyLibrary.defaultLibraryPtyPath,
-      workingDirectory: workingDirectory,
-      environment: environment,
-      arguments: arguments ?? [],
-      rows: rows,
-      columns: columns,
-      isAckRead: isAckRead,
-    );
-    ptyLibrary.ensureInitialized();
-    return ptyLibrary;
-  }
-
-  static String get defaultLibraryPtyPath {
-    if (Platform.isMacOS || Platform.isIOS) {
-      return "libterminal_library_flutter_pty.framework/libterminal_library_flutter_pty";
-    }
-    if (Platform.isAndroid || Platform.isLinux) {
-      if (Dart.executable_type == ExecutableType.cli) {
-        return 'libterminal_library_pty.so';
-      }
-      return 'libterminal_library_flutter_pty.so';
-    }
-
-    if (Platform.isWindows) {
-      return 'libterminal_library_flutter_pty.dll';
-    }
-    return "";
-  }
+  /// [ackRead] indicates if the pty should wait for a call to [TerminalPtyLibrary.ackRead] before sending the next data.
+  TerminalPtyLibrary({
+    super.executable,
+    super.workingDirectory,
+    super.libraryPtyPath,
+    super.arguments,
+    super.columns,
+    super.environment,
+    super.isAckRead,
+    super.rows,
+  });
 
   static String get defaultShell {
     if (Platform.isMacOS || Platform.isLinux) {
@@ -113,6 +45,7 @@ class PtyLibrary {
     return 'sh';
   }
 
+  @override
   void ensureInitialized() {
     if (isInitialized) {
       return;
@@ -126,7 +59,7 @@ class PtyLibrary {
         return DynamicLibrary.process();
       }();
 
-      pty_library = FlutterPtyLibraryBindings(dynamic_library_pty);
+      pty_library = TerminalPtyBindings(dynamic_library_pty);
       pty_library_init = pty_library.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
       is_dynamic_library_pty_initialized = true;
 
@@ -176,14 +109,14 @@ class PtyLibrary {
     }
     envp.elementAt(effectiveEnv.length).value = nullptr;
 
-    final options = calloc<PtyLibraryOptions>();
+    final options = calloc<PtyOptions>();
     options.ref.rows = rows;
     options.ref.cols = columns;
     options.ref.executable = executable.toNativeUtf8().cast();
     options.ref.arguments = argv.cast();
     options.ref.environment = envp.cast();
     options.ref.stdout_port = stdout_receive_port.sendPort.nativePort;
-    options.ref.exit_port = exit__receive_port.sendPort.nativePort;
+    options.ref.exit_port = exit_receive_port.sendPort.nativePort;
     options.ref.ackRead = isAckRead;
 
     if ((workingDirectory ?? "").isNotEmpty) {
@@ -199,13 +132,14 @@ class PtyLibrary {
     if (_handle == nullptr) {
       throw StateError('Failed to create PTY: ${_getPtyLibraryError()}');
     }
-    exit__receive_port.first.then(_onExitCode);
+    exit_receive_port.first.then(_onExitCode);
 
     isInitialized = true;
   }
 
   /// The output stream from the pseudo-terminal. Note that pseudo-terminals
   /// do not distinguish between stdout and stderr.
+  @override
   Stream<Uint8List> get output => stdout_receive_port.cast();
 
   /// A `Future` which completes with the exit code of the process
@@ -234,12 +168,15 @@ class PtyLibrary {
   /// output of the process when the returned future completes.
   /// To be sure that all output is captured, wait for the done event on the
   /// streams.
+  @override
   Future<int> get exitCode => exit_code_completer.future;
 
   /// The process id of the process running in the pseudo-terminal.
+  @override
   int get pid => pty_library.pty_getpid(_handle);
 
   /// Write data to the pseudo-terminal.
+  @override
   void write(Uint8List data) {
     final buf = malloc<Int8>(data.length);
     buf.asTypedList(data.length).setAll(0, data);
@@ -248,6 +185,7 @@ class PtyLibrary {
   }
 
   /// Resize the pseudo-terminal.
+  @override
   void resize(int rows, int cols) {
     pty_library.pty_resize(_handle, rows, cols);
   }
@@ -257,6 +195,7 @@ class PtyLibrary {
   /// When possible, [signal] will be sent to the process. This includes
   /// Linux and OS X. The default signal is [ProcessSignal.sigterm]
   /// which will normally terminate the process.
+  @override
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
     return Process.killPid(pid, signal);
   }
@@ -264,13 +203,14 @@ class PtyLibrary {
   /// indicates that a data chunk has been processed.
   /// This is needed when ackRead is set to true as the pty will wait for this signal to happen
   /// before any additional data is sent.
+  @override
   void ackRead() {
     pty_library.pty_ack_read(_handle);
   }
 
   void _onExitCode(dynamic exitCode) {
     stdout_receive_port.close();
-    exit__receive_port.close();
+    exit_receive_port.close();
     exit_code_completer.complete(exitCode);
   }
 

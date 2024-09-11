@@ -9,21 +9,21 @@
 // ignore_for_file: type=lint
 import 'dart:ffi' as ffi;
 
-/// Bindings for `src/terminal_library_flutter_pty.h`.
+/// Bindings for `native_lib/terminal_pty.h`.
 ///
 /// Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
 ///
-class TerminalLibraryFlutterPtyBindings {
+class TerminalPtyBindings {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
       _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  TerminalLibraryFlutterPtyBindings(ffi.DynamicLibrary dynamicLibrary)
+  TerminalPtyBindings(ffi.DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
-  TerminalLibraryFlutterPtyBindings.fromLookup(
+  TerminalPtyBindings.fromLookup(
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;

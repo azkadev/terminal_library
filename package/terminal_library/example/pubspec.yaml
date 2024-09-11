@@ -15,8 +15,6 @@ dependencies:
   general: '^0.0.29'
   terminal_library: 
     path: '../'
-  # flutter_pty: 
-    # path: '../../../../general_studio_developer_project/package/flutter_pty'
   terminal_library_flutter_pty: 
     path: '/home/galaxeus/Documents/galaxeus/app/terminal_library/package/terminal_library_flutter_pty'
 dev_dependencies: 

@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/galaxeus/Documents/galaxeus/app/terminal_library/native_lib"
+    "cmake.sourceDirectory": "/home/galaxeus/Documents/galaxeus/app/terminal_library/native_lib",
+    "files.associations": {
+        "terminal_library_flutter_pty.h": "c"
+    }
 }

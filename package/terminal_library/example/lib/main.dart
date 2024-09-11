@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
     maxLines: 1000,
     // inputHandler:
   );
-  late final PtyLibrary ptyLibrary;
+  late final TerminalPtyLibrary ptyLibrary;
   @override
   void initState() {
     super.initState();
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
     });
     await Future(() async {
       await Future.delayed(Durations.short1);
-      ptyLibrary = PtyLibrary.start(
+      ptyLibrary = TerminalPtyLibrary(
         executable:shell,
         columns: terminalLibraryFlutter.viewWidth,
         rows: terminalLibraryFlutter.viewHeight,

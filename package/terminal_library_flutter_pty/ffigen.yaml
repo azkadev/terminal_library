@@ -1,18 +1,18 @@
-name: TerminalLibraryFlutterPtyBindings
+name: TerminalPtyBindings
 
 description: |
-  Bindings for `src/terminal_library_flutter_pty.h`.
+  Bindings for `native_lib/terminal_pty.h`.
 
   Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
 
-output: "lib/src/terminal_library_flutter_pty_bindings_generated.dart"
+output: "../terminal_library/lib/pty_library/src/terminal_pty_bindings_generated.dart"
 
 headers:
   entry-points:
-    - "src/terminal_library_flutter_pty.h"
+    - "native_lib/terminal_pty.h"
   include-directives:
-    - "src/terminal_library_flutter_pty.h"
-    - "src/include/dart_api_dl.h"
+    - "native_lib/terminal_pty.h"
+    - "native_lib/include/dart_api_dl.h"
 
 functions:
   includes:

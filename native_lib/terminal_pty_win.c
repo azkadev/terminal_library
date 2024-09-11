@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <Windows.h>
 
-#include "terminal_library_flutter_pty.h"
+#include "terminal_pty.h"
 
 #include "include/dart_api.h"
 #include "include/dart_api_dl.h"

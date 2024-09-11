@@ -1,13 +1,10 @@
-name: terminal_library_flutter_pty
-description: "A new Flutter FFI plugin project."
-version: 0.0.1
-homepage:
-
-environment:
-  sdk: '>=3.4.4 <4.0.0'
+name: 'terminal_library_flutter_pty'
+description: 'A new Flutter FFI plugin project.'
+version: '0.0.1'
+homepage: null
+environment: 
+  sdk: '>=3.3.3 <4.0.0'
   flutter: '>=3.3.0'
- 
-
 dependencies: 
   flutter: 
     sdk: 'flutter'
@@ -17,7 +14,6 @@ dev_dependencies:
     sdk: 'flutter'
   ffigen: '^8.0.0'
   flutter_lints: '^2.0.1'
-  
 flutter: 
   plugin: 
     platforms: 
@@ -31,3 +27,7 @@ flutter:
         ffiPlugin: true
       windows: 
         ffiPlugin: true
+dependency_overrides: 
+  pointycastle: '3.8.0'
+funding: 
+  - 'https://github.com/sponsors/azkadev'
