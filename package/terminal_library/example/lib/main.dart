@@ -1,12 +1,14 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
+import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:general_lib/general_lib.dart';
 import 'package:general_lib_flutter/extension/build_context.dart';
 import 'package:general_lib_flutter/widget/widget.dart';
 import 'package:terminal_library/pty_library/pty_library.dart';
 import 'package:terminal_library/xterm_library/xterm.dart';
+
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +44,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   TerminalLibraryFlutterController terminalLibraryFlutterController = TerminalLibraryFlutterController();
-//  TerminalLibraryFlutterInputHandler terminalLibraryFlutterInputHandler = TerminalLibraryFlutterInputHandler;
   final TerminalLibraryFlutter terminalLibraryFlutter = TerminalLibraryFlutter(
     maxLines: 1000,
     // inputHandler:
@@ -74,20 +75,25 @@ class _MyAppState extends State<MyApp> {
     await Future(() async {
       await Future.delayed(Durations.short1);
       ptyLibrary = TerminalPtyLibrary(
-        executable:shell,
+        executable: TerminalPtyLibraryBase.defaultShell,
         columns: terminalLibraryFlutter.viewWidth,
         rows: terminalLibraryFlutter.viewHeight,
       );
-      ptyLibrary.output.listen((event) {
-        if (event.isNotEmpty) {
-          try {
-            terminalLibraryFlutter.write(utf8.decode(event, allowMalformed: true));
-          } catch (e) {}
-        }
-      });
+      ptyLibrary.on(
+        eventName: ptyLibrary.event_output,
+        onCallback: onCallback,
+      );
+      // ptyLibrary.output.listen((event) {
+      //   if (event.isNotEmpty) {
+      //     try {
+      //       terminalLibraryFlutter.write(utf8.decode(event, allowMalformed: true));
+      //     } catch (e) {}
+      //   }
+      // });
       terminalLibraryFlutter.onOutput = (String value) {
         if (value.isNotEmpty) {
           try {
+            // print(json.encode(value));
             ptyLibrary.write(utf8.encode(value));
           } catch (e) {}
         }
@@ -99,11 +105,22 @@ class _MyAppState extends State<MyApp> {
       terminalLibraryFlutter.buffer.setCursor(0, 0);
       terminalLibraryFlutter.textInput("clear");
       terminalLibraryFlutter.keyInput(TerminalLibraryFlutterKey.enter);
+      terminalLibraryFlutter.write("Hello World");
       setState(() {});
     });
     setState(() {
       is_loading = false;
     });
+  }
+
+  FutureOr<dynamic> onCallback(dynamic update, TerminalPtyLibraryBase te) {
+    if (update is Uint8List) {
+      try { 
+        terminalLibraryFlutter.write(utf8.decode(update, allowMalformed: true));
+      } catch (e) {}
+    } else if (update is String) {
+      terminalLibraryFlutter.write(update);
+    }
   }
 
   @override
@@ -132,15 +149,5 @@ class _MyAppState extends State<MyApp> {
         deleteDetection: Dart.isMobile,
       ),
     );
-  }
-
-  static String get shell {
-    if (Platform.isMacOS || Platform.isLinux) {
-      return Platform.environment['SHELL'] ?? 'bash';
-    }
-    if (Platform.isWindows) {
-      return 'cmd.exe';
-    }
-    return 'sh';
   }
 }

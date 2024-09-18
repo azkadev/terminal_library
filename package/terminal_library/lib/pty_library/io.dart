@@ -1,8 +1,9 @@
 // ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations, deprecated_member_use
 
 import 'dart:async';
-import 'dart:ffi';
+ import 'dart:ffi';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
@@ -21,8 +22,12 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
 
   late final Pointer<PtyHandle> _handle;
 
-  static late final String library_pty_path;
+  final ReceivePort stdout_receive_port = ReceivePort();
 
+  final ReceivePort exit_receive_port = ReceivePort();
+
+  final Completer<int> exit_code_completer = Completer<int>();
+ 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
   /// [ackRead] indicates if the pty should wait for a call to [TerminalPtyLibrary.ackRead] before sending the next data.
@@ -35,9 +40,10 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     super.environment,
     super.isAckRead,
     super.rows,
-  }) {
-    library_pty_path = libraryPtyPath;
-    openLibrary();
+  }) { 
+    openLibrary(
+      libraryPath: libraryPtyPath,
+    );
     ensureInitialized();
   }
 
@@ -51,11 +57,13 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     return 'sh';
   }
 
-  static void openLibrary() {
+  static void openLibrary({
+    required String libraryPath,
+  }) {
     if (is_dynamic_library_pty_initialized == false) {
       dynamic_library_pty = () {
-        if (library_pty_path.isNotEmpty) {
-          return DynamicLibrary.open('${library_pty_path}');
+        if (libraryPath.isNotEmpty) {
+          return DynamicLibrary.open('${libraryPath}');
         }
         return DynamicLibrary.process();
       }();
@@ -141,14 +149,19 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
       throw StateError('Failed to create PTY: ${_getPtyLibraryError()}');
     }
     exit_receive_port.first.then(_onExitCode);
-
+    stdout_receive_port.listen(
+      (data) { 
+        event_emitter.emit(eventName: event_output, value: data);
+      },
+      onDone: () {},
+    );
     isInitialized = true;
   }
 
   /// The output stream from the pseudo-terminal. Note that pseudo-terminals
-  /// do not distinguish between stdout and stderr.
-  @override
-  Stream<Uint8List> get output => stdout_receive_port.cast();
+  // /// do not distinguish between stdout and stderr.
+  // @override
+  // Stream<Uint8List> get output => stdout_receive_port.cast();
 
   /// A `Future` which completes with the exit code of the process
   /// when the process completes.
@@ -205,6 +218,7 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
   /// which will normally terminate the process.
   @override
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
+    event_emitter.clear();
     return Process.killPid(pid, signal);
   }
 

@@ -6,7 +6,7 @@ import 'dart:typed_data';
 
 import 'package:general_lib/dart/dart.dart';
 import 'package:general_lib/dart/executable_type/executable_type.dart';
-import 'package:terminal_library/isolate/isolate.dart';
+import 'package:general_lib/event_emitter/event_emitter.dart';
 import 'package:universal_io/io.dart';
 
 /// PtyLibrary represents a process running in a pseudo-terminal.
@@ -21,8 +21,7 @@ abstract class TerminalPtyLibraryBase {
   final int rows;
   final int columns;
   final bool isAckRead;
-
-  static late final String library_pty_path;
+ 
 
   bool isInitialized = false;
 
@@ -30,12 +29,12 @@ abstract class TerminalPtyLibraryBase {
 
   static late final int pty_library_init;
 
-  final ReceivePort stdout_receive_port = ReceivePort();
 
-  final ReceivePort exit_receive_port = ReceivePort();
-
-  final Completer<int> exit_code_completer = Completer<int>();
   late final String libraryPtyPath;
+
+  final EventEmitter event_emitter = EventEmitter();
+  final String event_output = "ouput";
+  final String event_input = "input";
 
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
@@ -56,11 +55,9 @@ abstract class TerminalPtyLibraryBase {
       this.arguments = [];
     }
     if (libraryPtyPath != null) {
-      this.libraryPtyPath = libraryPtyPath;
-      library_pty_path = libraryPtyPath;
+      this.libraryPtyPath = libraryPtyPath; 
     } else {
-      this.libraryPtyPath = TerminalPtyLibraryBase.defaultLibraryPtyPath;
-      library_pty_path = TerminalPtyLibraryBase.defaultLibraryPtyPath;
+      this.libraryPtyPath = TerminalPtyLibraryBase.defaultLibraryPtyPath; 
     }
   }
 
@@ -97,11 +94,26 @@ abstract class TerminalPtyLibraryBase {
     }
   }
 
-  /// The output stream from the pseudo-terminal. Note that pseudo-terminals
-  /// do not distinguish between stdout and stderr.
-  Stream<Uint8List> get output async* {
-    return;
+  EventEmitterListener on({
+    required String eventName,
+    required FutureOr<dynamic> Function(
+      dynamic update,
+      TerminalPtyLibraryBase terminalPtyLibraryBase,
+    ) onCallback,
+  }) {
+    return event_emitter.on(
+      eventName: eventName,
+      onCallback: (listener, update) async {
+        await onCallback(update, this);
+      },
+    );
   }
+
+  // /// The output stream from the pseudo-terminal. Note that pseudo-terminals
+  // /// do not distinguish between stdout and stderr.
+  // Stream<Uint8List> get output async* {
+  //   return;
+  // }
 
   /// A `Future` which completes with the exit code of the process
   /// when the process completes.
@@ -129,7 +141,7 @@ abstract class TerminalPtyLibraryBase {
   /// output of the process when the returned future completes.
   /// To be sure that all output is captured, wait for the done event on the
   /// streams.
-  Future<int> get exitCode => exit_code_completer.future;
+  Future<int> get exitCode async => 0;
 
   /// The process id of the process running in the pseudo-terminal.
   int get pid => 0;

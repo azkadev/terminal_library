@@ -71,7 +71,6 @@ Example Quickstart script minimal for insight you or make you use this library b
 ```dart
 // ignore_for_file: empty_catches, non_constant_identifier_names
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:general_lib/general_lib.dart';
 import 'package:general_lib_flutter/extension/build_context.dart';
@@ -113,12 +112,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   TerminalLibraryFlutterController terminalLibraryFlutterController = TerminalLibraryFlutterController();
-//  TerminalLibraryFlutterInputHandler terminalLibraryFlutterInputHandler = TerminalLibraryFlutterInputHandler;
   final TerminalLibraryFlutter terminalLibraryFlutter = TerminalLibraryFlutter(
     maxLines: 1000,
     // inputHandler:
   );
-  late final PtyLibrary ptyLibrary;
+  late final TerminalPtyLibrary ptyLibrary;
   @override
   void initState() {
     super.initState();
@@ -144,8 +142,8 @@ class _MyAppState extends State<MyApp> {
     });
     await Future(() async {
       await Future.delayed(Durations.short1);
-      ptyLibrary = PtyLibrary.start(
-        shell,
+      ptyLibrary = TerminalPtyLibrary(
+        executable: TerminalPtyLibraryBase.defaultShell,
         columns: terminalLibraryFlutter.viewWidth,
         rows: terminalLibraryFlutter.viewHeight,
       );
@@ -203,16 +201,6 @@ class _MyAppState extends State<MyApp> {
         deleteDetection: Dart.isMobile,
       ),
     );
-  }
-
-  static String get shell {
-    if (Platform.isMacOS || Platform.isLinux) {
-      return Platform.environment['SHELL'] ?? 'bash';
-    }
-    if (Platform.isWindows) {
-      return 'cmd.exe';
-    }
-    return 'sh';
   }
 }
 ```
