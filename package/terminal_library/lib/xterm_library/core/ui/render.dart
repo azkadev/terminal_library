@@ -19,7 +19,8 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 
 typedef EditableRectCallback = void Function(Rect rect, Rect caretRect);
 
-class RenderTerminalLibraryFlutter extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
+class RenderTerminalLibraryFlutter extends RenderBox
+    with RelayoutWhenSystemFontsChangeMixin {
   RenderTerminalLibraryFlutter({
     required TerminalLibraryFlutter terminal,
     required TerminalLibraryFlutterController controller,
@@ -218,7 +219,8 @@ class RenderTerminalLibraryFlutter extends RenderBox with RelayoutWhenSystemFont
   }
 
   /// Total height of the terminal in pixels. Includes scrollback buffer.
-  double get _terminalHeight => _terminal.buffer.lines.length * _painter.cellSize.height;
+  double get _terminalHeight =>
+      _terminal.buffer.lines.length * _painter.cellSize.height;
 
   /// The distance from the top of the terminal to the top of the viewport.
   // double get _scrollOffset => _offset.pixels;
@@ -420,7 +422,8 @@ class RenderTerminalLibraryFlutter extends RenderBox with RelayoutWhenSystemFont
       );
     }
 
-    if (_terminal.buffer.absoluteCursorY >= effectFirstLine && _terminal.buffer.absoluteCursorY <= effectLastLine) {
+    if (_terminal.buffer.absoluteCursorY >= effectFirstLine &&
+        _terminal.buffer.absoluteCursorY <= effectLastLine) {
       if (_isComposingText) {
         _paintComposingText(canvas, offset + cursorOffset);
       }
@@ -515,7 +518,9 @@ class RenderTerminalLibraryFlutter extends RenderBox with RelayoutWhenSystemFont
     for (var highlight in _controller.highlights) {
       final range = highlight.range?.normalized;
 
-      if (range == null || range.begin.y > lastLine || range.end.y < firstLine) {
+      if (range == null ||
+          range.begin.y > lastLine ||
+          range.end.y < firstLine) {
         continue;
       }
 

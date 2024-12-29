@@ -3,11 +3,11 @@ description: 'Demonstrates how to use the terminal_library_flutter_pty plugin.'
 publish_to: 'none'
 version: '1.0.0+1'
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 dependencies:
   flutter:
     sdk: 'flutter'
-  general: '^0.0.33'
+  general: '^0.0.34'
   terminal_library_flutter_pty:
     path: '../'
   cupertino_icons: '^1.0.6'

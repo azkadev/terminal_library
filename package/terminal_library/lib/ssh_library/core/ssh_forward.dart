@@ -8,7 +8,10 @@ class SSHForwardChannel implements SSHSocket {
   final SSHChannel _channel;
 
   SSHForwardChannel(this._channel) {
-    _sinkController.stream.map((data) => data is Uint8List ? data : Uint8List.fromList(data)).map((data) => SSHChannelData(data)).pipe(_channel.sink);
+    _sinkController.stream
+        .map((data) => data is Uint8List ? data : Uint8List.fromList(data))
+        .map((data) => SSHChannelData(data))
+        .pipe(_channel.sink);
   }
 
   final _sinkController = StreamController<List<int>>();

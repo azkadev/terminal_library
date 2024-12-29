@@ -91,7 +91,8 @@ class SSHHttpClientRequest {
   /// Whether or not the HTTP request has a body.
   bool get hasBody => _body != null;
 
-  SSHHttpClientRequest._(this.client, this.method, this.uri, bool body) : _body = body ? BytesBuilder() : null;
+  SSHHttpClientRequest._(this.client, this.method, this.uri, bool body)
+      : _body = body ? BytesBuilder() : null;
 
   /// Write content into the body of the HTTP request.
   void write(Object? obj) {
@@ -298,7 +299,8 @@ class _SSHHttpClientRequestHeaders implements SSHHttpHeaders {
   }
 
   @override
-  bool get chunkedTransferEncoding => value(SSHHttpHeaders.transferEncodingHeader)?.toLowerCase() == 'chunked';
+  bool get chunkedTransferEncoding =>
+      value(SSHHttpHeaders.transferEncodingHeader)?.toLowerCase() == 'chunked';
 
   @override
   set chunkedTransferEncoding(bool chunkedTransferEncoding) {
@@ -427,7 +429,8 @@ class SSHHttpClientResponse {
         final separator = line.indexOf(':');
         final name = line.substring(0, separator).toLowerCase().trim();
         final value = line.substring(separator + 1).trim();
-        if (name == SSHHttpHeaders.transferEncodingHeader && value.toLowerCase() != 'identity') {
+        if (name == SSHHttpHeaders.transferEncodingHeader &&
+            value.toLowerCase() != 'identity') {
           throw UnsupportedError('only identity transfer encoding is accepted');
         }
         if (name == SSHHttpHeaders.contentLengthHeader) {
@@ -451,7 +454,9 @@ class SSHHttpClientResponse {
     final lineDecoder = LineDecoder.withCallback(processLine);
 
     await for (final chunk in socket.stream) {
-      if (!inHeader || !inBody || ((contentRead + lineDecoder.bufferedBytes) < contentLength)) {
+      if (!inHeader ||
+          !inBody ||
+          ((contentRead + lineDecoder.bufferedBytes) < contentLength)) {
         lineDecoder.add(chunk);
         continue;
       }
@@ -506,7 +511,8 @@ class _SSHHttpClientResponseHeaders implements SSHHttpHeaders {
   }
 
   @override
-  bool get chunkedTransferEncoding => value(SSHHttpHeaders.transferEncodingHeader)?.toLowerCase() == 'chunked';
+  bool get chunkedTransferEncoding =>
+      value(SSHHttpHeaders.transferEncodingHeader)?.toLowerCase() == 'chunked';
 
   @override
   set chunkedTransferEncoding(bool chunkedTransferEncoding) {
@@ -573,7 +579,8 @@ class _SSHHttpClientResponseHeaders implements SSHHttpHeaders {
   }
 
   @override
-  void forEach(void Function(String name, List<String> values) f) => _headers.forEach(f);
+  void forEach(void Function(String name, List<String> values) f) =>
+      _headers.forEach(f);
 
   @override
   set host(String? host) {

@@ -25,7 +25,8 @@ class BufferRangeLine extends BufferRange {
   @override
   bool contains(CellOffset position) {
     final self = normalized;
-    return self.begin.isBeforeOrSame(position) && self.end.isAfterOrSame(position);
+    return self.begin.isBeforeOrSame(position) &&
+        self.end.isAfterOrSame(position);
   }
 
   @override

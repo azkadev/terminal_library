@@ -41,13 +41,9 @@ class ReceivePort {
 
   Future get first async => throw UnimplementedError();
 
-  cast(){
+  cast() {}
 
-  }
-
-  close(){
-    
-  }
+  close() {}
 }
 
 class SendPort {
@@ -55,7 +51,6 @@ class SendPort {
 
   void send(dynamic data) {}
   int get nativePort => 0;
-
 }
 
 class Isolate {

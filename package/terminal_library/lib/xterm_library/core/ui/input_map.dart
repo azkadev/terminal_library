@@ -146,7 +146,8 @@ final _keyToTerminalLibraryFlutterKey = {
   LogicalKeyboardKey.abort: TerminalLibraryFlutterKey.abort,
   LogicalKeyboardKey.props: TerminalLibraryFlutterKey.props,
   LogicalKeyboardKey.numpadParenLeft: TerminalLibraryFlutterKey.numpadParenLeft,
-  LogicalKeyboardKey.numpadParenRight: TerminalLibraryFlutterKey.numpadParenRight,
+  LogicalKeyboardKey.numpadParenRight:
+      TerminalLibraryFlutterKey.numpadParenRight,
   LogicalKeyboardKey.controlLeft: TerminalLibraryFlutterKey.controlLeft,
   LogicalKeyboardKey.shiftLeft: TerminalLibraryFlutterKey.shiftLeft,
   LogicalKeyboardKey.altLeft: TerminalLibraryFlutterKey.altLeft,
@@ -156,7 +157,8 @@ final _keyToTerminalLibraryFlutterKey = {
   LogicalKeyboardKey.altRight: TerminalLibraryFlutterKey.altRight,
   LogicalKeyboardKey.metaRight: TerminalLibraryFlutterKey.metaRight,
   LogicalKeyboardKey.info: TerminalLibraryFlutterKey.info,
-  LogicalKeyboardKey.closedCaptionToggle: TerminalLibraryFlutterKey.closedCaptionToggle,
+  LogicalKeyboardKey.closedCaptionToggle:
+      TerminalLibraryFlutterKey.closedCaptionToggle,
   LogicalKeyboardKey.brightnessUp: TerminalLibraryFlutterKey.brightnessUp,
   LogicalKeyboardKey.brightnessDown: TerminalLibraryFlutterKey.brightnessDown,
   LogicalKeyboardKey.mediaLast: TerminalLibraryFlutterKey.mediaLast,
@@ -167,23 +169,30 @@ final _keyToTerminalLibraryFlutterKey = {
   LogicalKeyboardKey.mediaPlay: TerminalLibraryFlutterKey.mediaPlay,
   LogicalKeyboardKey.mediaPause: TerminalLibraryFlutterKey.mediaPause,
   LogicalKeyboardKey.mediaRecord: TerminalLibraryFlutterKey.mediaRecord,
-  LogicalKeyboardKey.mediaFastForward: TerminalLibraryFlutterKey.mediaFastForward,
+  LogicalKeyboardKey.mediaFastForward:
+      TerminalLibraryFlutterKey.mediaFastForward,
   LogicalKeyboardKey.mediaRewind: TerminalLibraryFlutterKey.mediaRewind,
   LogicalKeyboardKey.mediaTrackNext: TerminalLibraryFlutterKey.mediaTrackNext,
-  LogicalKeyboardKey.mediaTrackPrevious: TerminalLibraryFlutterKey.mediaTrackPrevious,
+  LogicalKeyboardKey.mediaTrackPrevious:
+      TerminalLibraryFlutterKey.mediaTrackPrevious,
   LogicalKeyboardKey.mediaStop: TerminalLibraryFlutterKey.mediaStop,
   LogicalKeyboardKey.eject: TerminalLibraryFlutterKey.eject,
   LogicalKeyboardKey.mediaPlayPause: TerminalLibraryFlutterKey.mediaPlayPause,
-  LogicalKeyboardKey.speechInputToggle: TerminalLibraryFlutterKey.speechInputToggle,
-  LogicalKeyboardKey.launchWordProcessor: TerminalLibraryFlutterKey.launchWordProcessor,
-  LogicalKeyboardKey.launchSpreadsheet: TerminalLibraryFlutterKey.launchSpreadsheet,
+  LogicalKeyboardKey.speechInputToggle:
+      TerminalLibraryFlutterKey.speechInputToggle,
+  LogicalKeyboardKey.launchWordProcessor:
+      TerminalLibraryFlutterKey.launchWordProcessor,
+  LogicalKeyboardKey.launchSpreadsheet:
+      TerminalLibraryFlutterKey.launchSpreadsheet,
   LogicalKeyboardKey.launchMail: TerminalLibraryFlutterKey.launchMail,
   LogicalKeyboardKey.launchContacts: TerminalLibraryFlutterKey.launchContacts,
   LogicalKeyboardKey.launchCalendar: TerminalLibraryFlutterKey.launchCalendar,
   LogicalKeyboardKey.logOff: TerminalLibraryFlutterKey.logOff,
-  LogicalKeyboardKey.launchControlPanel: TerminalLibraryFlutterKey.launchControlPanel,
+  LogicalKeyboardKey.launchControlPanel:
+      TerminalLibraryFlutterKey.launchControlPanel,
   LogicalKeyboardKey.spellCheck: TerminalLibraryFlutterKey.spellCheck,
-  LogicalKeyboardKey.launchScreenSaver: TerminalLibraryFlutterKey.launchScreenSaver,
+  LogicalKeyboardKey.launchScreenSaver:
+      TerminalLibraryFlutterKey.launchScreenSaver,
   LogicalKeyboardKey.launchAssistant: TerminalLibraryFlutterKey.launchAssistant,
   LogicalKeyboardKey.newKey: TerminalLibraryFlutterKey.newKey,
   LogicalKeyboardKey.close: TerminalLibraryFlutterKey.close,
@@ -195,7 +204,8 @@ final _keyToTerminalLibraryFlutterKey = {
   LogicalKeyboardKey.browserForward: TerminalLibraryFlutterKey.browserForward,
   LogicalKeyboardKey.browserStop: TerminalLibraryFlutterKey.browserStop,
   LogicalKeyboardKey.browserRefresh: TerminalLibraryFlutterKey.browserRefresh,
-  LogicalKeyboardKey.browserFavorites: TerminalLibraryFlutterKey.browserFavorites,
+  LogicalKeyboardKey.browserFavorites:
+      TerminalLibraryFlutterKey.browserFavorites,
   LogicalKeyboardKey.zoomIn: TerminalLibraryFlutterKey.zoomIn,
   LogicalKeyboardKey.zoomOut: TerminalLibraryFlutterKey.zoomOut,
   LogicalKeyboardKey.zoomToggle: TerminalLibraryFlutterKey.zoomToggle,
@@ -225,12 +235,17 @@ final _keyToTerminalLibraryFlutterKey = {
   LogicalKeyboardKey.gameButtonLeft1: TerminalLibraryFlutterKey.gameButtonLeft1,
   LogicalKeyboardKey.gameButtonLeft2: TerminalLibraryFlutterKey.gameButtonLeft2,
   LogicalKeyboardKey.gameButtonMode: TerminalLibraryFlutterKey.gameButtonMode,
-  LogicalKeyboardKey.gameButtonRight1: TerminalLibraryFlutterKey.gameButtonRight1,
-  LogicalKeyboardKey.gameButtonRight2: TerminalLibraryFlutterKey.gameButtonRight2,
-  LogicalKeyboardKey.gameButtonSelect: TerminalLibraryFlutterKey.gameButtonSelect,
+  LogicalKeyboardKey.gameButtonRight1:
+      TerminalLibraryFlutterKey.gameButtonRight1,
+  LogicalKeyboardKey.gameButtonRight2:
+      TerminalLibraryFlutterKey.gameButtonRight2,
+  LogicalKeyboardKey.gameButtonSelect:
+      TerminalLibraryFlutterKey.gameButtonSelect,
   LogicalKeyboardKey.gameButtonStart: TerminalLibraryFlutterKey.gameButtonStart,
-  LogicalKeyboardKey.gameButtonThumbLeft: TerminalLibraryFlutterKey.gameButtonThumbLeft,
-  LogicalKeyboardKey.gameButtonThumbRight: TerminalLibraryFlutterKey.gameButtonThumbRight,
+  LogicalKeyboardKey.gameButtonThumbLeft:
+      TerminalLibraryFlutterKey.gameButtonThumbLeft,
+  LogicalKeyboardKey.gameButtonThumbRight:
+      TerminalLibraryFlutterKey.gameButtonThumbRight,
   LogicalKeyboardKey.gameButtonX: TerminalLibraryFlutterKey.gameButtonX,
   LogicalKeyboardKey.gameButtonY: TerminalLibraryFlutterKey.gameButtonY,
   LogicalKeyboardKey.gameButtonZ: TerminalLibraryFlutterKey.gameButtonZ,
@@ -270,7 +285,8 @@ final _keyByChar = () {
 ///
 /// For example, `LogicalKeyboardKey.keyA` will be converted to
 /// `TerminalLibraryFlutterKey.keyA`.
-TerminalLibraryFlutterKey? keyToTerminalLibraryFlutterKey(LogicalKeyboardKey key) {
+TerminalLibraryFlutterKey? keyToTerminalLibraryFlutterKey(
+    LogicalKeyboardKey key) {
   return _keyById[key.keyId];
 }
 

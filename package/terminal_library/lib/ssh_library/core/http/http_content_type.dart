@@ -120,7 +120,8 @@ class _ContentType extends _HeaderValue implements SSHContentType {
     if (index == -1 || index == (result._value.length - 1)) {
       result._primaryType = result._value.trim().toLowerCase();
     } else {
-      result._primaryType = result._value.substring(0, index).trim().toLowerCase();
+      result._primaryType =
+          result._value.substring(0, index).trim().toLowerCase();
       result._subType = result._value.substring(index + 1).trim().toLowerCase();
     }
     return result;
@@ -166,9 +167,11 @@ class _HeaderValue {
 
   String get value => _value;
 
-  Map<String, String?> _ensureParameters() => _parameters ??= <String, String?>{};
+  Map<String, String?> _ensureParameters() =>
+      _parameters ??= <String, String?>{};
 
-  Map<String, String?> get parameters => _unmodifiableParameters ??= UnmodifiableMapView(_ensureParameters());
+  Map<String, String?> get parameters =>
+      _unmodifiableParameters ??= UnmodifiableMapView(_ensureParameters());
 
   static bool _isToken(String token) {
     if (token.isEmpty) {
@@ -204,7 +207,8 @@ class _HeaderValue {
             for (int i = 0; i < value.length; i++) {
               // Can use codeUnitAt here instead.
               int codeUnit = value.codeUnitAt(i);
-              if (codeUnit == 92 /* backslash */ || codeUnit == 34 /* double quote */) {
+              if (codeUnit == 92 /* backslash */ ||
+                  codeUnit == 34 /* double quote */) {
                 sb.write(value.substring(start, i));
                 sb.write(r'\');
                 start = i;
@@ -241,7 +245,10 @@ class _HeaderValue {
       int start = index;
       while (!done()) {
         var char = s[index];
-        if (char == " " || char == "\t" || char == valueSeparator || char == parameterSeparator) break;
+        if (char == " " ||
+            char == "\t" ||
+            char == valueSeparator ||
+            char == parameterSeparator) break;
         index++;
       }
       return s.substring(start, index);
@@ -269,7 +276,11 @@ class _HeaderValue {
         int start = index;
         while (!done()) {
           var char = s[index];
-          if (char == " " || char == "\t" || char == "=" || char == parameterSeparator || char == valueSeparator) break;
+          if (char == " " ||
+              char == "\t" ||
+              char == "=" ||
+              char == parameterSeparator ||
+              char == valueSeparator) break;
           index++;
         }
         return s.substring(start, index).toLowerCase();

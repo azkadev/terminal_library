@@ -965,7 +965,9 @@ class EscapeParser {
       case 7:
         return handler.setAutoWrapMode(enabled);
       case 9:
-        return enabled ? handler.setMouseMode(MouseMode.clickOnly) : handler.setMouseMode(MouseMode.none);
+        return enabled
+            ? handler.setMouseMode(MouseMode.clickOnly)
+            : handler.setMouseMode(MouseMode.none);
       case 12:
       case 13:
         return handler.setCursorBlinkMode(enabled);
@@ -981,23 +983,37 @@ class EscapeParser {
         return handler.setAppKeypadMode(enabled);
       case 1000:
       case 10061000:
-        return enabled ? handler.setMouseMode(MouseMode.upDownScroll) : handler.setMouseMode(MouseMode.none);
+        return enabled
+            ? handler.setMouseMode(MouseMode.upDownScroll)
+            : handler.setMouseMode(MouseMode.none);
       case 1001:
-        return enabled ? handler.setMouseMode(MouseMode.upDownScroll) : handler.setMouseMode(MouseMode.none);
+        return enabled
+            ? handler.setMouseMode(MouseMode.upDownScroll)
+            : handler.setMouseMode(MouseMode.none);
       case 1002:
-        return enabled ? handler.setMouseMode(MouseMode.upDownScrollDrag) : handler.setMouseMode(MouseMode.none);
+        return enabled
+            ? handler.setMouseMode(MouseMode.upDownScrollDrag)
+            : handler.setMouseMode(MouseMode.none);
       case 1003:
-        return enabled ? handler.setMouseMode(MouseMode.upDownScrollMove) : handler.setMouseMode(MouseMode.none);
+        return enabled
+            ? handler.setMouseMode(MouseMode.upDownScrollMove)
+            : handler.setMouseMode(MouseMode.none);
       case 1004:
         return handler.setReportFocusMode(enabled);
       case 1005:
-        return enabled ? handler.setMouseReportMode(MouseReportMode.utf) : handler.setMouseReportMode(MouseReportMode.normal);
+        return enabled
+            ? handler.setMouseReportMode(MouseReportMode.utf)
+            : handler.setMouseReportMode(MouseReportMode.normal);
       case 1006:
-        return enabled ? handler.setMouseReportMode(MouseReportMode.sgr) : handler.setMouseReportMode(MouseReportMode.normal);
+        return enabled
+            ? handler.setMouseReportMode(MouseReportMode.sgr)
+            : handler.setMouseReportMode(MouseReportMode.normal);
       case 1007:
         return handler.setAltBufferMouseScrollMode(enabled);
       case 1015:
-        return enabled ? handler.setMouseReportMode(MouseReportMode.urxvt) : handler.setMouseReportMode(MouseReportMode.normal);
+        return enabled
+            ? handler.setMouseReportMode(MouseReportMode.urxvt)
+            : handler.setMouseReportMode(MouseReportMode.normal);
       case 1047:
         if (enabled) {
           handler.useAltBuffer();

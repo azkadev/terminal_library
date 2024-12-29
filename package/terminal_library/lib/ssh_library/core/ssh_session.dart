@@ -40,7 +40,9 @@ class SSHSession {
       onDone: _handleChannelDataDone,
     );
 
-    _stdinController.stream.map((data) => SSHChannelData(data)).pipe(_channel.sink);
+    _stdinController.stream
+        .map((data) => SSHChannelData(data))
+        .pipe(_channel.sink);
   }
 
   final SSHChannel _channel;

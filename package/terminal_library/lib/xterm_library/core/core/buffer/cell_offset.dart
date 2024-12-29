@@ -46,5 +46,10 @@ class CellOffset {
   int get hashCode => x.hashCode ^ y.hashCode;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is CellOffset && runtimeType == other.runtimeType && x == other.x && y == other.y;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CellOffset &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y;
 }

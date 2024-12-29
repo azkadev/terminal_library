@@ -1,15 +1,13 @@
 name: 'terminal_library_flutter'
-description: 'A new Flutter package project.'
+description: 'A Cross Platform Terminal Library Easy Maintaned And Support On Everywhere Platform'
 version: '0.0.1'
-publish_to: 'none'
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=1.17.0'
 dependencies:
   flutter:
     sdk: 'flutter'
-  terminal_library_flutter_pty:
-    path: '../terminal_library_flutter_pty'
+  terminal_library_flutter_pty: '^0.0.1'
 dev_dependencies:
   flutter_test:
     sdk: 'flutter'

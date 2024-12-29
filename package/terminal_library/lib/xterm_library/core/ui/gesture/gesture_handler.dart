@@ -47,13 +47,16 @@ class TerminalLibraryFlutterGestureHandler extends StatefulWidget {
   final bool readOnly;
 
   @override
-  State<TerminalLibraryFlutterGestureHandler> createState() => _TerminalLibraryFlutterGestureHandlerState();
+  State<TerminalLibraryFlutterGestureHandler> createState() =>
+      _TerminalLibraryFlutterGestureHandlerState();
 }
 
-class _TerminalLibraryFlutterGestureHandlerState extends State<TerminalLibraryFlutterGestureHandler> {
+class _TerminalLibraryFlutterGestureHandlerState
+    extends State<TerminalLibraryFlutterGestureHandler> {
   TerminalLibraryFlutterViewWidgetState get terminalView => widget.terminalView;
 
-  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter => terminalView.renderTerminalLibraryFlutter;
+  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter =>
+      terminalView.renderTerminalLibraryFlutter;
 
   DragStartDetails? _lastDragStartDetails;
 
@@ -79,7 +82,9 @@ class _TerminalLibraryFlutterGestureHandlerState extends State<TerminalLibraryFl
     );
   }
 
-  bool get _shouldSendTapEvent => !widget.readOnly && widget.terminalController.shouldSendPointerInput(PointerInput.tap);
+  bool get _shouldSendTapEvent =>
+      !widget.readOnly &&
+      widget.terminalController.shouldSendPointerInput(PointerInput.tap);
 
   void _tapDown(
     GestureTapDownCallback? callback,
@@ -135,23 +140,28 @@ class _TerminalLibraryFlutterGestureHandlerState extends State<TerminalLibraryFl
   }
 
   void onSingleTapUp(TapUpDetails details) {
-    _tapUp(widget.onSingleTapUp, details, TerminalLibraryFlutterMouseButton.left);
+    _tapUp(
+        widget.onSingleTapUp, details, TerminalLibraryFlutterMouseButton.left);
   }
 
   void onSecondaryTapDown(TapDownDetails details) {
-    _tapDown(widget.onSecondaryTapDown, details, TerminalLibraryFlutterMouseButton.right);
+    _tapDown(widget.onSecondaryTapDown, details,
+        TerminalLibraryFlutterMouseButton.right);
   }
 
   void onSecondaryTapUp(TapUpDetails details) {
-    _tapUp(widget.onSecondaryTapUp, details, TerminalLibraryFlutterMouseButton.right);
+    _tapUp(widget.onSecondaryTapUp, details,
+        TerminalLibraryFlutterMouseButton.right);
   }
 
   void onTertiaryTapDown(TapDownDetails details) {
-    _tapDown(widget.onTertiaryTapDown, details, TerminalLibraryFlutterMouseButton.middle);
+    _tapDown(widget.onTertiaryTapDown, details,
+        TerminalLibraryFlutterMouseButton.middle);
   }
 
   void onTertiaryTapUp(TapUpDetails details) {
-    _tapUp(widget.onTertiaryTapUp, details, TerminalLibraryFlutterMouseButton.right);
+    _tapUp(widget.onTertiaryTapUp, details,
+        TerminalLibraryFlutterMouseButton.right);
   }
 
   void onDoubleTapDown(TapDownDetails details) {
@@ -175,7 +185,9 @@ class _TerminalLibraryFlutterGestureHandlerState extends State<TerminalLibraryFl
   void onDragStart(DragStartDetails details) {
     _lastDragStartDetails = details;
 
-    details.kind == PointerDeviceKind.mouse ? renderTerminalLibraryFlutter.selectCharacters(details.localPosition) : renderTerminalLibraryFlutter.selectWord(details.localPosition);
+    details.kind == PointerDeviceKind.mouse
+        ? renderTerminalLibraryFlutter.selectCharacters(details.localPosition)
+        : renderTerminalLibraryFlutter.selectWord(details.localPosition);
   }
 
   void onDragUpdate(DragUpdateDetails details) {

@@ -32,10 +32,12 @@ class TerminalLibraryFlutterScrollGestureHandler extends StatefulWidget {
   final Widget child;
 
   @override
-  State<TerminalLibraryFlutterScrollGestureHandler> createState() => _TerminalLibraryFlutterScrollGestureHandlerState();
+  State<TerminalLibraryFlutterScrollGestureHandler> createState() =>
+      _TerminalLibraryFlutterScrollGestureHandlerState();
 }
 
-class _TerminalLibraryFlutterScrollGestureHandlerState extends State<TerminalLibraryFlutterScrollGestureHandler> {
+class _TerminalLibraryFlutterScrollGestureHandlerState
+    extends State<TerminalLibraryFlutterScrollGestureHandler> {
   /// Whether the application is in alternate screen buffer. If false, then this
   /// widget does nothing.
   var isAltBuffer = false;
@@ -62,7 +64,8 @@ class _TerminalLibraryFlutterScrollGestureHandlerState extends State<TerminalLib
   }
 
   @override
-  void didUpdateWidget(covariant TerminalLibraryFlutterScrollGestureHandler oldWidget) {
+  void didUpdateWidget(
+      covariant TerminalLibraryFlutterScrollGestureHandler oldWidget) {
     if (oldWidget.terminal != widget.terminal) {
       oldWidget.terminal.removeListener(_onTerminalLibraryFlutterUpdated);
       widget.terminal.addListener(_onTerminalLibraryFlutterUpdated);
@@ -85,14 +88,18 @@ class _TerminalLibraryFlutterScrollGestureHandlerState extends State<TerminalLib
     final position = widget.getCellOffset(lastPointerPosition);
 
     final handled = widget.terminal.mouseInput(
-      up ? TerminalLibraryFlutterMouseButton.wheelUp : TerminalLibraryFlutterMouseButton.wheelDown,
+      up
+          ? TerminalLibraryFlutterMouseButton.wheelUp
+          : TerminalLibraryFlutterMouseButton.wheelDown,
       TerminalLibraryFlutterMouseButtonState.down,
       position,
     );
 
     if (!handled && widget.simulateScroll) {
       widget.terminal.keyInput(
-        up ? TerminalLibraryFlutterKey.arrowUp : TerminalLibraryFlutterKey.arrowDown,
+        up
+            ? TerminalLibraryFlutterKey.arrowUp
+            : TerminalLibraryFlutterKey.arrowDown,
       );
     }
   }

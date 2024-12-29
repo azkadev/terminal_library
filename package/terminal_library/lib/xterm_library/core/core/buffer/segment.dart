@@ -16,7 +16,8 @@ class BufferSegment {
   /// Should be greater than or equal to [start].
   final int? end;
 
-  const BufferSegment(this.range, this.line, this.start, this.end) : assert((start != null && end != null) ? start <= end : true);
+  const BufferSegment(this.range, this.line, this.start, this.end)
+      : assert((start != null && end != null) ? start <= end : true);
 
   bool isWithin(CellOffset position) {
     if (position.y != line) {
@@ -42,8 +43,16 @@ class BufferSegment {
   }
 
   @override
-  int get hashCode => range.hashCode ^ line.hashCode ^ start.hashCode ^ end.hashCode;
+  int get hashCode =>
+      range.hashCode ^ line.hashCode ^ start.hashCode ^ end.hashCode;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is BufferSegment && runtimeType == other.runtimeType && range == other.range && line == other.line && start == other.start && end == other.end;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BufferSegment &&
+          runtimeType == other.runtimeType &&
+          range == other.range &&
+          line == other.line &&
+          start == other.start &&
+          end == other.end;
 }

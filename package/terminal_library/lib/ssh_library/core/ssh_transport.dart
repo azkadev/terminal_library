@@ -182,7 +182,9 @@ class SSHTransport {
     if (isClosed) {
       throw SSHStateError('Transport is closed');
     }
-    final packetAlign = _encryptCipher == null ? SSHPacket.minAlign : max(SSHPacket.minAlign, _encryptCipher!.blockSize);
+    final packetAlign = _encryptCipher == null
+        ? SSHPacket.minAlign
+        : max(SSHPacket.minAlign, _encryptCipher!.blockSize);
 
     final packet = SSHPacket.pack(data, align: packetAlign);
 
@@ -324,7 +326,9 @@ class SSHTransport {
   /// WITHOUT `packet length`, `padding length`, `padding` and `MAC`. Returns
   /// `null` if there is not enough data in the buffer to read the packet.
   Uint8List? _consumePacket() {
-    return _decryptCipher == null ? _consumeClearTextPacket() : _consumeEncryptedPacket();
+    return _decryptCipher == null
+        ? _consumeClearTextPacket()
+        : _consumeEncryptedPacket();
   }
 
   Uint8List? _consumeClearTextPacket() {
@@ -395,7 +399,9 @@ class SSHTransport {
   /// Verifies that the padding of the packet is correct. Throws [SSHPacketError]
   /// if the padding is incorrect.
   void _verifyPacketPadding(int payloadLength, int paddingLength) {
-    final expectedPacketAlign = _decryptCipher == null ? SSHPacket.minAlign : max(SSHPacket.minAlign, _decryptCipher!.blockSize);
+    final expectedPacketAlign = _decryptCipher == null
+        ? SSHPacket.minAlign
+        : max(SSHPacket.minAlign, _decryptCipher!.blockSize);
 
     final minPaddingLength = SSHPacket.paddingLength(
       payloadLength,
@@ -767,7 +773,9 @@ class SSHTransport {
     late BigInt sharedSecret;
 
     if (kex is SSHKexDH) {
-      final message = kexType.isGroupExchange ? SSH_Message_KexDH_GexReply.decode(payload) : SSH_Message_KexDH_Reply.decode(payload);
+      final message = kexType.isGroupExchange
+          ? SSH_Message_KexDH_GexReply.decode(payload)
+          : SSH_Message_KexDH_Reply.decode(payload);
       printTrace?.call('<- $socket: $message');
       hostkey = message.hostPublicKey;
       hostSignature = message.signature;
@@ -818,7 +826,9 @@ class SSHTransport {
       return;
     }
 
-    final userVerified = onVerifyHostKey != null ? onVerifyHostKey!(_hostkeyType!.name, fingerprint) : true;
+    final userVerified = onVerifyHostKey != null
+        ? onVerifyHostKey!(_hostkeyType!.name, fingerprint)
+        : true;
 
     Future.value(userVerified).then(
       (verified) {

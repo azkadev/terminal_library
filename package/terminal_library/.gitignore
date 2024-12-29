@@ -24,3 +24,7 @@ macos/Flutter/ephemeral
 windows/ephemeral
 tmp/
 temp/
+generate_general_private_tools_*
+
+# b52f94533ec4a8ab5d1769fd7fca391fe6b79e19d9c207ac7a93a64dfb3c8be0
+

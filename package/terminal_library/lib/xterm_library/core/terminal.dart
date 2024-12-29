@@ -26,7 +26,9 @@ import 'package:terminal_library/xterm_library/core/utils/circular_buffer.dart';
 /// [buffer] and events such as [onTitleChange] or [onBell], as well as
 /// translating user input into escape sequences that the application can
 /// understand.
-class TerminalLibraryFlutter with Observable implements TerminalLibraryFlutterState, EscapeHandler, TerminalLibrary {
+class TerminalLibraryFlutter
+    with Observable
+    implements TerminalLibraryFlutterState, EscapeHandler, TerminalLibrary {
   /// The number of lines that the scrollback buffer can hold. If the buffer
   /// exceeds this size, the lines at the top of the buffer will be removed.
   final int maxLines;
@@ -49,7 +51,8 @@ class TerminalLibraryFlutter with Observable implements TerminalLibraryFlutterSt
   void Function(String data)? onOutput;
 
   /// Function that is called when the dimensions of the terminal change.
-  void Function(int width, int height, int pixelWidth, int pixelHeight)? onResize;
+  void Function(int width, int height, int pixelWidth, int pixelHeight)?
+      onResize;
 
   /// The [TerminalLibraryFlutterInputHandler] used by this terminal. [defaultInputHandler] is
   /// used when not specified. User of this class can provide their own

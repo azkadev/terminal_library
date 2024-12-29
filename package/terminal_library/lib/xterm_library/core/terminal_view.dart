@@ -143,10 +143,12 @@ class TerminalLibraryFlutterViewWidget extends StatefulWidget {
   final bool simulateScroll;
 
   @override
-  State<TerminalLibraryFlutterViewWidget> createState() => TerminalLibraryFlutterViewWidgetState();
+  State<TerminalLibraryFlutterViewWidget> createState() =>
+      TerminalLibraryFlutterViewWidgetState();
 }
 
-class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutterViewWidget> {
+class TerminalLibraryFlutterViewWidgetState
+    extends State<TerminalLibraryFlutterViewWidget> {
   late FocusNode _focusNode;
 
   late final ShortcutManager _shortcutManager;
@@ -163,7 +165,9 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
 
   late ScrollController _scrollController;
 
-  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter => _viewportKey.currentContext!.findRenderObject() as RenderTerminalLibraryFlutter;
+  RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter =>
+      _viewportKey.currentContext!.findRenderObject()
+          as RenderTerminalLibraryFlutter;
 
   @override
   void initState() {
@@ -196,7 +200,8 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
       }
       _scrollController = widget.scrollController ?? ScrollController();
     }
-    _shortcutManager.shortcuts = widget.shortcuts ?? defaultTerminalLibraryFlutterShortcuts;
+    _shortcutManager.shortcuts =
+        widget.shortcuts ?? defaultTerminalLibraryFlutterShortcuts;
     super.didUpdateWidget(oldWidget);
   }
 
@@ -243,7 +248,8 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
     child = TerminalLibraryFlutterScrollGestureHandler(
       terminal: widget.terminal,
       simulateScroll: widget.simulateScroll,
-      getCellOffset: (offset) => renderTerminalLibraryFlutter.getCellOffset(offset),
+      getCellOffset: (offset) =>
+          renderTerminalLibraryFlutter.getCellOffset(offset),
       getLineHeight: () => renderTerminalLibraryFlutter.lineHeight,
       child: child,
     );
@@ -300,8 +306,10 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
       terminalController: _controller,
       onTapUp: _onTapUp,
       onTapDown: _onTapDown,
-      onSecondaryTapDown: widget.onSecondaryTapDown != null ? _onSecondaryTapDown : null,
-      onSecondaryTapUp: widget.onSecondaryTapUp != null ? _onSecondaryTapUp : null,
+      onSecondaryTapDown:
+          widget.onSecondaryTapDown != null ? _onSecondaryTapDown : null,
+      onSecondaryTapUp:
+          widget.onSecondaryTapUp != null ? _onSecondaryTapUp : null,
       readOnly: widget.readOnly,
       child: child,
     );
@@ -329,15 +337,19 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
   }
 
   Rect get cursorRect {
-    return renderTerminalLibraryFlutter.cursorOffset & renderTerminalLibraryFlutter.cellSize;
+    return renderTerminalLibraryFlutter.cursorOffset &
+        renderTerminalLibraryFlutter.cellSize;
   }
 
   Rect get globalCursorRect {
-    return renderTerminalLibraryFlutter.localToGlobal(renderTerminalLibraryFlutter.cursorOffset) & renderTerminalLibraryFlutter.cellSize;
+    return renderTerminalLibraryFlutter
+            .localToGlobal(renderTerminalLibraryFlutter.cursorOffset) &
+        renderTerminalLibraryFlutter.cellSize;
   }
 
   void _onTapUp(TapUpDetails details) {
-    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
+    final offset =
+        renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onTapUp?.call(details, offset);
   }
 
@@ -354,12 +366,14 @@ class TerminalLibraryFlutterViewWidgetState extends State<TerminalLibraryFlutter
   }
 
   void _onSecondaryTapDown(TapDownDetails details) {
-    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
+    final offset =
+        renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onSecondaryTapDown?.call(details, offset);
   }
 
   void _onSecondaryTapUp(TapUpDetails details) {
-    final offset = renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
+    final offset =
+        renderTerminalLibraryFlutter.getCellOffset(details.localPosition);
     widget.onSecondaryTapUp?.call(details, offset);
   }
 
@@ -510,7 +524,8 @@ class _TerminalLibraryFlutterViewWidget extends LeafRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderTerminalLibraryFlutter renderObject) {
+  void updateRenderObject(
+      BuildContext context, RenderTerminalLibraryFlutter renderObject) {
     renderObject
       ..terminal = terminal
       ..controller = controller

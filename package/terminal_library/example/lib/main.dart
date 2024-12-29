@@ -9,7 +9,6 @@ import 'package:general_lib_flutter/widget/widget.dart';
 import 'package:terminal_library/pty_library/pty_library.dart';
 import 'package:terminal_library/xterm_library/xterm.dart';
 
-
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
@@ -43,7 +42,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  TerminalLibraryFlutterController terminalLibraryFlutterController = TerminalLibraryFlutterController();
+  TerminalLibraryFlutterController terminalLibraryFlutterController =
+      TerminalLibraryFlutterController();
   final TerminalLibraryFlutter terminalLibraryFlutter = TerminalLibraryFlutter(
     maxLines: 1000,
     // inputHandler:
@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
 
   FutureOr<dynamic> onCallback(dynamic update, TerminalPtyLibraryBase te) {
     if (update is Uint8List) {
-      try { 
+      try {
         terminalLibraryFlutter.write(utf8.decode(update, allowMalformed: true));
       } catch (e) {}
     } else if (update is String) {

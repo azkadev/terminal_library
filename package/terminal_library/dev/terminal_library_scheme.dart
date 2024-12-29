@@ -2,11 +2,10 @@
 
 // /* <!-- START LICENSE -->
 
+// Program Ini Di buat Oleh DEVELOPER Dari PERUSAHAAN GLOBAL CORPORATION
+// Social Media:
 
-// Program Ini Di buat Oleh DEVELOPER Dari PERUSAHAAN GLOBAL CORPORATION 
-// Social Media: 
-
-// - Youtube: https://youtube.com/@Global_Corporation 
+// - Youtube: https://youtube.com/@Global_Corporation
 // - Github: https://github.com/globalcorporation
 // - TELEGRAM: https://t.me/GLOBAL_CORP_ORG_BOT
 
@@ -27,23 +26,22 @@
 
 // Sebelum program ini sampai ke pembeli developer kami sudah melakukan testing
 
-// jadi sebelum nego kami sudah melakukan berbagai konsekuensi jika nego tidak sesuai ? 
+// jadi sebelum nego kami sudah melakukan berbagai konsekuensi jika nego tidak sesuai ?
 // Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba tiba di potong akhirnya bantuan / software kadang tidak lengkap
-
 
 // <!-- END LICENSE --> */
 // import 'package:terminal_library/schemes/api_schemes.dart';
 // import 'package:terminal_library/schemes/respond_schemes.dart';
-// import 'package:terminal_library/schemes/schemes.dart'; 
+// import 'package:terminal_library/schemes/schemes.dart';
 // import 'package:general_lib/json_to_script_dart/json_to_script.dart';
-// import 'package:path/path.dart'; 
-// import 'dart:io'; 
+// import 'package:path/path.dart';
+// import 'dart:io';
 
 // void main(List<String> args) async {
 //   Directory directory_scheme = Directory(
 //     join(Directory.current.path, "lib", "scheme"),
 //   )..createSync(recursive: true)..deleteSync(recursive: true)..createSync(recursive: true);
- 
+
 //   await jsonToScripts(
 //     api_schemes,
 //     directory: Directory(
@@ -64,5 +62,3 @@
 //     ),
 //   );
 // }
-
-

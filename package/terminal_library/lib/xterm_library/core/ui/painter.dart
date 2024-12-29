@@ -124,7 +124,8 @@ class TerminalLibraryFlutterPainter {
 
   @pragma('vm:prefer-inline')
   void paintHighlight(Canvas canvas, Offset offset, int length, Color color) {
-    final endOffset = offset.translate(length * _cellSize.width, _cellSize.height);
+    final endOffset =
+        offset.translate(length * _cellSize.width, _cellSize.height);
 
     final paint = Paint()
       ..color = color
@@ -179,7 +180,9 @@ class TerminalLibraryFlutterPainter {
     if (paragraph == null) {
       final cellFlags = cellData.flags;
 
-      var color = cellFlags & CellFlags.inverse == 0 ? resolveForegroundColor(cellData.foreground) : resolveBackgroundColor(cellData.background);
+      var color = cellFlags & CellFlags.inverse == 0
+          ? resolveForegroundColor(cellData.foreground)
+          : resolveBackgroundColor(cellData.background);
 
       if (cellData.flags & CellFlags.faint != 0) {
         color = color.withOpacity(0.5);

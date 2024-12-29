@@ -70,7 +70,8 @@ class SftpExtensionVersionMismatchError implements SftpExtensionError {
   final String version;
 
   @override
-  String get message => 'Extension "$extension" of version $version is not supported';
+  String get message =>
+      'Extension "$extension" of version $version is not supported';
 
   SftpExtensionVersionMismatchError(this.extension, this.version);
 

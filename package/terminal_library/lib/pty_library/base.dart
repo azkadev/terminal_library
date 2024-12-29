@@ -21,14 +21,12 @@ abstract class TerminalPtyLibraryBase {
   final int rows;
   final int columns;
   final bool isAckRead;
- 
 
   bool isInitialized = false;
 
   static bool is_dynamic_library_pty_initialized = false;
 
   static late final int pty_library_init;
-
 
   late final String libraryPtyPath;
 
@@ -55,9 +53,9 @@ abstract class TerminalPtyLibraryBase {
       this.arguments = [];
     }
     if (libraryPtyPath != null) {
-      this.libraryPtyPath = libraryPtyPath; 
+      this.libraryPtyPath = libraryPtyPath;
     } else {
-      this.libraryPtyPath = TerminalPtyLibraryBase.defaultLibraryPtyPath; 
+      this.libraryPtyPath = TerminalPtyLibraryBase.defaultLibraryPtyPath;
     }
   }
 

@@ -131,7 +131,8 @@ class KeytabInputHandler implements TerminalLibraryFlutterInputHandler {
     return result;
   }
 
-  String insertModifiers(TerminalLibraryFlutterKeyboardEvent event, String action) {
+  String insertModifiers(
+      TerminalLibraryFlutterKeyboardEvent event, String action) {
     String? code;
 
     if (event.shift && event.alt && event.ctrl) {
@@ -171,7 +172,8 @@ class CtrlInputHandler implements TerminalLibraryFlutterInputHandler {
 
     final key = event.key;
 
-    if (key.index >= TerminalLibraryFlutterKey.keyA.index && key.index <= TerminalLibraryFlutterKey.keyZ.index) {
+    if (key.index >= TerminalLibraryFlutterKey.keyA.index &&
+        key.index <= TerminalLibraryFlutterKey.keyZ.index) {
       final input = key.index - TerminalLibraryFlutterKey.keyA.index + 1;
       return String.fromCharCode(input);
     }
@@ -197,7 +199,8 @@ class AltInputHandler implements TerminalLibraryFlutterInputHandler {
 
     final key = event.key;
 
-    if (key.index >= TerminalLibraryFlutterKey.keyA.index && key.index <= TerminalLibraryFlutterKey.keyZ.index) {
+    if (key.index >= TerminalLibraryFlutterKey.keyA.index &&
+        key.index <= TerminalLibraryFlutterKey.keyZ.index) {
       final charCode = key.index - TerminalLibraryFlutterKey.keyA.index + 65;
       final input = [0x1b, charCode];
       return String.fromCharCodes(input);

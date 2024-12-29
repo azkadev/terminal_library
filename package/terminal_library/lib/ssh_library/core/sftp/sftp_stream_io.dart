@@ -31,7 +31,8 @@ class SftpFileWriter with DoneFuture {
   /// Creates a new [SftpFileWriter]. The upload process is started immediately
   /// after construction.
   SftpFileWriter(this.file, this.stream, this.offset, this.onProgress) {
-    _subscription = stream.transform(MaxChunkSize(chunkSize)).listen(_handleLocalData);
+    _subscription =
+        stream.transform(MaxChunkSize(chunkSize)).listen(_handleLocalData);
 
     _subscription.onDone(_handleLocalDone);
   }
@@ -134,10 +135,12 @@ mixin DoneFuture implements Future {
       done.catchError(onError, test: test);
 
   @override
-  Future<S> then<S>(FutureOr<S> Function(void) onValue, {Function? onError}) => done.then(onValue, onError: onError);
+  Future<S> then<S>(FutureOr<S> Function(void) onValue, {Function? onError}) =>
+      done.then(onValue, onError: onError);
 
   @override
-  Future<void> whenComplete(FutureOr Function() action) => done.whenComplete(action);
+  Future<void> whenComplete(FutureOr Function() action) =>
+      done.whenComplete(action);
 
   @override
   Future<void> timeout(

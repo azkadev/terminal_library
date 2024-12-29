@@ -17,10 +17,10 @@ void main(List<String> args) {
         stdout.add(update);
       }
     },
-  ); 
+  );
   stdin.listen((event) {
     try {
       ptyLibrary.write(Uint8List.fromList(event));
     } catch (e) {}
-  }); 
+  });
 }

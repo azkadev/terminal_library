@@ -16,10 +16,12 @@ class TerminalLibraryFlutterDebuggerView extends StatefulWidget {
   final void Function(int?)? onSeek;
 
   @override
-  State<TerminalLibraryFlutterDebuggerView> createState() => _TerminalLibraryFlutterDebuggerViewState();
+  State<TerminalLibraryFlutterDebuggerView> createState() =>
+      _TerminalLibraryFlutterDebuggerViewState();
 }
 
-class _TerminalLibraryFlutterDebuggerViewState extends State<TerminalLibraryFlutterDebuggerView> {
+class _TerminalLibraryFlutterDebuggerViewState
+    extends State<TerminalLibraryFlutterDebuggerView> {
   int? selectedCommand;
 
   @override

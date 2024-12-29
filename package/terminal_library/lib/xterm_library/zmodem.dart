@@ -75,7 +75,9 @@ class ZModemMux {
       // onPause: _stdoutSubscription.pause,
       // onResume: _stdoutSubscription.resume,
       )
-    ..stream.transform(Utf8Decoder(allowMalformed: true)).listen(onTerminalLibraryFlutterInput);
+    ..stream
+        .transform(Utf8Decoder(allowMalformed: true))
+        .listen(onTerminalLibraryFlutterInput);
 
   /// Current ZModem session. If null, no session is active.
   ZModemCore? _session;
@@ -113,7 +115,8 @@ class ZModemMux {
   /// Detects a ZModem session in [chunk] and starts it if found. Returns true
   /// if a session was started.
   bool _detectZModem(Uint8List chunk) {
-    final index = chunk.listIndexOf(_zmodemSenderInit) ?? chunk.listIndexOf(_zmodemReceiverInit);
+    final index = chunk.listIndexOf(_zmodemSenderInit) ??
+        chunk.listIndexOf(_zmodemReceiverInit);
 
     if (index != null) {
       _terminalSink.add(Uint8List.sublistView(chunk, 0, index));

@@ -25,7 +25,8 @@ import 'package:terminal_library/ssh_library/core/ssh_userauth.dart';
 /// https://datatracker.ietf.org/doc/html/rfc4252#section-8
 typedef SSHPasswordRequestHandler = FutureOr<String?> Function();
 
-typedef SSHChangePasswordRequestHandler = FutureOr<SSHChangePasswordResponse?> Function(String prompt);
+typedef SSHChangePasswordRequestHandler = FutureOr<SSHChangePasswordResponse?>
+    Function(String prompt);
 
 /// https://datatracker.ietf.org/doc/html/rfc4256#section-3.3
 typedef SSHUserInfoRequestHandler = FutureOr<List<String>?> Function(
@@ -196,7 +197,9 @@ class SSHClient {
 
   final _remoteForwards = <SSHRemoteForward>{};
 
-  late final _keepAlive = keepAliveInterval != null ? SSHKeepAlive(ping: ping, interval: keepAliveInterval!) : null;
+  late final _keepAlive = keepAliveInterval != null
+      ? SSHKeepAlive(ping: ping, interval: keepAliveInterval!)
+      : null;
 
   SSHAuthMethod? _currentAuthMethod;
 

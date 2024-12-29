@@ -508,7 +508,8 @@ class RsaKeyPair {
   factory RsaKeyPair.decode(SSHPem pem) {
     final dekInfoHeader = pem.headers['DEK-Info'];
 
-    final dekInfo = dekInfoHeader != null ? RsaKeyPairDEKInfo.parse(dekInfoHeader) : null;
+    final dekInfo =
+        dekInfoHeader != null ? RsaKeyPairDEKInfo.parse(dekInfoHeader) : null;
 
     final keyBlob = pem.content;
 
@@ -550,7 +551,8 @@ class RsaKeyPair {
 
     final key = Uint8List.sublistView(kdfHash, 0, cipher.keySize);
 
-    final decryptCipher = cipher.createCipher(key, dekInfo!.iv, forEncryption: false);
+    final decryptCipher =
+        cipher.createCipher(key, dekInfo!.iv, forEncryption: false);
 
     return decryptCipher.processAll(keyBlob);
   }

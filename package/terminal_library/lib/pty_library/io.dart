@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names, unnecessary_string_interpolations, deprecated_member_use
 
 import 'dart:async';
- import 'dart:ffi';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:typed_data';
@@ -27,7 +27,7 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
   final ReceivePort exit_receive_port = ReceivePort();
 
   final Completer<int> exit_code_completer = Completer<int>();
- 
+
   /// Spawns a process in a pseudo-terminal. The arguments have the same meaning
   /// as in [Process.start].
   /// [ackRead] indicates if the pty should wait for a call to [TerminalPtyLibrary.ackRead] before sending the next data.
@@ -40,7 +40,7 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     super.environment,
     super.isAckRead,
     super.rows,
-  }) { 
+  }) {
     openLibrary(
       libraryPath: libraryPtyPath,
     );
@@ -69,7 +69,8 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
       }();
 
       pty_library = TerminalPtyBindings(dynamic_library_pty);
-      pty_library_init = pty_library.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
+      pty_library_init =
+          pty_library.Dart_InitializeApiDL(NativeApi.initializeApiDLData);
       is_dynamic_library_pty_initialized = true;
 
       if (pty_library_init != 0) {
@@ -136,7 +137,8 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     options.ref.ackRead = isAckRead;
 
     if ((workingDirectory ?? "").isNotEmpty) {
-      options.ref.working_directory = (workingDirectory ?? "").toNativeUtf8().cast();
+      options.ref.working_directory =
+          (workingDirectory ?? "").toNativeUtf8().cast();
     } else {
       options.ref.working_directory = nullptr;
     }
@@ -150,7 +152,7 @@ class TerminalPtyLibrary extends TerminalPtyLibraryBase {
     }
     exit_receive_port.first.then(_onExitCode);
     stdout_receive_port.listen(
-      (data) { 
+      (data) {
         event_emitter.emit(eventName: event_output, value: data);
       },
       onDone: () {},

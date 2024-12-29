@@ -1,9 +1,8 @@
 name: 'terminal_library_flutter_pty'
-description: 'A new Flutter FFI plugin project.'
+description: 'A Cross Platform Terminal Library Easy Maintaned And Support On Everywhere Platform'
 version: '0.0.1'
-homepage: null
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=3.3.0'
 dependencies:
   flutter:
@@ -36,3 +35,4 @@ funding:
 repository: 'https://github.com/azkadev/general_framework'
 issue_tracker: 'https://t.me/DEVELOPER_GLOBAL_PUBLIC'
 documentation: 'https://youtube.com/@azkadev'
+homepage: 'https://youtube.com/@azkadev'

@@ -52,7 +52,8 @@ class TerminalLibraryFlutterDebugger with Observable {
       final chars = String.fromCharCodes(charCodes);
       final escapedChars = _escape(chars);
       commands.add(
-        TerminalLibraryFlutterCommand(start, end, chars, escapedChars, [explanation], error),
+        TerminalLibraryFlutterCommand(
+            start, end, chars, escapedChars, [explanation], error),
       );
     }
   }
