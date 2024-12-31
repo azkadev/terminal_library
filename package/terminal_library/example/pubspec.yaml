@@ -8,11 +8,11 @@ dependencies:
   flutter:
     sdk: 'flutter'
   cupertino_icons: '^1.0.6'
-  general_lib: '^0.0.51'
-  general_lib_flutter: '^0.0.32'
-  simulate: '^0.0.45'
+  general_lib: '^0.0.52'
+  general_lib_flutter: '^0.0.33'
+  simulate: '^0.0.46'
   path: '^1.9.0'
-  general: '^0.0.34'
+  general: '^0.0.36'
   terminal_library:
     path: '../'
   terminal_library_flutter_pty:
