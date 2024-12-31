@@ -20,9 +20,9 @@ environment:
 dependencies:
   general_lib: '^0.0.51'
   path: '^1.9.0'
-  universal_io: '^2.2.2'
+  io_universe: '^0.0.2'
   mason_logger: '^0.3.1'
-  collection: '^1.18.0'
+  collection: '^1.19.0'
   yaml: '^3.1.2'
   yaml_writer: '^2.0.0'
   ffi: '^2.1.3'

@@ -7,7 +7,7 @@ import 'dart:typed_data';
 import 'package:general_lib/dart/dart.dart';
 import 'package:general_lib/dart/executable_type/executable_type.dart';
 import 'package:general_lib/event_emitter/event_emitter.dart';
-import 'package:universal_io/io.dart';
+import 'package:io_universe/io_universe.dart';
 
 /// PtyLibrary represents a process running in a pseudo-terminal.
 ///
