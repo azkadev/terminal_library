@@ -1,6 +1,6 @@
 name: 'terminal_library'
 description: 'A Cross Platform Terminal Library Easy Maintaned And Support On Everywhere Platform'
-version: '0.0.3'
+version: '0.0.5'
 homepage: 'https://github.com/azkadev/terminal_library'
 repository: 'https://github.com/azkadev/terminal_library'
 issue_tracker: 'https://github.com/azkadev/terminal_library/issues'
@@ -18,9 +18,9 @@ platforms:
 environment:
   sdk: '>=3.6.0 <4.0.0'
 dependencies:
-  general_lib: '^0.0.53'
+  general_lib: '^0.0.56'
   path: '^1.9.0'
-  io_universe: '^0.0.2'
+  io_universe: '^0.0.4'
   mason_logger: '^0.3.1'
   collection: '^1.19.0'
   yaml: '^3.1.2'
@@ -33,7 +33,7 @@ dependencies:
   pinenacl: '^0.6.0'
   quiver: '^3.0.0'
   equatable: '^2.0.3'
-  general_lib_flutter: '^0.0.34'
+  general_lib_flutter: '^0.0.37'
   flutter:
     sdk: 'flutter'
   zmodem: '^0.0.6'
