@@ -8,7 +8,9 @@ import 'package:terminal_library/xterm_library/core/ui/gesture/gesture_detector.
 import 'package:terminal_library/xterm_library/core/ui/pointer_input.dart';
 import 'package:terminal_library/xterm_library/core/ui/render.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterGestureHandler extends StatefulWidget {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterGestureHandler({
     super.key,
     required this.terminalView,
@@ -24,25 +26,39 @@ class TerminalLibraryFlutterGestureHandler extends StatefulWidget {
     this.readOnly = false,
   });
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterViewWidgetState terminalView;
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterController terminalController;
 
+  /// UncompleteDocumentation
   final Widget? child;
 
+  /// UncompleteDocumentation
   final GestureTapUpCallback? onTapUp;
 
+  /// UncompleteDocumentation
   final GestureTapUpCallback? onSingleTapUp;
 
+  /// UncompleteDocumentation
   final GestureTapDownCallback? onTapDown;
 
+  /// UncompleteDocumentation
   final GestureTapDownCallback? onSecondaryTapDown;
 
+  /// UncompleteDocumentation
   final GestureTapUpCallback? onSecondaryTapUp;
+
+  /// UncompleteDocumentation
 
   final GestureTapDownCallback? onTertiaryTapDown;
 
+  /// UncompleteDocumentation
+
   final GestureTapUpCallback? onTertiaryTapUp;
+
+  /// UncompleteDocumentation
 
   final bool readOnly;
 

@@ -1,18 +1,26 @@
 import 'package:flutter/widgets.dart';
 
+/// UncompleteDocumentation
 class CustomKeyboardListener extends StatelessWidget {
+  /// UncompleteDocumentation
   final Widget child;
 
+  /// UncompleteDocumentation
   final FocusNode focusNode;
 
+  /// UncompleteDocumentation
   final bool autofocus;
 
+  /// UncompleteDocumentation
   final void Function(String) onInsert;
 
+  /// UncompleteDocumentation
   final void Function(String?) onComposing;
 
+  /// UncompleteDocumentation
   final KeyEventResult Function(FocusNode, KeyEvent) onKeyEvent;
 
+  /// UncompleteDocumentation
   const CustomKeyboardListener({
     super.key,
     required this.child,

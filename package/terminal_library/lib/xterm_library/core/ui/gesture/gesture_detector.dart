@@ -3,7 +3,11 @@ import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
+/// UncompleteDocumentation
+
 class TerminalLibraryFlutterGestureDetector extends StatefulWidget {
+  /// UncompleteDocumentation
+
   const TerminalLibraryFlutterGestureDetector({
     super.key,
     this.child,
@@ -22,32 +26,51 @@ class TerminalLibraryFlutterGestureDetector extends StatefulWidget {
     this.onDoubleTapDown,
   });
 
+  /// UncompleteDocumentation
+
   final Widget? child;
+
+  /// UncompleteDocumentation
 
   final GestureTapUpCallback? onTapUp;
 
+  /// UncompleteDocumentation
+
   final GestureTapUpCallback? onSingleTapUp;
+
+  /// UncompleteDocumentation
 
   final GestureTapDownCallback? onTapDown;
 
+  /// UncompleteDocumentation
+
   final GestureTapDownCallback? onSecondaryTapDown;
 
+  /// UncompleteDocumentation
   final GestureTapUpCallback? onSecondaryTapUp;
 
+  /// UncompleteDocumentation
   final GestureTapDownCallback? onDoubleTapDown;
 
+  /// UncompleteDocumentation
   final GestureTapDownCallback? onTertiaryTapDown;
 
+  /// UncompleteDocumentation
   final GestureTapUpCallback? onTertiaryTapUp;
 
+  /// UncompleteDocumentation
   final GestureLongPressStartCallback? onLongPressStart;
 
+  /// UncompleteDocumentation
   final GestureLongPressMoveUpdateCallback? onLongPressMoveUpdate;
 
+  /// UncompleteDocumentation
   final GestureLongPressUpCallback? onLongPressUp;
 
+  /// UncompleteDocumentation
   final GestureDragStartCallback? onDragStart;
 
+  /// UncompleteDocumentation
   final GestureDragUpdateCallback? onDragUpdate;
 
   @override

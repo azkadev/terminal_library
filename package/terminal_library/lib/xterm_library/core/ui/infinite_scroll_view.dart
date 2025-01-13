@@ -9,14 +9,17 @@ typedef ScrollCallback = void Function(double offset);
 /// A [Scrollable] that can be scrolled infinitely in both directions. When
 /// scroll happens, the [onScroll] callback is called with the new offset.
 class InfiniteScrollView extends StatelessWidget {
+  /// UncompleteDocumentation
   const InfiniteScrollView({
     super.key,
     required this.onScroll,
     required this.child,
   });
 
+  /// UncompleteDocumentation
   final ScrollCallback onScroll;
 
+  /// UncompleteDocumentation
   final Widget child;
 
   @override

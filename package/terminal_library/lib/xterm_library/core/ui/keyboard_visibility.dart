@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+/// UncompleteDocumentation
 class KeyboardVisibilty extends StatefulWidget {
+  /// UncompleteDocumentation
   const KeyboardVisibilty({
     super.key,
     required this.child,
@@ -8,16 +10,20 @@ class KeyboardVisibilty extends StatefulWidget {
     this.onKeyboardHide,
   });
 
+  /// UncompleteDocumentation
   final Widget child;
 
+  /// UncompleteDocumentation
   final VoidCallback? onKeyboardShow;
 
+  /// UncompleteDocumentation
   final VoidCallback? onKeyboardHide;
 
   @override
   KeyboardVisibiltyState createState() => KeyboardVisibiltyState();
 }
 
+/// UncompleteDocumentation
 class KeyboardVisibiltyState extends State<KeyboardVisibilty>
     with WidgetsBindingObserver {
   @override

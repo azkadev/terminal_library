@@ -1,3 +1,4 @@
+/// UncompleteDocumentation
 enum TerminalLibraryFlutterKey {
   /// Represents the logical "None" key on the keyboard.
   none,
@@ -829,7 +830,9 @@ enum TerminalLibraryFlutterKey {
   control,
 
   // Missing flutter keys.
-
+  /// UncompleteDocumentation
   backtab,
+
+  /// UncompleteDocumentation
   returnKey,
 }

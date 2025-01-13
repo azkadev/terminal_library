@@ -7,6 +7,7 @@ import 'package:terminal_library/xterm_library/core/ui/infinite_scroll_view.dart
 /// scroll gestures are converted to escape sequences based on the current
 /// report mode declared by the application.
 class TerminalLibraryFlutterScrollGestureHandler extends StatefulWidget {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterScrollGestureHandler({
     super.key,
     required this.terminal,
@@ -16,6 +17,7 @@ class TerminalLibraryFlutterScrollGestureHandler extends StatefulWidget {
     required this.child,
   });
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutter terminal;
 
   /// Returns the cell offset for the pixel offset.
@@ -29,6 +31,7 @@ class TerminalLibraryFlutterScrollGestureHandler extends StatefulWidget {
   /// is the default behavior of most terminals.
   final bool simulateScroll;
 
+  /// UncompleteDocumentation
   final Widget child;
 
   @override

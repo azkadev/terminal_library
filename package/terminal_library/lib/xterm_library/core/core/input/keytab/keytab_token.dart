@@ -1,20 +1,41 @@
 import 'dart:math' show min;
 
+/// UncompleteDocumentation
 enum KeytabTokenType {
+  /// UncompleteDocumentation
   keyDefine,
+
+  /// UncompleteDocumentation
   keyboard,
+
+  /// UncompleteDocumentation
   keyName,
+
+  /// UncompleteDocumentation
   mode,
+
+  /// UncompleteDocumentation
   modeStatus,
+
+  /// UncompleteDocumentation
   colon,
+
+  /// UncompleteDocumentation
   input,
-  shortcut,
+
+  /// UncompleteDocumentation
+  shortcut;
 }
 
+/// UncompleteDocumentation
 class KeytabToken {
+  /// UncompleteDocumentation
   KeytabToken(this.type, this.value);
 
+  /// UncompleteDocumentation
   final KeytabTokenType type;
+
+  /// UncompleteDocumentation
   final String value;
 
   @override
@@ -23,21 +44,27 @@ class KeytabToken {
   }
 }
 
+/// UncompleteDocumentation
 class LineReader {
+  /// UncompleteDocumentation
   LineReader(this.line);
 
+  /// UncompleteDocumentation
   final String line;
 
   var _pos = 0;
 
+  /// UncompleteDocumentation
   bool get done => _pos > line.length - 1;
 
+  /// UncompleteDocumentation
   String? take([int count = 1]) {
     final result = peek(count);
     _pos += count;
     return result;
   }
 
+  /// UncompleteDocumentation
   String? peek([int count = 1]) {
     if (done) return null;
     final end = min(_pos + count, line.length);
@@ -45,12 +72,14 @@ class LineReader {
     return result;
   }
 
+  /// UncompleteDocumentation
   void skipWhitespace() {
     while (peek() == ' ' || peek() == '\t') {
       _pos += 1;
     }
   }
 
+  /// UncompleteDocumentation
   String readString() {
     final buffer = StringBuffer();
     final pattern = RegExp(r'\w|_');
@@ -63,6 +92,7 @@ class LineReader {
     return buffer.toString();
   }
 
+  /// UncompleteDocumentation
   String readUntil(Pattern pattern, {bool inclusive = false}) {
     final buffer = StringBuffer();
 
@@ -80,8 +110,11 @@ class LineReader {
   }
 }
 
+/// UncompleteDocumentation
+
 class TokenizeError {}
 
+/// UncompleteDocumentation
 Iterable<KeytabToken> tokenize(String source) sync* {
   final lines = source.split('\n');
 

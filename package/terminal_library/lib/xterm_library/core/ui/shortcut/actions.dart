@@ -4,7 +4,9 @@ import 'package:terminal_library/xterm_library/core/terminal.dart';
 import 'package:terminal_library/xterm_library/core/ui/controller.dart';
 import 'package:terminal_library/xterm_library/core/ui/selection_mode.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterActions extends StatelessWidget {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterActions({
     super.key,
     required this.terminal,
@@ -12,10 +14,13 @@ class TerminalLibraryFlutterActions extends StatelessWidget {
     required this.child,
   });
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutter terminal;
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterController controller;
 
+  /// UncompleteDocumentation
   final Widget child;
 
   @override

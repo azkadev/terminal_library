@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+/// UncompleteDocumentation
 class ByteConsumer {
   final _queue = ListQueue<List<int>>();
 
@@ -11,6 +12,7 @@ class ByteConsumer {
 
   var _totalConsumed = 0;
 
+  /// UncompleteDocumentation
   void add(String data) {
     if (data.isEmpty) return;
     final runes = data.runes.toList(growable: false);
@@ -18,6 +20,7 @@ class ByteConsumer {
     _length += runes.length;
   }
 
+  /// UncompleteDocumentation
   int peek() {
     final data = _queue.first;
     if (_currentOffset < data.length) {
@@ -29,6 +32,7 @@ class ByteConsumer {
     }
   }
 
+  /// UncompleteDocumentation
   int consume() {
     final data = _queue.first;
 
@@ -60,12 +64,16 @@ class ByteConsumer {
     rollback(length - _length);
   }
 
+  /// UncompleteDocumentation
   int get length => _length;
 
+  /// UncompleteDocumentation
   int get totalConsumed => _totalConsumed;
 
+  /// UncompleteDocumentation
   bool get isEmpty => _length == 0;
 
+  /// UncompleteDocumentation
   bool get isNotEmpty => _length != 0;
 
   /// Unreferences data blocks that have been consumed. After calling this

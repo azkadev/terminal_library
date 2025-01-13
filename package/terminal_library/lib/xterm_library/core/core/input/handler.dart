@@ -11,20 +11,28 @@ import 'package:terminal_library/xterm_library/core/core/platform.dart';
 /// See also:
 /// - [TerminalLibraryFlutterInputHandler]
 class TerminalLibraryFlutterKeyboardEvent {
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterKey key;
 
+  /// UncompleteDocumentation
   final bool shift;
 
+  /// UncompleteDocumentation
   final bool ctrl;
 
+  /// UncompleteDocumentation
   final bool alt;
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterState state;
 
+  /// UncompleteDocumentation
   final bool altBuffer;
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterTargetPlatform platform;
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterKeyboardEvent({
     required this.key,
     required this.shift,
@@ -34,6 +42,8 @@ class TerminalLibraryFlutterKeyboardEvent {
     required this.altBuffer,
     required this.platform,
   });
+
+  /// UncompleteDocumentation
 
   TerminalLibraryFlutterKeyboardEvent copyWith({
     TerminalLibraryFlutterKey? key,
@@ -70,6 +80,7 @@ abstract class TerminalLibraryFlutterInputHandler {
 class CascadeInputHandler implements TerminalLibraryFlutterInputHandler {
   final List<TerminalLibraryFlutterInputHandler> _handlers;
 
+  /// UncompleteDocumentation
   const CascadeInputHandler(this._handlers);
 
   @override
@@ -102,7 +113,10 @@ const defaultInputHandler = CascadeInputHandler([
 /// A [TerminalLibraryFlutterInputHandler] that translates key events according to a keytab
 /// file. If no keytab is provided, [Keytab.defaultKeytab] is used.
 class KeytabInputHandler implements TerminalLibraryFlutterInputHandler {
+  /// UncompleteDocumentation
   const KeytabInputHandler([this.keytab]);
+
+  /// UncompleteDocumentation
 
   final Keytab? keytab;
 
@@ -131,6 +145,7 @@ class KeytabInputHandler implements TerminalLibraryFlutterInputHandler {
     return result;
   }
 
+  /// UncompleteDocumentation
   String insertModifiers(
       TerminalLibraryFlutterKeyboardEvent event, String action) {
     String? code;
@@ -162,6 +177,7 @@ class KeytabInputHandler implements TerminalLibraryFlutterInputHandler {
 /// A [TerminalLibraryFlutterInputHandler] that translates ctrl + key events into escape
 /// sequences. For example, ctrl + a becomes ^A.
 class CtrlInputHandler implements TerminalLibraryFlutterInputHandler {
+  /// UncompleteDocumentation
   const CtrlInputHandler();
 
   @override
@@ -184,7 +200,9 @@ class CtrlInputHandler implements TerminalLibraryFlutterInputHandler {
 
 /// A [TerminalLibraryFlutterInputHandler] that translates alt + key events into escape
 /// sequences. For example, alt + a becomes ^[a.
+/// UncompleteDocumentation
 class AltInputHandler implements TerminalLibraryFlutterInputHandler {
+  /// UncompleteDocumentation
   const AltInputHandler();
 
   @override

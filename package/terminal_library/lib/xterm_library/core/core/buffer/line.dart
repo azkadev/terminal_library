@@ -17,7 +17,10 @@ const _cellAttributes = 2;
 
 const _cellContent = 3;
 
+/// UncompleteDocumentation
+
 class BufferLine with IndexedItem {
+  /// UncompleteDocumentation
   BufferLine(
     this._length, {
     this.isWrapped = false,
@@ -27,40 +30,53 @@ class BufferLine with IndexedItem {
 
   Uint32List _data;
 
+  /// UncompleteDocumentation
+
   Uint32List get data => _data;
 
+  /// UncompleteDocumentation
   var isWrapped = false;
 
+  /// UncompleteDocumentation
   int get length => _length;
 
   final _anchors = <CellAnchor>[];
 
+  /// UncompleteDocumentation
   List<CellAnchor> get anchors => _anchors;
 
+  /// UncompleteDocumentation
   int getForeground(int index) {
     return _data[index * _cellSize + _cellForeground];
   }
 
+  /// UncompleteDocumentation
   int getBackground(int index) {
     return _data[index * _cellSize + _cellBackground];
   }
 
+  /// UncompleteDocumentation
   int getAttributes(int index) {
     return _data[index * _cellSize + _cellAttributes];
   }
 
+  /// UncompleteDocumentation
   int getContent(int index) {
     return _data[index * _cellSize + _cellContent];
   }
 
+  /// UncompleteDocumentation
   int getCodePoint(int index) {
     return _data[index * _cellSize + _cellContent] & CellContent.codepointMask;
   }
+
+  /// UncompleteDocumentation
 
   int getWidth(int index) {
     return _data[index * _cellSize + _cellContent] >> CellContent.widthShift;
   }
 
+  /// UncompleteDocumentation
   void getCellData(int index, CellData cellData) {
     final offset = index * _cellSize;
     cellData.foreground = _data[offset + _cellForeground];
@@ -68,6 +84,8 @@ class BufferLine with IndexedItem {
     cellData.flags = _data[offset + _cellAttributes];
     cellData.content = _data[offset + _cellContent];
   }
+
+  /// UncompleteDocumentation
 
   CellData createCellData(int index) {
     final cellData = CellData.empty();
@@ -79,27 +97,36 @@ class BufferLine with IndexedItem {
     return cellData;
   }
 
+  /// UncompleteDocumentation
+
   void setForeground(int index, int value) {
     _data[index * _cellSize + _cellForeground] = value;
   }
+
+  /// UncompleteDocumentation
 
   void setBackground(int index, int value) {
     _data[index * _cellSize + _cellBackground] = value;
   }
 
+  /// UncompleteDocumentation
   void setAttributes(int index, int value) {
     _data[index * _cellSize + _cellAttributes] = value;
   }
 
+  /// UncompleteDocumentation
   void setContent(int index, int value) {
     _data[index * _cellSize + _cellContent] = value;
   }
+
+  /// UncompleteDocumentation
 
   void setCodePoint(int index, int char) {
     final width = unicodeV11.wcwidth(char);
     setContent(index, char | (width << CellContent.widthShift));
   }
 
+  /// UncompleteDocumentation
   void setCell(int index, int char, int witdh, CursorStyle style) {
     final offset = index * _cellSize;
     _data[offset + _cellForeground] = style.foreground;
@@ -108,6 +135,7 @@ class BufferLine with IndexedItem {
     _data[offset + _cellContent] = char | (witdh << CellContent.widthShift);
   }
 
+  /// UncompleteDocumentation
   void setCellData(int index, CellData cellData) {
     final offset = index * _cellSize;
     _data[offset + _cellForeground] = cellData.foreground;
@@ -115,6 +143,8 @@ class BufferLine with IndexedItem {
     _data[offset + _cellAttributes] = cellData.flags;
     _data[offset + _cellContent] = cellData.content;
   }
+
+  /// UncompleteDocumentation
 
   void eraseCell(int index, CursorStyle style) {
     final offset = index * _cellSize;
@@ -124,6 +154,7 @@ class BufferLine with IndexedItem {
     _data[offset + _cellContent] = 0;
   }
 
+  /// UncompleteDocumentation
   void resetCell(int index) {
     final offset = index * _cellSize;
     _data[offset + _cellForeground] = 0;
@@ -229,6 +260,8 @@ class BufferLine with IndexedItem {
     }
   }
 
+  /// UncompleteDocumentation
+
   void resize(int length) {
     assert(length >= 0);
 
@@ -322,6 +355,7 @@ class BufferLine with IndexedItem {
     return capacity;
   }
 
+  /// UncompleteDocumentation
   String getText([int? from, int? to]) {
     if (from == null || from < 0) {
       from = 0;
@@ -343,11 +377,14 @@ class BufferLine with IndexedItem {
     return builder.toString();
   }
 
+  /// UncompleteDocumentation
   CellAnchor createAnchor(int offset) {
     final anchor = CellAnchor(offset, owner: this);
     _anchors.add(anchor);
     return anchor;
   }
+
+  /// UncompleteDocumentation
 
   void dispose() {
     for (final anchor in _anchors) {
@@ -365,20 +402,25 @@ class BufferLine with IndexedItem {
 /// of the cell. Anchors are guaranteed to be stable, retaining their relative
 /// position to each other after mutations to the buffer.
 class CellAnchor {
+  /// UncompleteDocumentation
   CellAnchor(int offset, {BufferLine? owner})
       : _offset = offset,
         _owner = owner;
 
   int _offset;
 
+  /// UncompleteDocumentation
   int get x {
     return _offset;
   }
 
+  /// UncompleteDocumentation
   int get y {
     assert(attached);
     return _owner!.index;
   }
+
+  /// UncompleteDocumentation
 
   CellOffset get offset {
     assert(attached);
@@ -387,10 +429,15 @@ class CellAnchor {
 
   BufferLine? _owner;
 
+  /// UncompleteDocumentation
+
   BufferLine? get line => _owner;
+
+  /// UncompleteDocumentation
 
   bool get attached => _owner?.attached ?? false;
 
+  /// UncompleteDocumentation
   void reparent(BufferLine owner, int offset) {
     _owner?._anchors.remove(this);
     _owner = owner;
@@ -398,10 +445,13 @@ class CellAnchor {
     _offset = offset;
   }
 
+  /// UncompleteDocumentation
+
   void reposition(int offset) {
     _offset = offset;
   }
 
+  /// UncompleteDocumentation
   void dispose() {
     _owner?._anchors.remove(this);
     _owner = null;

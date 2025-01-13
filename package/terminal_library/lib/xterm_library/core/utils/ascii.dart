@@ -1,10 +1,10 @@
 // ignore_for_file: constant_identifier_names
-
+/// UncompleteDocumentation
 abstract class Ascii {
   /*
    * Helper functions
    */
-
+  /// UncompleteDocumentation
   static bool isNonPrintable(int c) {
     return c < 32 || c == 127;
   }

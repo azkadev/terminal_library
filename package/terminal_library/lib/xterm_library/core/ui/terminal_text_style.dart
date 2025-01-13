@@ -23,7 +23,9 @@ const _kDefaultFontFamilyFallback = [
   'sans-serif',
 ];
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterStyle {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterStyle({
     this.fontSize = _kDefaultFontSize,
     this.height = _kDefaultHeight,
@@ -31,6 +33,7 @@ class TerminalLibraryFlutterStyle {
     this.fontFamilyFallback = _kDefaultFontFamilyFallback,
   });
 
+  /// UncompleteDocumentation
   factory TerminalLibraryFlutterStyle.fromTextStyle(TextStyle textStyle) {
     return TerminalLibraryFlutterStyle(
       fontSize: textStyle.fontSize ?? _kDefaultFontSize,
@@ -43,14 +46,20 @@ class TerminalLibraryFlutterStyle {
     );
   }
 
+  /// UncompleteDocumentation
   final double fontSize;
 
+  /// UncompleteDocumentation
   final double height;
 
+  /// UncompleteDocumentation
   final String fontFamily;
+
+  /// UncompleteDocumentation
 
   final List<String> fontFamilyFallback;
 
+  /// UncompleteDocumentation
   TextStyle toTextStyle({
     Color? color,
     Color? backgroundColor,
@@ -71,6 +80,7 @@ class TerminalLibraryFlutterStyle {
     );
   }
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterStyle copyWith({
     double? fontSize,
     double? height,

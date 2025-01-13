@@ -11,17 +11,22 @@ import 'package:terminal_library/xterm_library/core/core/state.dart';
 import 'package:terminal_library/xterm_library/core/utils/circular_buffer.dart';
 import 'package:terminal_library/xterm_library/core/utils/unicode_v11.dart';
 
+/// UncompleteDocumentation
 class Buffer {
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterState terminal;
 
+  /// UncompleteDocumentation
   final int maxLines;
 
+  /// UncompleteDocumentation
   final bool isAltBuffer;
 
   /// Characters that break selection when calling [getWordBoundary]. If null,
   /// defaults to [defaultWordSeparators].
   final Set<int>? wordSeparators;
 
+  /// UncompleteDocumentation
   Buffer(
     this.terminal, {
     required this.maxLines,
@@ -49,6 +54,7 @@ class Buffer {
 
   final _savedCursorStyle = CursorStyle();
 
+  /// UncompleteDocumentation
   final charset = Charset();
 
   /// Width of the viewport in columns. Also the index of the last column.
@@ -135,6 +141,8 @@ class Buffer {
     return lines[absoluteCursorY];
   }
 
+  /// UncompleteDocumentation
+
   void backspace() {
     if (_cursorX == 0 && currentLine.isWrapped) {
       currentLine.isWrapped = false;
@@ -205,6 +213,7 @@ class Buffer {
     currentLine.eraseRange(start, start + count, terminal.cursor);
   }
 
+  /// UncompleteDocumentation
   void scrollDown(int lines) {
     for (var i = absoluteMarginBottom; i >= absoluteMarginTop; i--) {
       if (i >= absoluteMarginTop + lines) {
@@ -214,6 +223,8 @@ class Buffer {
       }
     }
   }
+
+  /// UncompleteDocumentation
 
   void scrollUp(int lines) {
     for (var i = absoluteMarginTop; i <= absoluteMarginBottom; i++) {
@@ -260,6 +271,7 @@ class Buffer {
     }
   }
 
+  /// UncompleteDocumentation
   void lineFeed() {
     index();
     if (terminal.lineFeedMode) {
@@ -280,26 +292,35 @@ class Buffer {
     }
   }
 
+  /// UncompleteDocumentation
+
   void cursorGoForward() {
     _cursorX = min(_cursorX + 1, viewWidth);
   }
+
+  /// UncompleteDocumentation
 
   void setCursorX(int cursorX) {
     _cursorX = cursorX.clamp(0, viewWidth - 1);
   }
 
+  /// UncompleteDocumentation
   void setCursorY(int cursorY) {
     _cursorY = cursorY.clamp(0, viewHeight - 1);
   }
 
+  /// UncompleteDocumentation
   void moveCursorX(int offset) {
     setCursorX(_cursorX + offset);
   }
+
+  /// UncompleteDocumentation
 
   void moveCursorY(int offset) {
     setCursorY(_cursorY + offset);
   }
 
+  /// UncompleteDocumentation
   void setCursor(int cursorX, int cursorY) {
     var maxCursorY = viewHeight - 1;
 
@@ -312,6 +333,7 @@ class Buffer {
     _cursorY = cursorY.clamp(0, maxCursorY);
   }
 
+  /// UncompleteDocumentation
   void moveCursor(int offsetX, int offsetY) {
     final cursorX = _cursorX + offsetX;
     final cursorY = _cursorY + offsetY;
@@ -348,14 +370,19 @@ class Buffer {
     _marginBottom = max(_marginTop, _marginBottom);
   }
 
+  /// UncompleteDocumentation
+
   bool get isInVerticalMargin {
     return _cursorY >= _marginTop && _cursorY <= _marginBottom;
   }
+
+  /// UncompleteDocumentation
 
   void resetVerticalMargins() {
     setVerticalMargins(0, viewHeight - 1);
   }
 
+  /// UncompleteDocumentation
   void deleteChars(int count) {
     final start = _cursorX.clamp(0, viewWidth);
     count = min(count, viewWidth - start);
@@ -379,10 +406,12 @@ class Buffer {
     }
   }
 
+  /// UncompleteDocumentation
   void insertBlankChars(int count) {
     currentLine.insertCells(_cursorX, count, terminal.cursor);
   }
 
+  /// UncompleteDocumentation
   void insertLines(int count) {
     if (!isInVerticalMargin) {
       return;
@@ -433,6 +462,8 @@ class Buffer {
       lines[absoluteMarginBottom - i] = _newEmptyLine();
     }
   }
+
+  /// UncompleteDocumentation
 
   void resize(int oldWidth, int oldHeight, int newWidth, int newHeight) {
     // 1. Adjust the height.
@@ -486,6 +517,7 @@ class Buffer {
     return lines[offset.y].createAnchor(offset.x);
   }
 
+  /// UncompleteDocumentation
   CellAnchor createAnchorFromCursor() {
     return createAnchor(cursorX, absoluteCursorY);
   }
@@ -497,6 +529,7 @@ class Buffer {
     return line;
   }
 
+  /// UncompleteDocumentation
   static final defaultWordSeparators = <int>{
     0,
     r' '.codeUnitAt(0),
@@ -511,6 +544,7 @@ class Buffer {
     r'\'.codeUnitAt(0),
   };
 
+  /// UncompleteDocumentation
   BufferRangeLine? getWordBoundary(CellOffset position) {
     var separators = wordSeparators ?? defaultWordSeparators;
     if (position.y >= lines.length) {

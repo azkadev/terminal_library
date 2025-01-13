@@ -6,28 +6,39 @@ import 'package:zmodem/zmodem.dart';
 
 export 'package:zmodem/zmodem.dart' show ZModemFileInfo;
 
+/// UncompleteDocumentation
 typedef ZModemInputHandler = void Function(String output);
 
+/// UncompleteDocumentation
 typedef ZModemOfferHandler = void Function(ZModemOffer offer);
 
+/// UncompleteDocumentation
 typedef ZModemRequestHandler = Future<Iterable<ZModemOffer>> Function();
 
+/// UncompleteDocumentation
 abstract class ZModemOffer {
+  /// UncompleteDocumentation
   ZModemFileInfo get info;
 
+  /// UncompleteDocumentation
   Stream<Uint8List> accept(int offset);
 
+  /// UncompleteDocumentation
   void skip();
 }
 
+/// UncompleteDocumentation
 class ZModemCallbackOffer implements ZModemOffer {
   @override
   final ZModemFileInfo info;
 
+  /// UncompleteDocumentation
   final Stream<Uint8List> Function(int offset) onAccept;
 
+  /// UncompleteDocumentation
   final void Function()? onSkip;
 
+  /// UncompleteDocumentation
   ZModemCallbackOffer(this.info, {required this.onAccept, this.onSkip});
 
   @override
@@ -45,6 +56,7 @@ final _zmodemSenderInit = '**\x18B0000000'.codeUnits;
 
 final _zmodemReceiverInit = '**\x18B0100000'.codeUnits;
 
+/// UncompleteDocumentation
 class ZModemMux {
   /// Data from the underlying data channel.
   final Stream<Uint8List> stdout;
@@ -63,6 +75,7 @@ class ZModemMux {
   /// ignored.
   ZModemRequestHandler? onFileRequest;
 
+  /// UncompleteDocumentation
   ZModemMux({required this.stdin, required this.stdout}) {
     _stdoutSubscription = stdout.listen(_handleStdout);
   }
@@ -284,10 +297,14 @@ class ZModemMux {
   }
 }
 
+/// UncompleteDocumentation
 extension ListExtension on List<int> {
+  /// UncompleteDocumentation
   String dump() {
     return map((e) => e.toRadixString(16).padLeft(2, '0')).join(' ');
   }
+
+  /// UncompleteDocumentation
 
   int? listIndexOf(List<int> other, [int start = 0]) {
     if (other.length + start > length) {

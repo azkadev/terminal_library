@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// UncompleteDocumentation
 class CustomTextEdit extends StatefulWidget {
+  /// UncompleteDocumentation
   CustomTextEdit({
     super.key,
     required this.child,
@@ -21,36 +23,53 @@ class CustomTextEdit extends StatefulWidget {
     this.deleteDetection = false,
   });
 
+  /// UncompleteDocumentation
   final Widget child;
+
+  /// UncompleteDocumentation
 
   final void Function(String) onInsert;
 
+  /// UncompleteDocumentation
+
   final void Function() onDelete;
 
+  /// UncompleteDocumentation
   final void Function(String?) onComposing;
 
+  /// UncompleteDocumentation
   final void Function(TextInputAction) onAction;
 
+  /// UncompleteDocumentation
   final KeyEventResult Function(FocusNode, KeyEvent) onKeyEvent;
 
+  /// UncompleteDocumentation
   final FocusNode focusNode;
 
+  /// UncompleteDocumentation
   final bool autofocus;
 
+  /// UncompleteDocumentation
   final bool readOnly;
+
+  /// UncompleteDocumentation
 
   final TextInputType inputType;
 
+  /// UncompleteDocumentation
   final TextInputAction inputAction;
 
+  /// UncompleteDocumentation
   final Brightness keyboardAppearance;
 
+  /// UncompleteDocumentation
   final bool deleteDetection;
 
   @override
   CustomTextEditState createState() => CustomTextEditState();
 }
 
+/// UncompleteDocumentation
 class CustomTextEditState extends State<CustomTextEdit> with TextInputClient {
   TextInputConnection? _connection;
 
@@ -95,8 +114,10 @@ class CustomTextEditState extends State<CustomTextEdit> with TextInputClient {
     );
   }
 
+  /// UncompleteDocumentation
   bool get hasInputConnection => _connection != null && _connection!.attached;
 
+  /// UncompleteDocumentation
   void requestKeyboard() {
     if (widget.focusNode.hasFocus) {
       _openInputConnection();
@@ -105,17 +126,20 @@ class CustomTextEditState extends State<CustomTextEdit> with TextInputClient {
     }
   }
 
+  /// UncompleteDocumentation
   void closeKeyboard() {
     if (hasInputConnection) {
       _connection?.close();
     }
   }
 
+  /// UncompleteDocumentation
   void setEditingState(TextEditingValue value) {
     _currentEditingState = value;
     _connection?.setEditingState(value);
   }
 
+  /// UncompleteDocumentation
   void setEditableRect(Rect rect, Rect caretRect) {
     if (!hasInputConnection) {
       return;

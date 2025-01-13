@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterTheme {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterTheme({
     required this.cursor,
     required this.selection,
@@ -27,31 +29,72 @@ class TerminalLibraryFlutterTheme {
     required this.searchHitForeground,
   });
 
+  /// UncompleteDocumentation
   final Color cursor;
+
+  /// UncompleteDocumentation
   final Color selection;
 
+  /// UncompleteDocumentation
   final Color foreground;
+
+  /// UncompleteDocumentation
   final Color background;
 
+  /// UncompleteDocumentation
   final Color black;
+
+  /// UncompleteDocumentation
   final Color red;
+
+  /// UncompleteDocumentation
   final Color green;
+
+  /// UncompleteDocumentation
   final Color yellow;
+
+  /// UncompleteDocumentation
   final Color blue;
+
+  /// UncompleteDocumentation
   final Color magenta;
+
+  /// UncompleteDocumentation
   final Color cyan;
+
+  /// UncompleteDocumentation
   final Color white;
 
+  /// UncompleteDocumentation
   final Color brightBlack;
+
+  /// UncompleteDocumentation
   final Color brightRed;
+
+  /// UncompleteDocumentation
   final Color brightGreen;
+
+  /// UncompleteDocumentation
   final Color brightYellow;
+
+  /// UncompleteDocumentation
   final Color brightBlue;
+
+  /// UncompleteDocumentation
   final Color brightMagenta;
+
+  /// UncompleteDocumentation
   final Color brightCyan;
+
+  /// UncompleteDocumentation
   final Color brightWhite;
 
+  /// UncompleteDocumentation
   final Color searchHitBackground;
+
+  /// UncompleteDocumentation
   final Color searchHitBackgroundCurrent;
+
+  /// UncompleteDocumentation
   final Color searchHitForeground;
 }

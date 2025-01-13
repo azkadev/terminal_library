@@ -4,24 +4,31 @@ import 'package:terminal_library/xterm_library/core/core/input/keytab/keytab_par
 import 'package:terminal_library/xterm_library/core/core/input/keytab/keytab_record.dart';
 import 'package:terminal_library/xterm_library/core/core/input/keytab/keytab_token.dart';
 
+/// UncompleteDocumentation
 class Keytab {
+  /// UncompleteDocumentation
   Keytab({
     required this.name,
     required this.records,
   });
 
+  /// UncompleteDocumentation
   factory Keytab.parse(String source) {
     final tokens = tokenize(source).toList();
     final parser = KeytabParser()..addTokens(tokens);
     return parser.result;
   }
 
+  /// UncompleteDocumentation
   static final defaultKeytab = Keytab.parse(kDefaultKeytab);
 
+  /// UncompleteDocumentation
   final String? name;
 
+  /// UncompleteDocumentation
   final List<KeytabRecord> records;
 
+  /// UncompleteDocumentation
   KeytabRecord? find(
     TerminalLibraryFlutterKey key, {
     bool ctrl = false,

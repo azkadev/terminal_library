@@ -1,6 +1,7 @@
 /// Fixed-size list based lookup table, optimized for small positive integer
 /// keys.
 class FastLookupTable<T> {
+  /// UncompleteDocumentation
   FastLookupTable(Map<int, T> data) {
     var maxIndex = data.keys.first;
 
@@ -19,9 +20,11 @@ class FastLookupTable<T> {
     }
   }
 
+  /// UncompleteDocumentation
   late final List<T?> _table;
   late final int _maxIndex;
 
+  /// UncompleteDocumentation
   T? operator [](int index) {
     if (index > _maxIndex) {
       return null;
@@ -30,5 +33,6 @@ class FastLookupTable<T> {
     return _table[index];
   }
 
+  /// UncompleteDocumentation
   int get maxIndex => _maxIndex;
 }

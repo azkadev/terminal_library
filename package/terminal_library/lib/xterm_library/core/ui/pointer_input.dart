@@ -1,3 +1,4 @@
+/// UncompleteDocumentation
 enum PointerInput {
   /// Taps / buttons presses & releases.
   tap,
@@ -12,13 +13,18 @@ enum PointerInput {
   move,
 }
 
+/// UncompleteDocumentation
 class PointerInputs {
+  /// UncompleteDocumentation
   final Set<PointerInput> inputs;
 
+  /// UncompleteDocumentation
   const PointerInputs(this.inputs);
 
+  /// UncompleteDocumentation
   const PointerInputs.none() : inputs = const <PointerInput>{};
 
+  /// UncompleteDocumentation
   const PointerInputs.all()
       : inputs = const <PointerInput>{
           PointerInput.tap,

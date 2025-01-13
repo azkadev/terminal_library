@@ -7,6 +7,7 @@ import 'package:terminal_library/xterm_library/xterm.dart';
 
 /// Encapsulates the logic for painting various terminal elements.
 class TerminalLibraryFlutterPainter {
+  /// UncompleteDocumentation
   TerminalLibraryFlutterPainter({
     required TerminalLibraryFlutterTheme theme,
     required TerminalLibraryFlutterStyle textStyle,
@@ -26,8 +27,11 @@ class TerminalLibraryFlutterPainter {
   /// [_textStyle] is changed, or when the system font changes.
   final _paragraphCache = ParagraphCache(10240);
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterStyle get textStyle => _textStyle;
   TerminalLibraryFlutterStyle _textStyle;
+
+  /// UncompleteDocumentation
   set textStyle(TerminalLibraryFlutterStyle value) {
     if (value == _textStyle) return;
     _textStyle = value;
@@ -35,8 +39,11 @@ class TerminalLibraryFlutterPainter {
     _paragraphCache.clear();
   }
 
+  /// UncompleteDocumentation
   TextScaler get textScaler => _textScaler;
   TextScaler _textScaler = TextScaler.linear(1.0);
+
+  /// UncompleteDocumentation
   set textScaler(TextScaler value) {
     if (value == _textScaler) return;
     _textScaler = value;
@@ -44,8 +51,11 @@ class TerminalLibraryFlutterPainter {
     _paragraphCache.clear();
   }
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterTheme get theme => _theme;
   TerminalLibraryFlutterTheme _theme;
+
+  /// UncompleteDocumentation
   set theme(TerminalLibraryFlutterTheme value) {
     if (value == _theme) return;
     _theme = value;
@@ -123,6 +133,8 @@ class TerminalLibraryFlutterPainter {
   }
 
   @pragma('vm:prefer-inline')
+
+  /// UncompleteDocumentation
   void paintHighlight(Canvas canvas, Offset offset, int length, Color color) {
     final endOffset =
         offset.translate(length * _cellSize.width, _cellSize.height);
@@ -162,6 +174,8 @@ class TerminalLibraryFlutterPainter {
   }
 
   @pragma('vm:prefer-inline')
+
+  /// UncompleteDocumentation
   void paintCell(Canvas canvas, Offset offset, CellData cellData) {
     paintCellBackground(canvas, offset, cellData);
     paintCellForeground(canvas, offset, cellData);
@@ -185,7 +199,7 @@ class TerminalLibraryFlutterPainter {
           : resolveBackgroundColor(cellData.background);
 
       if (cellData.flags & CellFlags.faint != 0) {
-        color = color.withOpacity(0.5);
+        color = color.withValues(alpha: 0.5);
       }
 
       final style = _textStyle.toTextStyle(

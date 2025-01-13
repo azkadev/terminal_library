@@ -16,9 +16,11 @@ class BufferSegment {
   /// Should be greater than or equal to [start].
   final int? end;
 
+  /// UncompleteDocumentation
   const BufferSegment(this.range, this.line, this.start, this.end)
       : assert((start != null && end != null) ? start <= end : true);
 
+  /// UncompleteDocumentation
   bool isWithin(CellOffset position) {
     if (position.y != line) {
       return false;

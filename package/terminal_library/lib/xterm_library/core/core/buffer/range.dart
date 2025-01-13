@@ -1,23 +1,33 @@
 import 'package:terminal_library/xterm_library/core/core/buffer/cell_offset.dart';
 import 'package:terminal_library/xterm_library/core/core/buffer/segment.dart';
 
+/// UncompleteDocumentation
 abstract class BufferRange {
+  /// UncompleteDocumentation
+
   final CellOffset begin;
 
+  /// UncompleteDocumentation
   final CellOffset end;
+
+  /// UncompleteDocumentation
 
   const BufferRange(this.begin, this.end);
 
+  /// UncompleteDocumentation
   BufferRange.collapsed(this.begin) : end = begin;
 
+  /// UncompleteDocumentation
   bool get isNormalized {
     return begin.isBefore(end) || begin.isEqual(end);
   }
 
+  /// UncompleteDocumentation
   bool get isCollapsed {
     return begin.isEqual(end);
   }
 
+  /// UncompleteDocumentation
   BufferRange get normalized;
 
   /// Convert this range to segments of single lines.

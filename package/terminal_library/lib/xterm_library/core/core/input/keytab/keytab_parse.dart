@@ -3,22 +3,30 @@ import 'package:terminal_library/xterm_library/core/core/input/keytab/keytab_rec
 import 'package:terminal_library/xterm_library/core/core/input/keytab/keytab_token.dart';
 import 'package:terminal_library/xterm_library/core/core/input/keytab/qt_keyname.dart';
 
+/// UncompleteDocumentation
 class ParseError {}
 
+/// UncompleteDocumentation
 class TokensReader {
+  /// UncompleteDocumentation
   TokensReader(this.tokens);
 
+  /// UncompleteDocumentation
   final List<KeytabToken> tokens;
 
   var _pos = 0;
 
+  /// UncompleteDocumentation
   bool get done => _pos > tokens.length - 1;
 
+  /// UncompleteDocumentation
   KeytabToken? take() {
     final result = peek();
     _pos += 1;
     return result;
   }
+
+  /// UncompleteDocumentation
 
   KeytabToken? peek() {
     if (done) return null;
@@ -26,10 +34,12 @@ class TokensReader {
   }
 }
 
+/// UncompleteDocumentation
 class KeytabParser {
   String? _name;
   final _records = <KeytabRecord>[];
 
+  /// UncompleteDocumentation
   void addTokens(List<KeytabToken> tokens) {
     final reader = TokensReader(tokens);
 
@@ -48,6 +58,7 @@ class KeytabParser {
     }
   }
 
+  /// UncompleteDocumentation
   Keytab get result {
     return Keytab(name: _name, records: _records);
   }

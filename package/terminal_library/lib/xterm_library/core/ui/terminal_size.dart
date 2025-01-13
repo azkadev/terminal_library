@@ -1,7 +1,13 @@
+/// UncompleteDocumentation
 class TerminalLibraryFlutterSize {
+  /// UncompleteDocumentation
   final int width;
 
+  /// UncompleteDocumentation
+
   final int height;
+
+  /// UncompleteDocumentation
 
   const TerminalLibraryFlutterSize(this.width, this.height);
 

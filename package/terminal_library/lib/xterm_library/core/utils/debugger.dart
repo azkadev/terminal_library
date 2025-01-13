@@ -3,7 +3,9 @@ import 'package:terminal_library/xterm_library/core/core/escape/parser.dart';
 import 'package:terminal_library/xterm_library/core/core/mouse/mode.dart';
 import 'package:terminal_library/xterm_library/core/base/observable.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterCommand {
+  /// UncompleteDocumentation
   TerminalLibraryFlutterCommand(
     this.start,
     this.end,
@@ -13,34 +15,47 @@ class TerminalLibraryFlutterCommand {
     this.error,
   );
 
+  /// UncompleteDocumentation
   final int start;
 
+  /// UncompleteDocumentation
   final int end;
+
+  /// UncompleteDocumentation
 
   final String chars;
 
+  /// UncompleteDocumentation
+
   final String escapedChars;
 
+  /// UncompleteDocumentation
   final List<String> explanation;
 
+  /// UncompleteDocumentation
   final bool error;
 }
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterDebugger with Observable {
   late final _parser = EscapeParser(_handler);
 
   late final _handler = _TerminalLibraryFlutterDebuggerHandler(recordCommand);
 
+  /// UncompleteDocumentation
   final recorded = <int>[];
 
+  /// UncompleteDocumentation
   final commands = <TerminalLibraryFlutterCommand>[];
 
+  /// UncompleteDocumentation
   void write(String chunk) {
     recorded.addAll(chunk.runes);
     _parser.write(chunk);
     notifyListeners();
   }
 
+  /// UncompleteDocumentation
   void recordCommand(String explanation, {bool error = false}) {
     final start = _parser.tokenBegin;
     final end = _parser.tokenEnd;
@@ -58,6 +73,7 @@ class TerminalLibraryFlutterDebugger with Observable {
     }
   }
 
+  /// UncompleteDocumentation
   String getRecord(TerminalLibraryFlutterCommand command) {
     final charCodes = recorded.sublist(0, command.end);
     return String.fromCharCodes(charCodes);

@@ -5,9 +5,12 @@ import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
 
+/// UncompleteDocumentation
 class MaxChunkSize extends StreamTransformerBase<Uint8List, Uint8List> {
+  /// UncompleteDocumentation
   MaxChunkSize(this.size);
 
+  /// UncompleteDocumentation
   final int size;
 
   @override
@@ -31,9 +34,12 @@ class MaxChunkSize extends StreamTransformerBase<Uint8List, Uint8List> {
   }
 }
 
+/// UncompleteDocumentation
 class MinChunkSize extends StreamTransformerBase<Uint8List, Uint8List> {
+  /// UncompleteDocumentation
   MinChunkSize(this.size);
 
+  /// UncompleteDocumentation
   final int size;
 
   var _yielded = false;
@@ -136,7 +142,8 @@ abstract class StreamConsumerBase<T> {
 
 /// A helper class that can be used to read data from a byte stream on demand.
 class StreamConsumer extends StreamConsumerBase<Uint8List> {
-  StreamConsumer(Stream<Uint8List> stream) : super(stream);
+  /// UncompleteDocumentation
+  StreamConsumer(super.stream);
 
   @override
   int getLength(Uint8List chunk) {

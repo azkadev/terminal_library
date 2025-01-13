@@ -1,3 +1,4 @@
+/// UncompleteDocumentation
 typedef CharsetTranslator = int Function(int);
 
 final _charsets = <int, CharsetTranslator>{
@@ -5,6 +6,7 @@ final _charsets = <int, CharsetTranslator>{
   'B'.codeUnitAt(0): asciiTranslator,
 };
 
+/// UncompleteDocumentation
 class Charset {
   var _charsetMap = <int, CharsetTranslator>{};
   var _currentIndex = 0;
@@ -18,10 +20,12 @@ class Charset {
     _cached = _charsetMap[_currentIndex] ?? asciiTranslator;
   }
 
+  /// UncompleteDocumentation
   int translate(int codePoint) {
     return _cached(codePoint);
   }
 
+  /// UncompleteDocumentation
   void designate(int index, int name) {
     final charset = _charsets[name];
     if (charset != null) {
@@ -30,22 +34,27 @@ class Charset {
     }
   }
 
+  /// UncompleteDocumentation
   void use(int index) {
     _currentIndex = index;
     _updateCache();
   }
 
+  /// UncompleteDocumentation
   void save() {
     _savedCharsetMap = Map.from(_charsetMap);
     _savedIndex = _currentIndex;
   }
 
+  /// UncompleteDocumentation
   void restore() {
     _charsetMap = _savedCharsetMap;
     _currentIndex = _savedIndex;
     _updateCache();
   }
 }
+
+/// UncompleteDocumentation
 
 const decSpecGraphics = <int, int>{
   0x5f: 0x00A0, // NO-BREAK SPACE
@@ -82,10 +91,12 @@ const decSpecGraphics = <int, int>{
   0x7e: 0x00B7, // MIDDLE DOT
 };
 
+/// UncompleteDocumentation
 int asciiTranslator(int codePoint) {
   return codePoint;
 }
 
+/// UncompleteDocumentation
 int decSpecGraphicsTranslator(int codePoint) {
   if (codePoint >= 127) {
     return codePoint;

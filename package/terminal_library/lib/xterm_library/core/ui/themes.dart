@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterThemes {
+  /// UncompleteDocumentation
   static const defaultTheme = TerminalLibraryFlutterTheme(
     cursor: Color(0XAAAEAFAD),
     selection: Color(0XAAAEAFAD),
@@ -28,6 +30,7 @@ class TerminalLibraryFlutterThemes {
     searchHitForeground: Color(0XFF000000),
   );
 
+  /// UncompleteDocumentation
   static const whiteOnBlack = TerminalLibraryFlutterTheme(
     cursor: Color(0XFFAEAFAD),
     selection: Color(0XFFAEAFAD),

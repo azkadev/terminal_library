@@ -6,6 +6,7 @@ const _kMaxColumns = 1024;
 class TabStops {
   final _stops = List<bool>.filled(_kMaxColumns, false);
 
+  /// UncompleteDocumentation
   TabStops() {
     _initialize();
   }

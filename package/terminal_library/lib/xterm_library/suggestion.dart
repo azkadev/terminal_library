@@ -19,6 +19,7 @@ class SuggestionPortalController extends OverlayPortalController {
 /// A convenience widget to place a suggestion popup around the cursor specified
 /// by [SuggestionPortalController].
 class SuggestionPortal extends StatefulWidget {
+  /// UncompleteDocumentation
   const SuggestionPortal({
     super.key,
     required this.controller,
@@ -28,8 +29,10 @@ class SuggestionPortal extends StatefulWidget {
     this.cursorMargin = const EdgeInsets.all(4),
   });
 
+  /// UncompleteDocumentation
   final SuggestionPortalController controller;
 
+  /// UncompleteDocumentation
   final WidgetBuilder overlayBuilder;
 
   /// The minimum space between [child] and the screen edge.
@@ -39,6 +42,7 @@ class SuggestionPortal extends StatefulWidget {
   /// bottom are used.
   final EdgeInsets cursorMargin;
 
+  /// UncompleteDocumentation
   final Widget child;
 
   @override
@@ -65,6 +69,7 @@ class _SuggestionPortalState extends State<SuggestionPortal> {
 
 /// A widget that places [child] around [cursorRect].
 class SuggestionLayout extends SingleChildRenderObjectWidget {
+  /// UncompleteDocumentation
   SuggestionLayout({
     super.child,
     required this.cursorRect,
@@ -103,7 +108,10 @@ class SuggestionLayout extends SingleChildRenderObjectWidget {
   }
 }
 
+/// UncompleteDocumentation
+
 class RenderCompletionLayout extends RenderShiftedBox {
+  /// UncompleteDocumentation
   RenderCompletionLayout(
     super.child, {
     required ValueListenable<Rect> cursorRect,
@@ -114,6 +122,8 @@ class RenderCompletionLayout extends RenderShiftedBox {
         _cursorPadding = cursorMargin;
 
   ValueListenable<Rect> _cursorRect;
+
+  /// UncompleteDocumentation
   ValueListenable<Rect> get cursorRect => _cursorRect;
   set cursorRect(ValueListenable<Rect> value) {
     if (_cursorRect == value) return;
@@ -124,6 +134,8 @@ class RenderCompletionLayout extends RenderShiftedBox {
   }
 
   EdgeInsets _padding;
+
+  /// UncompleteDocumentation
   EdgeInsets get padding => _padding;
   set padding(EdgeInsets value) {
     if (_padding == value) return;
@@ -132,6 +144,8 @@ class RenderCompletionLayout extends RenderShiftedBox {
   }
 
   EdgeInsets _cursorPadding;
+
+  /// UncompleteDocumentation
   EdgeInsets get cursorMargin => _cursorPadding;
   set cursorMargin(EdgeInsets value) {
     if (_cursorPadding == value) return;

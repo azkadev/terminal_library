@@ -6,6 +6,7 @@ import 'package:terminal_library/xterm_library/core/core/mouse/reporter.dart';
 import 'package:terminal_library/xterm_library/core/core/platform.dart';
 import 'package:terminal_library/xterm_library/core/core/state.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterMouseEvent {
   /// The button that is pressed or released.
   final TerminalLibraryFlutterMouseButton button;
@@ -22,6 +23,7 @@ class TerminalLibraryFlutterMouseEvent {
   /// The platform of the terminal.
   final TerminalLibraryFlutterTargetPlatform platform;
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterMouseEvent({
     required this.button,
     required this.buttonState,
@@ -31,20 +33,26 @@ class TerminalLibraryFlutterMouseEvent {
   });
 }
 
+/// UncompleteDocumentation
 const defaultMouseHandler = CascadeMouseHandler([
   ClickMouseHandler(),
   UpDownMouseHandler(),
 ]);
 
+/// UncompleteDocumentation
 abstract class TerminalLibraryFlutterMouseHandler {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterMouseHandler();
 
+  /// UncompleteDocumentation
   String? call(TerminalLibraryFlutterMouseEvent event);
 }
 
+/// UncompleteDocumentation
 class CascadeMouseHandler implements TerminalLibraryFlutterMouseHandler {
   final List<TerminalLibraryFlutterMouseHandler> _handlers;
 
+  /// UncompleteDocumentation
   const CascadeMouseHandler(this._handlers);
 
   @override
@@ -59,7 +67,10 @@ class CascadeMouseHandler implements TerminalLibraryFlutterMouseHandler {
   }
 }
 
+/// UncompleteDocumentation
+
 class ClickMouseHandler implements TerminalLibraryFlutterMouseHandler {
+  /// UncompleteDocumentation
   const ClickMouseHandler();
 
   @override
@@ -86,7 +97,9 @@ class ClickMouseHandler implements TerminalLibraryFlutterMouseHandler {
   }
 }
 
+/// UncompleteDocumentation
 class UpDownMouseHandler implements TerminalLibraryFlutterMouseHandler {
+  /// UncompleteDocumentation
   const UpDownMouseHandler();
 
   @override

@@ -3,7 +3,9 @@ import 'package:terminal_library/xterm_library/core/core/mouse/mode.dart';
 import 'package:terminal_library/xterm_library/core/core/mouse/button.dart';
 import 'package:terminal_library/xterm_library/core/core/mouse/button_state.dart';
 
+/// UncompleteDocumentation
 abstract class MouseReporter {
+  /// UncompleteDocumentation
   static String report(
     TerminalLibraryFlutterMouseButton button,
     TerminalLibraryFlutterMouseButtonState state,

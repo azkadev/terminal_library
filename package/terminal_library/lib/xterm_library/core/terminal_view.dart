@@ -21,7 +21,9 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_text_style.dart'
 import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 import 'package:terminal_library/xterm_library/core/ui/themes.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterViewWidget extends StatefulWidget {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterViewWidget(
     this.terminal, {
     super.key,
@@ -54,6 +56,7 @@ class TerminalLibraryFlutterViewWidget extends StatefulWidget {
   /// The underlying terminal that this widget renders.
   final TerminalLibraryFlutter terminal;
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterController? controller;
 
   /// The theme to use for this terminal.
@@ -61,6 +64,8 @@ class TerminalLibraryFlutterViewWidget extends StatefulWidget {
 
   /// The style to use for painting characters.
   final TerminalLibraryFlutterStyle textStyle;
+
+  /// UncompleteDocumentation
 
   final TextScaler? textScaler;
 
@@ -147,6 +152,8 @@ class TerminalLibraryFlutterViewWidget extends StatefulWidget {
       TerminalLibraryFlutterViewWidgetState();
 }
 
+/// UncompleteDocumentation
+
 class TerminalLibraryFlutterViewWidgetState
     extends State<TerminalLibraryFlutterViewWidget> {
   late FocusNode _focusNode;
@@ -165,6 +172,7 @@ class TerminalLibraryFlutterViewWidgetState
 
   late ScrollController _scrollController;
 
+  /// UncompleteDocumentation
   RenderTerminalLibraryFlutter get renderTerminalLibraryFlutter =>
       _viewportKey.currentContext!.findRenderObject()
           as RenderTerminalLibraryFlutter;
@@ -320,7 +328,9 @@ class TerminalLibraryFlutterViewWidgetState
     );
 
     child = Container(
-      color: widget.theme.background.withOpacity(widget.backgroundOpacity),
+      // color: widget.theme.background.withOpacity(widget.backgroundOpacity),
+      color:
+          widget.theme.background.withValues(alpha: widget.backgroundOpacity),
       padding: widget.padding,
       child: child,
     );
@@ -328,19 +338,23 @@ class TerminalLibraryFlutterViewWidgetState
     return child;
   }
 
+  /// UncompleteDocumentation
   void requestKeyboard() {
     _customTextEditKey.currentState?.requestKeyboard();
   }
 
+  /// UncompleteDocumentation
   void closeKeyboard() {
     _customTextEditKey.currentState?.closeKeyboard();
   }
 
+  /// UncompleteDocumentation
   Rect get cursorRect {
     return renderTerminalLibraryFlutter.cursorOffset &
         renderTerminalLibraryFlutter.cellSize;
   }
 
+  /// UncompleteDocumentation
   Rect get globalCursorRect {
     return renderTerminalLibraryFlutter
             .localToGlobal(renderTerminalLibraryFlutter.cursorOffset) &
@@ -377,6 +391,7 @@ class TerminalLibraryFlutterViewWidgetState
     widget.onSecondaryTapUp?.call(details, offset);
   }
 
+  /// UncompleteDocumentation
   bool get hasInputConnection {
     return _customTextEditKey.currentState?.hasInputConnection == true;
   }

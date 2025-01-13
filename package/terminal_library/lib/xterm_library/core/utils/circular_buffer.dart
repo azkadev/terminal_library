@@ -270,6 +270,7 @@ class IndexAwareCircularBuffer<T extends IndexedItem> {
     return List<T>.generate(length, (index) => this[index]);
   }
 
+  /// UncompleteDocumentation
   String debugDump() {
     final buffer = StringBuffer();
     buffer.writeln('CircularList:');
@@ -280,6 +281,8 @@ class IndexAwareCircularBuffer<T extends IndexedItem> {
     return buffer.toString();
   }
 }
+
+/// UncompleteDocumentation
 
 mixin IndexedItem {
   IndexAwareCircularBuffer? _owner;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_library/xterm_library/core/utils/debugger.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterDebuggerView extends StatefulWidget {
+  /// UncompleteDocumentation
   const TerminalLibraryFlutterDebuggerView(
     this.debugger, {
     super.key,
@@ -9,10 +11,13 @@ class TerminalLibraryFlutterDebuggerView extends StatefulWidget {
     this.onSeek,
   });
 
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterDebugger debugger;
 
+  /// UncompleteDocumentation
   final ScrollController? scrollController;
 
+  /// UncompleteDocumentation
   final void Function(int?)? onSeek;
 
   @override

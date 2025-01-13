@@ -19,6 +19,7 @@ class _Jenkins {
   }
 }
 
+/// UncompleteDocumentation
 int hashValues(
   Object? arg01,
   Object? arg02, [
@@ -102,6 +103,7 @@ int hashValues(
   return _Jenkins.finish(result);
 }
 
+/// UncompleteDocumentation
 int hashList(Iterable<Object> arguments) {
   int result = 0;
   for (Object argument in arguments) {

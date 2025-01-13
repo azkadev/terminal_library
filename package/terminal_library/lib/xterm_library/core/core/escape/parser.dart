@@ -13,8 +13,10 @@ import 'package:terminal_library/xterm_library/core/utils/lookup_table.dart';
 ///  * Zero object allocation during processing.
 ///  * No internal state. Same input will always produce same output.
 class EscapeParser {
+  /// UncompleteDocumentation
   final EscapeHandler handler;
 
+  /// UncompleteDocumentation
   EscapeParser(this.handler);
 
   final _queue = ByteConsumer();
@@ -25,6 +27,7 @@ class EscapeParser {
   /// End of sequence or character being processed. Useful for debugging.
   int get tokenEnd => _queue.totalConsumed;
 
+  /// UncompleteDocumentation
   void write(String chunk) {
     _queue.unrefConsumedBlocks();
     _queue.add(chunk);

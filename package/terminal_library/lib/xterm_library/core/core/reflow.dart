@@ -160,6 +160,7 @@ class _LineReflow {
   }
 }
 
+/// UncompleteDocumentation
 List<BufferLine> reflow(
   IndexAwareCircularBuffer<BufferLine> lines,
   int oldWidth,

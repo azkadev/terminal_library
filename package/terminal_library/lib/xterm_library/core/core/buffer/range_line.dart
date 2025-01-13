@@ -2,9 +2,12 @@ import 'package:terminal_library/xterm_library/core/core/buffer/cell_offset.dart
 import 'package:terminal_library/xterm_library/core/core/buffer/range.dart';
 import 'package:terminal_library/xterm_library/core/core/buffer/segment.dart';
 
+/// UncompleteDocumentation
 class BufferRangeLine extends BufferRange {
+  /// UncompleteDocumentation
   BufferRangeLine(super.begin, super.end);
 
+  /// UncompleteDocumentation
   BufferRangeLine.collapsed(super.begin) : super.collapsed();
 
   @override

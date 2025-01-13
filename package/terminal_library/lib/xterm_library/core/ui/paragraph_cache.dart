@@ -6,6 +6,7 @@ import 'package:quiver/collection.dart';
 /// A cache of laid out [Paragraph]s. This is used to avoid laying out the same
 /// text multiple times, which is expensive.
 class ParagraphCache {
+  /// UncompleteDocumentation
   ParagraphCache(int maximumSize)
       : _cache = LruMap<int, Paragraph>(maximumSize: maximumSize);
 

@@ -2,11 +2,15 @@ import 'package:flutter/widgets.dart';
 import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 import 'package:terminal_library/xterm_library/core/utils/lookup_table.dart';
 
+/// UncompleteDocumentation
 class PaletteBuilder {
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterTheme theme;
 
+  /// UncompleteDocumentation
   PaletteBuilder(this.theme);
 
+  /// UncompleteDocumentation
   List<Color> build() {
     return List<Color>.generate(
       256,

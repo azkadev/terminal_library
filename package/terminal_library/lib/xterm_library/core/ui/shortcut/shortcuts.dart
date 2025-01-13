@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+/// UncompleteDocumentation
 Map<ShortcutActivator, Intent> get defaultTerminalLibraryFlutterShortcuts {
   switch (defaultTargetPlatform) {
     case TargetPlatform.android:

@@ -1,5 +1,6 @@
 final _esc = String.fromCharCode(0x1b);
 
+/// UncompleteDocumentation
 String keytabUnescape(String str) {
   str = str
       .replaceAll(r'\E', _esc)

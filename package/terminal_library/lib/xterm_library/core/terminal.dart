@@ -60,6 +60,7 @@ class TerminalLibraryFlutter
   /// with [CascadeInputHandler].
   TerminalLibraryFlutterInputHandler? inputHandler;
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterMouseHandler? mouseHandler;
 
   /// The callback that is called when the terminal receives a unrecognized
@@ -73,6 +74,7 @@ class TerminalLibraryFlutter
   /// [Buffer.defaultWordSeparators] will be used.
   final Set<int>? wordSeparators;
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutter({
     this.maxLines = 1000,
     this.onBell,
@@ -210,10 +212,13 @@ class TerminalLibraryFlutter
   /// the underlying program requests it.
   Buffer get buffer => _buffer;
 
+  /// UncompleteDocumentation
   Buffer get mainBuffer => _mainBuffer;
 
+  /// UncompleteDocumentation
   Buffer get altBuffer => _altBuffer;
 
+  /// UncompleteDocumentation
   bool get isUsingAltBuffer => _buffer == _altBuffer;
 
   /// Lines of the active buffer.
@@ -328,6 +333,8 @@ class TerminalLibraryFlutter
       textInput(text);
     }
   }
+
+  /// UncompleteDocumentation
 
   // Handle a mouse event and return true if it was handled.
   bool mouseInput(

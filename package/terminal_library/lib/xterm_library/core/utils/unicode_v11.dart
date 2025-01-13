@@ -2,6 +2,7 @@
 
 import 'dart:typed_data';
 
+/// UncompleteDocumentation
 const BMP_COMBINING = [
   [0x0300, 0x036F],
   [0x0483, 0x0489],
@@ -219,6 +220,7 @@ const BMP_COMBINING = [
   [0xFFF9, 0xFFFB],
 ];
 
+/// UncompleteDocumentation
 const HIGH_COMBINING = [
   [0x101FD, 0x101FD],
   [0x102E0, 0x102E0],
@@ -339,6 +341,7 @@ const HIGH_COMBINING = [
   [0xE0100, 0xE01EF],
 ];
 
+/// UncompleteDocumentation
 const BMP_WIDE = [
   [0x1100, 0x115F],
   [0x231A, 0x231B],
@@ -403,6 +406,7 @@ const BMP_WIDE = [
   [0xFFE0, 0xFFE6],
 ];
 
+/// UncompleteDocumentation
 const HIGH_WIDE = [
   [0x16FE0, 0x16FE3],
   [0x17000, 0x187F7],
@@ -459,8 +463,10 @@ const HIGH_WIDE = [
   [0x30000, 0x3FFFD],
 ];
 
+/// UncompleteDocumentation
 final table = buildTable();
 
+/// UncompleteDocumentation
 Uint8List buildTable() {
   final table = Uint8List(65536);
   table.fillRange(0, table.length, 1);
@@ -476,6 +482,7 @@ Uint8List buildTable() {
   return table;
 }
 
+/// UncompleteDocumentation
 bool bisearch(int ucs, List<List<int>> data) {
   var min = 0;
   var max = data.length - 1;
@@ -496,8 +503,12 @@ bool bisearch(int ucs, List<List<int>> data) {
   return false;
 }
 
+/// UncompleteDocumentation
 class UnicodeV11 {
+  /// UncompleteDocumentation
   final version = '11';
+
+  /// UncompleteDocumentation
 
   int wcwidth(int codePoint) {
     if (codePoint < 32) return 0;
@@ -509,4 +520,5 @@ class UnicodeV11 {
   }
 }
 
+/// UncompleteDocumentation
 final unicodeV11 = UnicodeV11();

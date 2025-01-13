@@ -1,18 +1,25 @@
 /// https://terminalguide.namepad.de/mouse/
 enum MouseMode {
+  /// UncompleteDocumentation
   none,
+
+  /// UncompleteDocumentation
 
   clickOnly,
 
+  /// UncompleteDocumentation
+
   upDownScroll(reportScroll: true),
 
+  /// UncompleteDocumentation
   upDownScrollDrag(reportScroll: true),
 
-  upDownScrollMove(reportScroll: true),
-  ;
+  /// UncompleteDocumentation
+  upDownScrollMove(reportScroll: true);
 
   const MouseMode({this.reportScroll = false});
 
+  /// UncompleteDocumentation
   final bool reportScroll;
 }
 

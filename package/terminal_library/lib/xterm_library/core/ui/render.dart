@@ -17,10 +17,13 @@ import 'package:terminal_library/xterm_library/core/ui/terminal_size.dart';
 import 'package:terminal_library/xterm_library/core/ui/terminal_text_style.dart';
 import 'package:terminal_library/xterm_library/core/ui/terminal_theme.dart';
 
+/// UncompleteDocumentation
 typedef EditableRectCallback = void Function(Rect rect, Rect caretRect);
 
+/// UncompleteDocumentation
 class RenderTerminalLibraryFlutter extends RenderBox
     with RelayoutWhenSystemFontsChangeMixin {
+  /// UncompleteDocumentation
   RenderTerminalLibraryFlutter({
     required TerminalLibraryFlutter terminal,
     required TerminalLibraryFlutterController controller,
@@ -388,6 +391,8 @@ class RenderTerminalLibraryFlutter extends RenderBox
       _terminal.buffer.absoluteCursorY * _painter.cellSize.height + _lineOffset,
     );
   }
+
+  /// UncompleteDocumentation
 
   Size get cellSize {
     return _painter.cellSize;

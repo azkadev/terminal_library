@@ -9,7 +9,9 @@ import 'package:terminal_library/xterm_library/core/core/buffer/range_line.dart'
 import 'package:terminal_library/xterm_library/core/ui/pointer_input.dart';
 import 'package:terminal_library/xterm_library/core/ui/selection_mode.dart';
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterController with ChangeNotifier {
+  /// UncompleteDocumentation
   TerminalLibraryFlutterController({
     SelectionMode selectionMode = SelectionMode.line,
     PointerInputs pointerInputs = const PointerInputs({PointerInput.tap}),
@@ -20,6 +22,8 @@ class TerminalLibraryFlutterController with ChangeNotifier {
 
   CellAnchor? _selectionBase;
   CellAnchor? _selectionExtent;
+
+  /// UncompleteDocumentation
 
   SelectionMode get selectionMode => _selectionMode;
   SelectionMode _selectionMode;
@@ -32,9 +36,11 @@ class TerminalLibraryFlutterController with ChangeNotifier {
   bool get suspendedPointerInputs => _suspendPointerInputs;
   bool _suspendPointerInputs;
 
+  /// UncompleteDocumentation
   List<TerminalLibraryFlutterHighlight> get highlights => _highlights;
   final _highlights = <TerminalLibraryFlutterHighlight>[];
 
+  /// UncompleteDocumentation
   BufferRange? get selection {
     final base = _selectionBase;
     final extent = _selectionExtent;
@@ -99,6 +105,7 @@ class TerminalLibraryFlutterController with ChangeNotifier {
     notifyListeners();
   }
 
+  /// UncompleteDocumentation
   // Select which type of pointer events are send to the terminal.
   void setPointerInputs(PointerInputs pointerInput) {
     _pointerInputs = pointerInput;
@@ -106,6 +113,7 @@ class TerminalLibraryFlutterController with ChangeNotifier {
   }
 
   // Toggle sending pointer events to the terminal.
+  /// UncompleteDocumentation
   void setSuspendPointerInput(bool suspend) {
     _suspendPointerInputs = suspend;
     notifyListeners();
@@ -113,6 +121,7 @@ class TerminalLibraryFlutterController with ChangeNotifier {
 
   // Returns true if this type of PointerInput should be send to the TerminalLibraryFlutter.
   // @internal
+  /// UncompleteDocumentation
   bool shouldSendPointerInput(PointerInput pointerInput) {
     // Always return false if pointer input is suspended.
     return _suspendPointerInputs
@@ -147,15 +156,21 @@ class TerminalLibraryFlutterController with ChangeNotifier {
   }
 }
 
+/// UncompleteDocumentation
 class TerminalLibraryFlutterHighlight with Disposable {
+  /// UncompleteDocumentation
   final TerminalLibraryFlutterController owner;
 
+  /// UncompleteDocumentation
   final CellAnchor p1;
 
+  /// UncompleteDocumentation
   final CellAnchor p2;
 
+  /// UncompleteDocumentation
   final Color color;
 
+  /// UncompleteDocumentation
   TerminalLibraryFlutterHighlight(
     this.owner, {
     required this.p1,

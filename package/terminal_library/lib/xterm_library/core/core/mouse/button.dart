@@ -1,18 +1,25 @@
+/// UncompleteDocumentation
 enum TerminalLibraryFlutterMouseButton {
+  /// UncompleteDocumentation
   left(id: 0),
 
+  /// UncompleteDocumentation
   middle(id: 1),
 
+  /// UncompleteDocumentation
   right(id: 2),
 
+  /// UncompleteDocumentation
   wheelUp(id: 64 + 4, isWheel: true),
 
+  /// UncompleteDocumentation
   wheelDown(id: 64 + 5, isWheel: true),
 
+  /// UncompleteDocumentation
   wheelLeft(id: 64 + 6, isWheel: true),
 
-  wheelRight(id: 64 + 7, isWheel: true),
-  ;
+  /// UncompleteDocumentation
+  wheelRight(id: 64 + 7, isWheel: true);
 
   /// The id that is used to report a button press or release to the terminal.
   ///
