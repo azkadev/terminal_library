@@ -7,7 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: 'flutter'
-  general: '^0.0.44'
+  general: '^0.0.46'
   terminal_library_flutter_pty:
     path: '../'
   cupertino_icons: '^1.0.6'
