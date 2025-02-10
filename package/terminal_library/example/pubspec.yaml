@@ -12,7 +12,6 @@ dependencies:
   general_lib_flutter: '^0.0.41'
   simulate: '^0.0.52'
   path: '^1.9.0'
-  general: '^0.0.46'
   terminal_library:
     path: '../'
   terminal_library_flutter_pty:
