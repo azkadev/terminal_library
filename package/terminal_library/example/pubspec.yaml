@@ -8,9 +8,9 @@ dependencies:
   flutter:
     sdk: 'flutter'
   cupertino_icons: '^1.0.6'
-  general_lib: '^0.0.63'
+  general_lib: '^0.0.67'
   general_lib_flutter: '^0.0.41'
-  simulate: '^0.0.52'
+  simulate: '^0.0.53'
   path: '^1.9.0'
   terminal_library:
     path: '../'
@@ -23,7 +23,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 dependency_overrides:
-  pointycastle: '3.8.0'
+  pointycastle: '4.0.0'
   mime: '^2.0.0'
 funding:
   - 'https://github.com/sponsors/azkadev'
@@ -32,3 +32,5 @@ homepage: 'https://youtube.com/@azkadev'
 repository: 'https://github.com/azkadev/general_framework'
 issue_tracker: 'https://t.me/DEVELOPER_GLOBAL_PUBLIC'
 documentation: 'https://youtube.com/@azkadev'
+project:
+  type: ''
