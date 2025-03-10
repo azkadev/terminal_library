@@ -8,14 +8,14 @@ dependencies:
   flutter:
     sdk: 'flutter'
   cupertino_icons: '^1.0.6'
-  general_lib: '^0.0.70'
+  general_lib: '^0.0.71'
   general_lib_flutter: '^0.0.42'
   path: '^1.9.0'
   terminal_library:
     path: '../'
   terminal_library_flutter_pty:
     path: '/home/galaxeus/Documents/galaxeus/app/terminal_library/package/terminal_library_flutter_pty'
-  general_framework: '^0.0.30'
+  general_framework: '^0.0.31'
 dev_dependencies:
   flutter_test:
     sdk: 'flutter'
